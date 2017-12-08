@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">HeartRyt Care</string>
+    <string name="title_activity_main_menu">HeartRyt Care</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Help</string>
+    <string name="diet_plan">Diet Plan</string>
+    <string name="vital_signs">Vital Signs</string>
+
+    <string name="default_text">--</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_schedule_medication">ScheduleMedication</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_medication_intake_schedule">MedicationIntakeSchedule</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+</resources>
+
+

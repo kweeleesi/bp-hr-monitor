@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_journal"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="Journal" />
+        <item
+            android:id="@+id/nav_sched"
+            android:icon="@drawable/ic_event_note_black_24dp"
+            android:title="Schedule" />
+        <item
+            android:id="@+id/nav_measure"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:title="Measure" />
+        <item
+            android:id="@+id/nav_stat"
+            android:icon="@drawable/ic_assessment_black_24dp"
+            android:title="Statistics" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_messages"
+                android:icon="@drawable/ic_mode_comment_black_24dp"
+                android:title="Messages" />
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+        </menu>
+    </item>
+
+</menu>
