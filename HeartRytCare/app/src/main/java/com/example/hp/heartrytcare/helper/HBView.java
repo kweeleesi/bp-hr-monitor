@@ -1,7 +1,5 @@
-package com.example.hp.heartrytcare;
+package com.example.hp.heartrytcare.helper;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +8,9 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.activity.HeartRateMonitor;
 
 public class HBView extends View {
 

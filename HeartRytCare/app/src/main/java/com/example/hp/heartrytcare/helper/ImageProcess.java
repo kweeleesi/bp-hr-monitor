@@ -1,4 +1,4 @@
-package com.example.hp.heartrytcare;
+package com.example.hp.heartrytcare.helper;
 
 /**
  * Created by HP on 11/7/2017.

@@ -1,15 +1,13 @@
-package com.example.hp.heartrytcare;
+package com.example.hp.heartrytcare.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
-import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
@@ -17,6 +15,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.helper.ImageProcess;
 
 
 public class HeartRateMonitor extends AppCompatActivity {
@@ -121,7 +122,7 @@ public class HeartRateMonitor extends AppCompatActivity {
             int width = size.width;
             int height = size.height;
 
-            int imgAvg = com.example.hp.heartrytcare.ImageProcess.decodeYUV420SPtoRedAvg(data.clone(), height, width);
+            int imgAvg = ImageProcess.decodeYUV420SPtoRedAvg(data.clone(), height, width);
             // Log.i(TAG, "imgAvg="+imgAvg);
             if (imgAvg == 0 || imgAvg == 255) {
                 processing.set(false);

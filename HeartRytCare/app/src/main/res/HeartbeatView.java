@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.example.hp.heartrytcare.activity.HeartRateMonitor;
+
 
 /**
  * This class extends the View class and is designed draw the heartbeat image.

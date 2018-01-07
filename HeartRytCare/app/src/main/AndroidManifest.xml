@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/FullscreenTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,13 +26,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main_menu"
+            android:name=".activity.MainMenuActivity"
             android:icon="@drawable/heart"
             android:label="@string/title_activity_main_menu"
             android:theme="@style/AppTheme.NoActionBar" />
 
 
-        <activity android:name=".HeartRateMonitor"
+        <activity android:name=".activity.HeartRateMonitor"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -1,9 +1,11 @@
-package com.example.hp.heartrytcare;
+package com.example.hp.heartrytcare.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
+
+import com.example.hp.heartrytcare.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                        Intent homeIntent = new Intent(MainActivity.this, main_menu.class);
+                        Intent homeIntent = new Intent(MainActivity.this, MainMenuActivity.class);
                         startActivity(homeIntent);
                         finish();
             }

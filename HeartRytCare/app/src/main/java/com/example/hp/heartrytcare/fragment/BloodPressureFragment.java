@@ -1,4 +1,4 @@
-package com.example.hp.heartrytcare;
+package com.example.hp.heartrytcare.fragment;
 
 
 import android.app.AlertDialog;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.hp.heartrytcare.R;
 
 
 /**

@@ -1,8 +1,7 @@
-package com.example.hp.heartrytcare;
+package com.example.hp.heartrytcare.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,14 +13,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
-import android.widget.Toast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+
+import com.example.hp.heartrytcare.fragment.HealthJournalFragment;
+import com.example.hp.heartrytcare.fragment.MeasureFragment;
+import com.example.hp.heartrytcare.fragment.MessagesFragment;
+import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.fragment.SchedFragment;
+import com.example.hp.heartrytcare.fragment.ShareFragment;
+import com.example.hp.heartrytcare.fragment.StatFragment;
 
 import static android.app.PendingIntent.getActivity;
 
 
-public class main_menu extends AppCompatActivity
+public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -36,7 +42,7 @@ public class main_menu extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(
-                            main_menu.this);
+                            MainMenuActivity.this);
                     builder.setTitle("Help");
                     builder.setMessage("Setting up the connection between your blood pressure monitor and your mobile device: " + " " +
                             " When the application is first started, it will check if this is the very first time the application has started or if the application has been updated since it was last started");
@@ -56,7 +62,7 @@ public class main_menu extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(main_menu.this, main_menu.class);
+                Intent in = new Intent(MainMenuActivity.this, MainMenuActivity.class);
                 startActivity(in);
 
                 //manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, home).commit();
