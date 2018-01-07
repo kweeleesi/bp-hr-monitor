@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:background="#030d2b"
+    android:background="@color/main_app_bg"
     tools:context="com.example.hp.heartrytcare.fragment.HeartRateFragment">
 
 

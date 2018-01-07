@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:background="#030d2b"
+    android:background="@color/main_app_bg"
     tools:context="com.example.hp.heartrytcare.fragment.ScheduleMed">
 
     <LinearLayout
@@ -85,7 +84,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Name"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <EditText
@@ -125,7 +124,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Dosage"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <EditText
@@ -165,7 +164,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Number"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <EditText
@@ -206,7 +205,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="How is it taken"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <EditText
@@ -246,7 +245,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Number of times"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <EditText
@@ -286,7 +285,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Medication Time"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <EditText
@@ -326,7 +325,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Date of Commencement"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <TextView
@@ -368,7 +367,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Number of days"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <EditText
@@ -408,7 +407,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Alert"
                     android:textSize="15dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
                 <Switch

@@ -33,8 +33,9 @@ public class MainGenerator {
         user.addStringProperty("last_name").notNull();
         user.addStringProperty("first_name").notNull();
         user.addStringProperty("license_number");
-        user.addStringProperty("email");
+        user.addStringProperty("email").notNull();
         user.addStringProperty("contact_number");
+        user.addStringProperty("password").notNull();
 
         return user;
     }

@@ -51,22 +51,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HeartRateMonitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/HeartRateMonitor.java">
+      <file leaf-file-name="activity_signup.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="35" />
+            <state relative-caret-position="204">
+              <caret line="15" column="47" lean-forward="false" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+              <folding>
+                <element signature="e#610#626#0" expanded="true" />
+                <element signature="e#926#942#0" expanded="true" />
+                <element signature="e#1482#1501#0" expanded="true" />
+                <element signature="e#2377#2395#0" expanded="true" />
+                <element signature="e#3314#3338#0" expanded="true" />
+                <element signature="e#4262#4286#0" expanded="true" />
+                <element signature="e#5209#5224#0" expanded="true" />
+                <element signature="e#6149#6167#0" expanded="true" />
+                <element signature="e#6797#6813#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="25" column="50" lean-forward="false" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gradle-wrapper.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
+      <file leaf-file-name="SignupActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/SignupActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="850">
+              <caret line="50" column="45" lean-forward="false" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#828#869#0" expanded="true" />
+                <element signature="e#1329#1599#0" expanded="true" />
+                <element signature="e#1598#1599#0" expanded="true" />
+                <element signature="e#1637#1799#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,49 +103,48 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+            <state relative-caret-position="306">
+              <caret line="23" column="33" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
               <folding>
-                <element signature="e#544#820#0" expanded="true" />
-                <element signature="e#819#820#0" expanded="true" />
+                <element signature="e#544#810#0" expanded="true" />
+                <element signature="e#809#810#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenuActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/MainMenuActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="35" column="39" lean-forward="true" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_main_menu.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_menu.xml">
+      <file leaf-file-name="fragment_health_journal.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_health_journal.xml">
           <provider editor-type-id="android-designer2">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="2346">
+              <caret line="298" column="70" lean-forward="false" selection-start-line="298" selection-start-column="70" selection-end-line="298" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainGenerator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/greendao-gen/src/main/java/com/example/greendao_gen/MainGenerator.java">
+      <file leaf-file-name="fragment_measure.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_measure.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#713#714#0" expanded="true" />
-                <element signature="e#758#759#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="172">
+              <caret line="78" column="45" lean-forward="false" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -127,11 +155,21 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile_vertical" />
-        <option value="resourceFile" />
         <option value="valueResourceFile" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>preview</find>
+      <find>030d2b</find>
+      <find>#841014</find>
+      <find>@color/red_textcolor</find>
+      <find>841014</find>
+      <find>margin</find>
+    </findStrings>
   </component>
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
@@ -2229,15 +2267,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_add_box_black_24dp.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_medication_intake_schedule2.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_schedule_appointment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/MedicationIntakeSchedule.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_schedule_medication.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_schedule.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/ScheduleMedication.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/ScheduleFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_schedule_medication.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_journal2.xml" />
@@ -2247,7 +2276,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_sched.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_schedule_med.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_help.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_measure.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_sched_appointment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_messages.xml" />
@@ -2256,12 +2284,9 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout-v21/fragment_journal2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/JournalFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/main_menu.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_health_journal.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/BloodPressureFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/ScheduleMed.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/HeartRateMonitor.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/HeartbeatView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_heart_rate.xml" />
@@ -2270,16 +2295,29 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/ImageProcessing.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ImageProcessing.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/HBView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_heart_rate_monitor.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/HeartRateMonitor.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/MeasureFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/ImageProcess.java" />
         <option value="$PROJECT_DIR$/greendao-gen/build.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/greendao-gen/src/main/java/com/example/greendao_gen/MainGenerator.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/HeartRateMonitor.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_heart_rate_monitor.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_measure.xml" />
+        <option value="$PROJECT_DIR$/greendao-gen/src/main/java/com/example/greendao_gen/MainGenerator.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/round_white_bg.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml" />
+        <option value="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/fragment_blood_pressure.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_health_journal.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/SignupActivity.java" />
       </list>
     </option>
   </component>
@@ -2387,6 +2425,10 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2442,6 +2484,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HeartRytCare" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="ProjectPane" />
@@ -2462,6 +2514,7 @@
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
+      <recent name="com.example.hp.heartrytcare.activity" />
       <recent name="com.example.hp.heartrytcare" />
     </key>
     <key name="android.template.parentActivityClass">
@@ -2575,7 +2628,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515344847630" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515348580299" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2623,7 +2676,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515344847630" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515348580299" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2806,7 +2859,7 @@
       <option name="ACTIVITY_CLASS" value="com.example.hp.heartrytcare.main_menu" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515344847632" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515348580301" />
       </method>
     </configuration>
     <list size="2">
@@ -2864,30 +2917,32 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18120806" sideWeight="0.49394855" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19271624" sideWeight="0.51342285" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18120806" sideWeight="0.49394855" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22844176" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22844176" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24054463" sideWeight="0.48657718" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15960665" sideWeight="0.48657718" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2917,7 +2972,6 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19271624" sideWeight="0.48657718" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -2990,62 +3044,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_heartbeat_view.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/MeasureFragment.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/HeartRateMonitor.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_heart_rate_monitor.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="47" lean-forward="false" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/ImageProcess.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_heartbeat_view.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/MeasureFragment.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/HeartRateMonitor.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_heart_rate_monitor.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="47" lean-forward="false" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/ImageProcess.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_heartbeat_view.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/MeasureFragment.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/HeartRateMonitor.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_heart_rate_monitor.xml">
@@ -3111,41 +3109,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_measure.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_heart_rate_monitor.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/MeasureFragment.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/ImageProcess.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/HBView.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/HeartRateMonitor.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="35" column="11" lean-forward="false" selection-start-line="35" selection-start-column="11" selection-end-line="40" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3186,30 +3153,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/greendao-gen/src/main/java/com/example/greendao_gen/MainGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#713#714#0" expanded="true" />
-            <element signature="e#758#759#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="1" lean-forward="false" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/HeartRateMonitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -3230,21 +3177,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main_menu.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
-          <folding>
-            <element signature="e#544#820#0" expanded="true" />
-            <element signature="e#819#820#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/HeartRateMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-391">
+          <caret line="36" column="72" lean-forward="false" selection-start-line="36" selection-start-column="72" selection-end-line="36" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_heart_rate_monitor.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="29" column="52" lean-forward="false" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main_menu.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/MainMenuActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="35" column="39" lean-forward="true" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+        <state relative-caret-position="187">
+          <caret line="35" column="41" lean-forward="false" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+          <folding>
+            <element signature="e#1552#2686#0" expanded="false" />
+            <element signature="e#2251#2616#0" expanded="false" />
+            <element signature="e#2615#2616#0" expanded="false" />
+            <element signature="e#2685#2686#0" expanded="false" />
+            <element signature="e#2804#3302#0" expanded="false" />
+            <element signature="e#3301#3302#0" expanded="false" />
+            <element signature="e#3490#3521#0" expanded="false" />
+            <element signature="e#3523#3555#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="21" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -3254,9 +3262,134 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="187">
+          <caret line="11" column="33" lean-forward="false" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_measure.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="78" column="45" lean-forward="false" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/round_white_bg.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/fragment_blood_pressure.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="149" column="39" lean-forward="false" selection-start-line="149" selection-start-column="39" selection-end-line="149" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="25" column="50" lean-forward="false" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="140" column="34" lean-forward="false" selection-start-line="140" selection-start-column="34" selection-end-line="140" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/greendao-gen/src/main/java/com/example/greendao_gen/MainGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="34" column="41" lean-forward="false" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+          <folding>
+            <element signature="e#713#714#0" expanded="true" />
+            <element signature="e#758#759#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" column="47" lean-forward="false" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+          <folding>
+            <element signature="e#610#626#0" expanded="true" />
+            <element signature="e#926#942#0" expanded="true" />
+            <element signature="e#1482#1501#0" expanded="true" />
+            <element signature="e#2377#2395#0" expanded="true" />
+            <element signature="e#3314#3338#0" expanded="true" />
+            <element signature="e#4262#4286#0" expanded="true" />
+            <element signature="e#5209#5224#0" expanded="true" />
+            <element signature="e#6149#6167#0" expanded="true" />
+            <element signature="e#6797#6813#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" column="33" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+          <folding>
+            <element signature="e#544#810#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_health_journal.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2346">
+          <caret line="298" column="70" lean-forward="false" selection-start-line="298" selection-start-column="70" selection-end-line="298" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/SignupActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" column="45" lean-forward="false" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#828#869#0" expanded="true" />
+            <element signature="e#1329#1599#0" expanded="true" />
+            <element signature="e#1598#1599#0" expanded="true" />
+            <element signature="e#1637#1799#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

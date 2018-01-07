@@ -1,9 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    android:background="#030d2b"
+    android:background="@color/main_app_bg"
     tools:context="com.example.hp.heartrytcare.fragment.SchedFragment">
 
     <LinearLayout
@@ -61,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:text="Medication"
                     android:textSize="16dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:layout_marginLeft="17dp"
                     android:layout_marginStart="17dp"
@@ -127,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:text="Appointment"
                     android:textSize="16dp"
-                    android:textColor="#841014"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:layout_marginLeft="18dp"
                     android:layout_marginStart="18dp"

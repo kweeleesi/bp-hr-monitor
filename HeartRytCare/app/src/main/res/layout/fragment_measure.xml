@@ -1,9 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    android:background="#030d2b"
+    android:background="@color/main_app_bg"
     tools:context="com.example.hp.heartrytcare.fragment.SchedFragment">
 
     <LinearLayout
@@ -18,13 +17,9 @@
             android:orientation="horizontal"
             android:id="@+id/linearLayout"
             android:weightSum="1"
-            android:layout_marginBottom="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+            android:layout_marginBottom="50dp">
 
         </LinearLayout>
-
 
         <android.support.v7.widget.CardView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -50,8 +45,8 @@
                     android:layout_height="wrap_content"
                     android:text="Heart rate"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                    android:textColor="#841014"
-                    android:textSize="16dp"
+                    android:textColor="@color/red_textcolor"
+                    android:textSize="16sp"
                     android:layout_above="@+id/textView4"
                     android:layout_toRightOf="@+id/imageView4"
                     android:layout_toEndOf="@+id/imageView4"
@@ -63,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Measure your heart rate"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     android:textStyle="italic"
                     android:layout_alignBottom="@+id/imageView4"
                     android:layout_alignLeft="@+id/txtview1"
@@ -106,8 +101,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Blood Pressure"
-                    android:textSize="16dp"
-                    android:textColor="#841014"
+                    android:textSize="16sp"
+                    android:textColor="@color/red_textcolor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:layout_alignTop="@+id/imageView5"
                     android:layout_toRightOf="@+id/imageView5"
@@ -120,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:text="Measure your blood pressure"
                     android:id="@+id/textView2"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     android:textStyle="italic"
                     android:layout_below="@+id/txtview2"
                     android:layout_alignLeft="@+id/txtview2"
