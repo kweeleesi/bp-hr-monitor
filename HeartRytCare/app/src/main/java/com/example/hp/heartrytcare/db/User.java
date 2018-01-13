@@ -10,15 +10,17 @@ package com.example.hp.heartrytcare.db;
 public class User {
 
     private Long id;
-    private int user_id;
     private int user_type;
     /** Not-null value. */
     private String last_name;
     /** Not-null value. */
     private String first_name;
     private String license_number;
+    /** Not-null value. */
     private String email;
     private String contact_number;
+    /** Not-null value. */
+    private String password;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -30,15 +32,15 @@ public class User {
         this.id = id;
     }
 
-    public User(Long id, int user_id, int user_type, String last_name, String first_name, String license_number, String email, String contact_number) {
+    public User(Long id, int user_type, String last_name, String first_name, String license_number, String email, String contact_number, String password) {
         this.id = id;
-        this.user_id = user_id;
         this.user_type = user_type;
         this.last_name = last_name;
         this.first_name = first_name;
         this.license_number = license_number;
         this.email = email;
         this.contact_number = contact_number;
+        this.password = password;
     }
 
     public Long getId() {
@@ -47,14 +49,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public int getUser_type() {
@@ -93,10 +87,12 @@ public class User {
         this.license_number = license_number;
     }
 
+    /** Not-null value. */
     public String getEmail() {
         return email;
     }
 
+    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setEmail(String email) {
         this.email = email;
     }
@@ -107,6 +103,16 @@ public class User {
 
     public void setContact_number(String contact_number) {
         this.contact_number = contact_number;
+    }
+
+    /** Not-null value. */
+    public String getPassword() {
+        return password;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     // KEEP METHODS - put your custom methods here

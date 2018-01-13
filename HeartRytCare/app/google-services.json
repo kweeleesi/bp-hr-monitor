@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "888920020547",
+    "firebase_url": "https://heartrytcare.firebaseio.com",
+    "project_id": "heartrytcare",
+    "storage_bucket": "heartrytcare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888920020547:android:b0c9b44e5c0e89aa",
+        "android_client_info": {
+          "package_name": "com.example.hp.heartrytcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888920020547-9087cik9g4avaflj8dr29jce0m3o0j9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hp.heartrytcare",
+            "certificate_hash": "3b7bc450d8d3c9f8e0b3f9eab4bc62d0fb6318a5"
+          }
+        },
+        {
+          "client_id": "888920020547-ktfkkgg1pa3qh6ch69jjhiih6q1a6ot9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7JY14zbbQU9zePUPkH7vOHIUIAlERpvU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888920020547-ktfkkgg1pa3qh6ch69jjhiih6q1a6ot9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -28,7 +28,7 @@ public class MainGenerator {
     private static Entity addUser(final Schema schema) {
         Entity user = schema.addEntity("User");
         user.addIdProperty().primaryKey().autoincrement();
-        user.addIntProperty("user_id").notNull();
+        user.addStringProperty("firebase_user_id").notNull();
         user.addIntProperty("user_type").notNull(); // 1 = doctor | 0 = patient
         user.addStringProperty("last_name").notNull();
         user.addStringProperty("first_name").notNull();
