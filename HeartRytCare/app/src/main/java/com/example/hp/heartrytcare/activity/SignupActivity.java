@@ -2,7 +2,6 @@ package com.example.hp.heartrytcare.activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -26,12 +24,12 @@ import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.db.User;
 import com.example.hp.heartrytcare.db.UserDao;
-import com.example.hp.heartrytcare.fragment.LoginFragment;
+import com.example.hp.heartrytcare.fragment.SignInFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.wang.avi.AVLoadingIndicatorView;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -41,6 +39,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private EditText firstName, lastName, licenseNumber, contactNumber, eMail, password;
     private LinearLayout licenseLinear;
     private TextView signIn;
+    private AVLoadingIndicatorView loading;
 
     private FirebaseAuth mAuth;
 
@@ -68,6 +67,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         contactNumber = (EditText) findViewById(R.id.contactNumber);
         eMail = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
+        loading = (AVLoadingIndicatorView) findViewById(R.id.loading);
 
         Spannable wordToSpan = new SpannableString(getResources().getString(R.string.signin));
         wordToSpan.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.blue_link)), 3, wordToSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -120,6 +120,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+        loading.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(eMail.getText().toString(), password.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -127,36 +128,34 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(getClass().getSimpleName(), "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
+//                            FirebaseUser user = mAuth.getCurrentUser();
+                            User user = new User();
+                            user.setUser_type(doctorRb.isChecked() ? 1 : 0); //1 = doctor, 0 = patient
+                            user.setFirst_name(firstName.getText().toString());
+                            user.setLast_name(lastName.getText().toString());
+                            user.setLicense_number(doctorRb.isChecked() ? licenseNumber.getText().toString() : "NA");
+                            user.setContact_number(contactNumber.getText().toString());
+                            user.setEmail(eMail.getText().toString());
+                            user.setPassword(password.getText().toString());
+                            userDao.insert(user);
+
+                            Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
+                            loading.setVisibility(View.GONE);
                             Log.w(getClass().getSimpleName(), "createUserWithEmail:failure", task.getException());
-//                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
+                            Toast.makeText(SignupActivity.this, "Authentication failed. Please try again.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-        User user = new User();
-        user.setUser_type(doctorRb.isChecked() ? 1 : 0); //1 = doctor, 0 = patient
-        user.setFirst_name(firstName.getText().toString());
-        user.setLast_name(lastName.getText().toString());
-        user.setLicense_number(doctorRb.isChecked() ? licenseNumber.getText().toString() : "NA");
-        user.setContact_number(contactNumber.getText().toString());
-        user.setEmail(eMail.getText().toString());
-        user.setPassword(password.getText().toString());
-//        userDao.insert(user);
-
-        Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     private void signIn() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.signinContainer, new LoginFragment());
+        ft.replace(R.id.signinContainer, new SignInFragment());
         ft.addToBackStack("signin");
         ft.commit();
     }

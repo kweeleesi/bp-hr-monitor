@@ -71,9 +71,7 @@ public class SchedFragment extends Fragment implements View.OnClickListener  {
     public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.relativeLayout_for_fragment, someFragment);
-        transaction.addToBackStack(null);
+        transaction.addToBackStack("");
         transaction.commit();
     }
-
-
 }
