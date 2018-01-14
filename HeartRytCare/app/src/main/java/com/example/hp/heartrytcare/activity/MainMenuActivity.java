@@ -2,7 +2,9 @@ package com.example.hp.heartrytcare.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -83,6 +85,7 @@ public class MainMenuActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        setTitle("HeartRytCare");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -119,46 +122,34 @@ public class MainMenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_journal) {
-          //  Toast.makeText(this, "Journal", Toast.LENGTH_SHORT).show();
             setTitle("Journal");
-            HealthJournalFragment journalFragment = new HealthJournalFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, journalFragment, journalFragment.getTag()).commit();
-
-
+            replaceFragment(new HealthJournalFragment());
         } else if (id == R.id.nav_sched) {
             setTitle("Schedule");
-            SchedFragment scheduleFragment = new SchedFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, scheduleFragment, scheduleFragment.getTag()).commit();
-
+            replaceFragment(new SchedFragment());
         } else if (id == R.id.nav_measure) {
             setTitle("Measure");
-            MeasureFragment measureFragment = new MeasureFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, measureFragment, measureFragment.getTag()).commit();
-
+            replaceFragment(new MeasureFragment());
         } else if (id == R.id.nav_stat) {
             setTitle("Statistics");
-            StatFragment statFragment = new StatFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, statFragment, statFragment.getTag()).commit();
-
+            replaceFragment(new StatFragment());
         } else if (id == R.id.nav_messages) {
             setTitle("Messages");
-            MessagesFragment messagesFragment = new MessagesFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, messagesFragment, messagesFragment.getTag()).commit();
-
+            replaceFragment(new MessagesFragment());
         } else if (id == R.id.nav_share) {
             setTitle("Share");
-            ShareFragment shareFragment = new ShareFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, shareFragment, shareFragment.getTag()).commit();
+            replaceFragment(new ShareFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.relativeLayout_for_fragment, someFragment);
+        transaction.addToBackStack("");
+        transaction.commit();
     }
 }
