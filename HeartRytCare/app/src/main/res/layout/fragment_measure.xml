@@ -1,140 +1,90 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/main_app_bg"
-    tools:context="com.example.hp.heartrytcare.fragment.SchedFragment">
+    android:orientation="vertical"
+    android:paddingTop="30dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/schedfragment_layout">
+    <RelativeLayout
+        android:id="@+id/heartRate"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="18dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_white_bg"
+        android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal"
-            android:id="@+id/linearLayout"
-            android:weightSum="1"
-            android:layout_marginBottom="50dp">
+        <ImageView
+            android:id="@+id/heartRateIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/heartrate" />
 
-        </LinearLayout>
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_hr"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="12dp"
-            card_view:cardElevation="5dp"
-            card_view:contentPadding="4dp"
-            android:layout_margin="20dp"
-            android:clickable="true">
-
-            <RelativeLayout
-                android:id="@+id/relativelayout1"
-                android:layout_width="match_parent"
-                android:layout_height="70dp">
-
-                <TextView
-                    android:id="@+id/txtview1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Heart rate"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                    android:textColor="@color/red_textcolor"
-                    android:textSize="16sp"
-                    android:layout_above="@+id/textView4"
-                    android:layout_toRightOf="@+id/imageView4"
-                    android:layout_toEndOf="@+id/imageView4"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Measure your heart rate"
-                    android:textSize="12sp"
-                    android:textStyle="italic"
-                    android:layout_alignBottom="@+id/imageView4"
-                    android:layout_alignLeft="@+id/txtview1"
-                    android:layout_alignStart="@+id/txtview1" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/heartbeat"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_bp"
-            android:layout_marginTop="30dp"
+        <TextView
+            android:id="@+id/heartRateText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="12dp"
-            card_view:cardElevation="5dp"
-            card_view:contentPadding="4dp"
-            android:layout_margin="20dp"
-            android:clickable="true">
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/heartRateIcon"
+            android:text="@string/heart_rate"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/red_textcolor"
+            android:textSize="16sp" />
 
-            <RelativeLayout
-                android:id="@+id/relativelayout2"
-                android:layout_width="match_parent"
-                android:layout_height="70dp">
+        <TextView
+            android:id="@+id/heartRateDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/heartRateText"
+            android:layout_toRightOf="@id/heartRateIcon"
+            android:text="@string/heart_rate_desc"
+            android:textSize="10sp"
+            android:textStyle="italic" />
 
-                <TextView
-                    android:id="@+id/txtview2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Blood Pressure"
-                    android:textSize="16sp"
-                    android:textColor="@color/red_textcolor"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                    android:layout_alignTop="@+id/imageView5"
-                    android:layout_toRightOf="@+id/imageView5"
-                    android:layout_toEndOf="@+id/imageView5"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp" />
+    </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Measure your blood pressure"
-                    android:id="@+id/textView2"
-                    android:textSize="12sp"
-                    android:textStyle="italic"
-                    android:layout_below="@+id/txtview2"
-                    android:layout_alignLeft="@+id/txtview2"
-                    android:layout_alignStart="@+id/txtview2" />
+    <RelativeLayout
+        android:id="@+id/bloodPressure"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="18dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_white_bg"
+        android:padding="10dp">
 
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/bpimg"
-                    android:id="@+id/imageView5"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp" />
+        <ImageView
+            android:id="@+id/bloodPressureIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/bloodpressure" />
 
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/bloodPressureText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/bloodPressureIcon"
+            android:layout_marginTop="5dp"
+            android:text="@string/blood_pressure"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/red_textcolor"
+            android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/bloodPressureDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blood_pressure_desc"
+            android:layout_toRightOf="@id/bloodPressureIcon"
+            android:layout_below="@id/bloodPressureText"
+            android:textSize="10sp"
+            android:textStyle="italic" />
 
-    </LinearLayout>
-</ScrollView>
+    </RelativeLayout>
+
+</LinearLayout>

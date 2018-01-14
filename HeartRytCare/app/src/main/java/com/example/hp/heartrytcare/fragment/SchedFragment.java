@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.CardView;
+import android.widget.RelativeLayout;
 
 import com.example.hp.heartrytcare.R;
 
@@ -17,56 +18,39 @@ import com.example.hp.heartrytcare.R;
  */
 public class SchedFragment extends Fragment implements View.OnClickListener  {
 
-
-    public SchedFragment() {
-        // Required empty public constructor
-    }
-
+    private View view;
+    private RelativeLayout medication, appointment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View FragmentView = inflater.inflate(R.layout.fragment_sched, container, false);
+        view = inflater.inflate(R.layout.fragment_sched, container, false);
         //context = FragmentView.getContext();
 
-        CardView schedmed = (CardView) FragmentView.findViewById(R.id.card_schedmed);
-        CardView schedappointment = (CardView) FragmentView.findViewById(R.id.card_schedappointment);
+        medication = (RelativeLayout) view.findViewById(R.id.medication);
+        appointment = (RelativeLayout) view.findViewById(R.id.appointment);
 
-        schedmed.setOnClickListener(this);
-        schedappointment.setOnClickListener(this);
+        medication.setOnClickListener(this);
+        appointment.setOnClickListener(this);
 
-        return FragmentView;
+        return view;
     }
 
         @Override
         public void onClick(View view) {
             Fragment fragment = null;
             switch (view.getId()) {
-                case R.id.card_schedmed:
+                case R.id.medication:
                     fragment = new ScheduleMed();
                     replaceFragment(fragment);
                     break;
-
-                case R.id.card_schedappointment:
+                case R.id.appointment:
                     fragment = new SchedAppointment();
                     replaceFragment(fragment);
                     break;
-
             }
         }
-
- /*       schedmed.setOnClickListener(new View.OnClickListener() {
-            @Override
-                public void onClick(View v) {
-                ScheduleMed scheduleMed = new ScheduleMed();
-                SchedFragment schedFragment = new SchedFragment();
-                FragmentManager manager = getFragmentManager();
-               // manager.beginTransaction().remove(schedFragment);
-                manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, scheduleMed, scheduleMed.getTag()).commit();
-    }
-        });
-        return FragmentView;*/
 
     public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

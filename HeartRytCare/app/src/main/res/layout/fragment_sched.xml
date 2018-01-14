@@ -1,165 +1,108 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/schedfragment_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/main_app_bg"
-    tools:context="com.example.hp.heartrytcare.fragment.SchedFragment">
+    android:orientation="vertical"
+    android:paddingTop="30dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/schedfragment_layout">
+    <RelativeLayout
+        android:id="@+id/medication"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="18dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_white_bg"
+        android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal"
-            android:id="@+id/linearLayout"
-            android:weightSum="1"
-            android:layout_marginBottom="5dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+        <ImageView
+            android:id="@+id/medicationIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/pills" />
 
-        </LinearLayout>
-
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_schedmed"
-            android:layout_marginTop="30dp"
+        <TextView
+            android:id="@+id/medText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="12dp"
-            card_view:cardElevation="5dp"
-            card_view:contentPadding="4dp"
-            android:layout_margin="18dp"
-            android:clickable="true">
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/medicationIcon"
+            android:text="@string/medication"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/red_textcolor"
+            android:textSize="16sp" />
 
-            <RelativeLayout
-                android:id="@+id/relativelayout1"
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
+        <TextView
+            android:id="@+id/medTextDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medText"
+            android:layout_toRightOf="@id/medicationIcon"
+            android:text="@string/medication_desc"
+            android:textSize="10sp"
+            android:textStyle="italic" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/pills"
-                    android:id="@+id/imageView7"
-                    android:layout_alignTop="@+id/txtview1"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_chevron_right_black_24dp" />
 
-                <TextView
-                    android:id="@+id/txtview1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Medication"
-                    android:textSize="16dp"
-                    android:textColor="@color/red_textcolor"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginStart="17dp"
-                    android:layout_alignTop="@+id/imageView6"
-                    android:layout_toRightOf="@+id/imageView7"
-                    android:layout_toEndOf="@+id/imageView7" />
+    </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:textStyle="italic"
-                    android:text="Schedule your medications intake"
-                    android:layout_below="@+id/txtview1"
-                    android:layout_alignLeft="@+id/txtview1"
-                    android:layout_alignStart="@+id/txtview1" />
+    <RelativeLayout
+        android:id="@+id/appointment"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="18dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_white_bg"
+        android:padding="10dp">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_chevron_right_black_24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/imageView6" />
+        <ImageView
+            android:id="@+id/appointmentIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/appointment" />
 
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_schedappointment"
-            android:layout_marginTop="30dp"
+        <TextView
+            android:id="@+id/appointmentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="12dp"
-            card_view:cardElevation="5dp"
-            card_view:contentPadding="4dp"
-            android:layout_margin="18dp"
-            android:clickable="true">
+            android:layout_toRightOf="@id/appointmentIcon"
+            android:layout_marginTop="5dp"
+            android:text="@string/appointment"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@color/red_textcolor"
+            android:textSize="16sp" />
 
-            <RelativeLayout
-                android:id="@+id/relativelayout2"
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
+        <TextView
+            android:id="@+id/appointmentDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/appointment_desc"
+            android:layout_toRightOf="@id/appointmentIcon"
+            android:layout_below="@id/appointmentText"
+            android:textSize="10sp"
+            android:textStyle="italic" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/appointment"
-                    android:id="@+id/imageView8"
-                    android:layout_alignTop="@+id/imageView9"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_chevron_right_black_24dp" />
 
-                <TextView
-                    android:id="@+id/txtview2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Appointment"
-                    android:textSize="16dp"
-                    android:textColor="@color/red_textcolor"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_above="@+id/textView2"
-                    android:layout_toRightOf="@+id/imageView8"
-                    android:layout_toEndOf="@+id/imageView8" />
+    </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Schedule your clinical appointments"
-                    android:layout_marginBottom="16dp"
-                    android:id="@+id/textView2"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignLeft="@+id/txtview2"
-                    android:layout_alignStart="@+id/txtview2"
-                    android:textSize="10dp"
-                    android:textStyle="italic"/>
+</LinearLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_chevron_right_black_24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/imageView9" />
-
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-
-
-
-    </LinearLayout>
-</ScrollView>

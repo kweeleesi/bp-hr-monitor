@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.activity.HeartRateMonitor;
@@ -20,33 +21,29 @@ import com.example.hp.heartrytcare.fragment.BloodPressureFragment;
  */
 public class MeasureFragment extends Fragment implements View.OnClickListener {
 
-    public MeasureFragment() {
-        // Required empty public constructor
-    }
-
+    private View view;
+    private RelativeLayout heartRate, bloodPressure;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View FragmentView = inflater.inflate(R.layout.fragment_measure, container, false);
+        view = inflater.inflate(R.layout.fragment_measure, container, false);
 
+        heartRate = (RelativeLayout) view.findViewById(R.id.heartRate);
+        bloodPressure = (RelativeLayout) view.findViewById(R.id.bloodPressure);
 
-        CardView heartrate = (CardView) FragmentView.findViewById(R.id.card_hr);
-        CardView bloodpressure = (CardView) FragmentView.findViewById(R.id.card_bp);
+        heartRate.setOnClickListener(this);
+        bloodPressure.setOnClickListener(this);
 
-        heartrate.setOnClickListener(this);
-        bloodpressure.setOnClickListener(this);
-
-        return FragmentView;
+        return view;
     }
-
 
     @Override
     public void onClick(View view) {
         Fragment fragment = null;
         switch (view.getId()) {
-            case R.id.card_hr:
+            case R.id.heartRate:
                 //context = FragmentView.getContext();
                 Intent i = new Intent(getActivity(), HeartRateMonitor.class);
                 getActivity().startActivity(i);
@@ -54,7 +51,7 @@ public class MeasureFragment extends Fragment implements View.OnClickListener {
                 replaceFragment(fragment); */
                 break;
 
-            case R.id.card_bp:
+            case R.id.bloodPressure:
                 fragment = new BloodPressureFragment();
                 replaceFragment(fragment);
                 break;
@@ -67,6 +64,5 @@ public class MeasureFragment extends Fragment implements View.OnClickListener {
         transaction.replace(R.id.relativeLayout_for_fragment, someFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-}
-
+    }
 }
