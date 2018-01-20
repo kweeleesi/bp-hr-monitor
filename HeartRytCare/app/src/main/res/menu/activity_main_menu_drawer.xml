@@ -5,19 +5,27 @@
         <item
             android:id="@+id/nav_journal"
             android:icon="@drawable/ic_assignment_black_24dp"
-            android:title="Journal" />
+            android:title="@string/journal" />
         <item
             android:id="@+id/nav_sched"
             android:icon="@drawable/ic_event_note_black_24dp"
-            android:title="Schedule" />
+            android:title="@string/schedule" />
         <item
             android:id="@+id/nav_measure"
             android:icon="@drawable/ic_favorite_black_24dp"
-            android:title="Measure" />
+            android:title="@string/measure" />
         <item
             android:id="@+id/nav_stat"
             android:icon="@drawable/ic_assessment_black_24dp"
-            android:title="Statistics" />
+            android:title="@string/statistics" />
+        <item
+            android:id="@+id/nav_patient"
+            android:icon="@drawable/patient"
+            android:title="@string/patient_nav" />
+        <item
+            android:id="@+id/nav_doctor"
+            android:icon="@drawable/doctor"
+            android:title="@string/doctor_nav" />
     </group>
 
     <item android:title="Communicate">
@@ -25,11 +33,11 @@
             <item
                 android:id="@+id/nav_messages"
                 android:icon="@drawable/ic_mode_comment_black_24dp"
-                android:title="Messages" />
+                android:title="@string/messages" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/share" />
         </menu>
     </item>
 

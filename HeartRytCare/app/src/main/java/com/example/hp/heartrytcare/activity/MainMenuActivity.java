@@ -1,12 +1,13 @@
 package com.example.hp.heartrytcare.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,19 +15,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.view.View;
 
+import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.fragment.DoctorFragment;
 import com.example.hp.heartrytcare.fragment.HealthJournalFragment;
 import com.example.hp.heartrytcare.fragment.MeasureFragment;
 import com.example.hp.heartrytcare.fragment.MessagesFragment;
-import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.fragment.PatientFragment;
 import com.example.hp.heartrytcare.fragment.SchedFragment;
 import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
-
-import static android.app.PendingIntent.getActivity;
 
 
 public class MainMenuActivity extends AppCompatActivity
@@ -81,6 +80,7 @@ public class MainMenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Menu menu = navigationView.getMenu();
     }
 
     @Override
@@ -139,6 +139,12 @@ public class MainMenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             setTitle("Share");
             replaceFragment(new ShareFragment());
+        } else if (id == R.id.nav_patient) {
+            setTitle("Patient");
+            replaceFragment(new PatientFragment());
+        } else if (id == R.id.nav_doctor) {
+            setTitle("Doctor");
+            replaceFragment(new DoctorFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

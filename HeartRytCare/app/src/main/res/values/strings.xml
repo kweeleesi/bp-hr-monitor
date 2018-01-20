@@ -14,6 +14,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--NAVIGATION DRAWER-->
+    <string name="journal">Journal</string>
+    <string name="schedule">Schedule</string>
+    <string name="measure">Measure</string>
+    <string name="statistics">Statistics</string>
+    <string name="doctor_nav">Doctor</string>
+    <string name="patient_nav">Patient</string>
+    <string name="messages">Messages</string>
+    <string name="share">Share</string>
+
     <!--SIGN UP | SIGN IN-->
     <string name="signup">Sign Up</string>
     <string name="signin">or sign in to your account</string>
