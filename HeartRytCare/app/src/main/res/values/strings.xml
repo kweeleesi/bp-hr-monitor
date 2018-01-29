@@ -57,12 +57,14 @@
     <string name="blood_pressure_desc">Measure your blood pressure</string>
 
     <!--DOCTOR FRAGMENT-->
+    <string name="add_doctor">ADD DOCTOR</string>
+    <string name="verification_code">VERIFICATION CODE</string>
+    <string name="verify">VERIFY</string>
+
+    <!--PATIENT FRAGMENT-->
     <string name="add_patient">ADD PATIENT</string>
     <string name="send_code">SEND CODE</string>
     <string name="cancel">CANCEL</string>
-
-    <!--PATIENT FRAGMENT-->
-    <string name="add_doctor">ADD DOCTOR</string>
 
 </resources>
 
