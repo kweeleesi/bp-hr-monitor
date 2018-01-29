@@ -13,11 +13,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.DaoSession;
+import com.example.hp.heartrytcare.db.User;
+import com.example.hp.heartrytcare.db.UserDao;
 import com.example.hp.heartrytcare.fragment.DoctorFragment;
 import com.example.hp.heartrytcare.fragment.HealthJournalFragment;
 import com.example.hp.heartrytcare.fragment.MeasureFragment;
@@ -26,10 +31,18 @@ import com.example.hp.heartrytcare.fragment.PatientFragment;
 import com.example.hp.heartrytcare.fragment.SchedFragment;
 import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
+import com.example.hp.heartrytcare.helper.Constants;
+
+import java.util.List;
+
+import de.greenrobot.dao.query.QueryBuilder;
 
 
 public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private String TAG = getClass().getSimpleName();
+    private UserDao userDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +91,24 @@ public class MainMenuActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        DaoSession daoSession = ((HeartRytCare) getApplication()).getDaoSession();
+        userDao = daoSession.getUserDao();
+        QueryBuilder<User> queryUser = userDao.queryBuilder();
+        queryUser.where(UserDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
+        List<User> users = queryUser.list();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
+        if (users.get(0).getUser_type() == 0) { //patient
+            menu.findItem(R.id.nav_doctor).setVisible(true);
+            menu.findItem(R.id.nav_patient).setVisible(false);
+        } else { //doctor
+            menu.findItem(R.id.nav_patient).setVisible(true);
+            menu.findItem(R.id.nav_doctor).setVisible(false);
+        }
+
+
     }
 
     @Override

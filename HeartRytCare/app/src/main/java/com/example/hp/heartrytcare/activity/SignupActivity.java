@@ -25,10 +25,12 @@ import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.db.User;
 import com.example.hp.heartrytcare.db.UserDao;
 import com.example.hp.heartrytcare.fragment.SignInFragment;
+import com.example.hp.heartrytcare.helper.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.wang.avi.AVLoadingIndicatorView;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
@@ -128,8 +130,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(getClass().getSimpleName(), "createUserWithEmail:success");
-//                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            Constants.FIREBASE_UID = firebaseUser.getUid();
                             User user = new User();
+                            user.setFirebase_user_id(firebaseUser.getUid());
                             user.setUser_type(doctorRb.isChecked() ? 1 : 0); //1 = doctor, 0 = patient
                             user.setFirst_name(firstName.getText().toString());
                             user.setLast_name(lastName.getText().toString());

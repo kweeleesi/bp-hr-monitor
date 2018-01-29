@@ -10,6 +10,8 @@ package com.example.hp.heartrytcare.db;
 public class User {
 
     private Long id;
+    /** Not-null value. */
+    private String firebase_user_id;
     private int user_type;
     /** Not-null value. */
     private String last_name;
@@ -32,8 +34,9 @@ public class User {
         this.id = id;
     }
 
-    public User(Long id, int user_type, String last_name, String first_name, String license_number, String email, String contact_number, String password) {
+    public User(Long id, String firebase_user_id, int user_type, String last_name, String first_name, String license_number, String email, String contact_number, String password) {
         this.id = id;
+        this.firebase_user_id = firebase_user_id;
         this.user_type = user_type;
         this.last_name = last_name;
         this.first_name = first_name;
@@ -49,6 +52,16 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getFirebase_user_id() {
+        return firebase_user_id;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setFirebase_user_id(String firebase_user_id) {
+        this.firebase_user_id = firebase_user_id;
     }
 
     public int getUser_type() {

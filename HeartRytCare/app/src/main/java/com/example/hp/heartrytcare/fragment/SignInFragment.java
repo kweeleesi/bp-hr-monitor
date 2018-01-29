@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.activity.MainMenuActivity;
+import com.example.hp.heartrytcare.helper.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.wang.avi.AVLoadingIndicatorView;
 
 public class SignInFragment extends Fragment {
@@ -64,6 +66,8 @@ public class SignInFragment extends Fragment {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(getClass().getSimpleName(), "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Constants.FIREBASE_UID = user.getUid();
 
                             Intent intent = new Intent(getActivity(), MainMenuActivity.class);
                             startActivity(intent);
