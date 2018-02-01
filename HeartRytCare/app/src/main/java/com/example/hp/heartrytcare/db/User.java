@@ -23,6 +23,10 @@ public class User {
     private String contact_number;
     /** Not-null value. */
     private String password;
+    private int age;
+    private int height;
+    private double weight;
+    private int gender;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -34,7 +38,7 @@ public class User {
         this.id = id;
     }
 
-    public User(Long id, String firebase_user_id, int user_type, String last_name, String first_name, String license_number, String email, String contact_number, String password) {
+    public User(Long id, String firebase_user_id, int user_type, String last_name, String first_name, String license_number, String email, String contact_number, String password, int age, int height, double weight, int gender) {
         this.id = id;
         this.firebase_user_id = firebase_user_id;
         this.user_type = user_type;
@@ -44,6 +48,10 @@ public class User {
         this.email = email;
         this.contact_number = contact_number;
         this.password = password;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+        this.gender = gender;
     }
 
     public Long getId() {
@@ -126,6 +134,38 @@ public class User {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     // KEEP METHODS - put your custom methods here

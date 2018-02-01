@@ -23,6 +23,8 @@ public class MainGenerator {
 
     private static void addTables(final Schema schema) {
         Entity user = addUser(schema);
+        Entity doctorCode = addDoctorCode(schema);
+        Entity doctorPatient = addDoctorPatient(schema);
     }
 
     private static Entity addUser(final Schema schema) {
@@ -36,7 +38,30 @@ public class MainGenerator {
         user.addStringProperty("email").notNull();
         user.addStringProperty("contact_number");
         user.addStringProperty("password").notNull();
+        user.addIntProperty("age").notNull();
+        user.addIntProperty("height").notNull();
+        user.addDoubleProperty("weight").notNull();
+        user.addIntProperty("gender").notNull();
 
         return user;
+    }
+
+    private static Entity addDoctorCode(final Schema schema) {
+        Entity doctorCode = schema.addEntity("DoctorCode");
+        doctorCode.addIdProperty().primaryKey().autoincrement();
+        doctorCode.addStringProperty("firebase_user_id").notNull();
+        doctorCode.addIntProperty("doctor_code").notNull();
+        doctorCode.addBooleanProperty("verified").notNull();
+
+        return doctorCode;
+    }
+
+    private static Entity addDoctorPatient(final Schema schema) {
+        Entity doctorPatient = schema.addEntity("DoctorPatient");
+        doctorPatient.addIdProperty().primaryKey().autoincrement();
+        doctorPatient.addStringProperty("doctor_firebase_uid").notNull();
+        doctorPatient.addStringProperty("patient_firebase_uid").notNull();
+
+        return doctorPatient;
     }
 }

@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 4000;
-    private static final String[] REQUIRED_PERMISSIONS = {Manifest.permission.SEND_SMS};
+    private static final String[] REQUIRED_PERMISSIONS = {Manifest.permission.SEND_SMS, Manifest.permission.CAMERA};
     private static final int PERMISSION_REQUESTS = 1001;
 
     private FirebaseAuth mAuth;

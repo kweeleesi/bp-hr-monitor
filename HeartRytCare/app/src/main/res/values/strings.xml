@@ -23,6 +23,7 @@
     <string name="patient_nav">Patient</string>
     <string name="messages">Messages</string>
     <string name="share">Share</string>
+    <string name="sign_out">Sign Out</string>
 
     <!--SIGN UP | SIGN IN-->
     <string name="signup">Sign Up</string>
@@ -37,6 +38,12 @@
     <string name="retype_password">Retype Password</string>
     <string name="doctor">I\'m a Doctor</string>
     <string name="patient">I\'m a Patient</string>
+    <string name="age">Age*</string>
+    <string name="height">Height (cm)*</string>
+    <string name="weight">Weight (kg)*</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
     <string name="title_activity_schedule_medication">ScheduleMedication</string>
     <string name="dummy_button">Dummy Button</string>

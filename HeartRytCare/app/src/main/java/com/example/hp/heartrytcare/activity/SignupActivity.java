@@ -36,9 +36,9 @@ import com.wang.avi.AVLoadingIndicatorView;
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button signUp;
-    private RadioButton patientRb, doctorRb;
+    private RadioButton patientRb, doctorRb, maleRb, femaleRb;
     private UserDao userDao;
-    private EditText firstName, lastName, licenseNumber, contactNumber, eMail, password;
+    private EditText firstName, lastName, licenseNumber, contactNumber, eMail, password, age, height, weight;
     private LinearLayout licenseLinear;
     private TextView signIn;
     private AVLoadingIndicatorView loading;
@@ -62,6 +62,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         signIn = (TextView) findViewById(R.id.signIn);
         doctorRb = (RadioButton) findViewById(R.id.doctorRB);
         patientRb = (RadioButton) findViewById(R.id.patientRB);
+        maleRb = (RadioButton) findViewById(R.id.maleRb);
+        femaleRb = (RadioButton) findViewById(R.id.femaleRb);
         licenseLinear = (LinearLayout) findViewById(R.id.licenseLinear);
         firstName = (EditText) findViewById(R.id.firstName);
         lastName = (EditText) findViewById(R.id.lastName);
@@ -69,6 +71,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         contactNumber = (EditText) findViewById(R.id.contactNumber);
         eMail = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
+        age = (EditText) findViewById(R.id.age);
+        height = (EditText) findViewById(R.id.heartRate);
+        weight = (EditText) findViewById(R.id.weight);
         loading = (AVLoadingIndicatorView) findViewById(R.id.loading);
 
         Spannable wordToSpan = new SpannableString(getResources().getString(R.string.signin));
@@ -81,6 +86,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         doctorRb.setOnClickListener(this);
         patientRb.setOnClickListener(this);
         doctorRb.setChecked(true);
+        maleRb.setChecked(true);
     }
 
     @Override
@@ -141,6 +147,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             user.setContact_number(contactNumber.getText().toString());
                             user.setEmail(eMail.getText().toString());
                             user.setPassword(password.getText().toString());
+                            user.setAge(Integer.parseInt(age.getText().toString()));
+                            user.setHeight(Integer.parseInt(height.getText().toString()));
+                            user.setWeight(Integer.parseInt(weight.getText().toString()));
+                            user.setGender(maleRb.isChecked() ? 1 : 0); //1 = male, 0 = female
                             userDao.insert(user);
 
                             Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);

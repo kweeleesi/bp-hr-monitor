@@ -32,6 +32,7 @@ import com.example.hp.heartrytcare.fragment.SchedFragment;
 import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
 import com.example.hp.heartrytcare.helper.Constants;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.List;
 
@@ -173,6 +174,25 @@ public class MainMenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_doctor) {
             setTitle("Doctor");
             replaceFragment(new DoctorFragment());
+        } else if (id == R.id.nav_signout) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Sign Out");
+            builder.setMessage("Are you sure you want to sing out?");
+            builder.setCancelable(false);
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            builder.create();
+            builder.show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

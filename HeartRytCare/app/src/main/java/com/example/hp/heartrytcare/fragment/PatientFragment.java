@@ -13,8 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.DaoSession;
+import com.example.hp.heartrytcare.db.DoctorCode;
+import com.example.hp.heartrytcare.db.DoctorCodeDao;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Random;
 
@@ -26,11 +32,17 @@ public class PatientFragment extends Fragment implements View.OnClickListener{
     private Button cancelSend;
     private Dialog dialog;
     private EditText contactNumber;
+    private DoctorCodeDao doctorCodeDao;
+    private FirebaseAuth mAuth;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_patient, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        DaoSession daoSession = ((HeartRytCare) getActivity().getApplication()).getDaoSession();
+        doctorCodeDao = daoSession.getDoctorCodeDao();
 
         initializeFields();
 
@@ -73,13 +85,23 @@ public class PatientFragment extends Fragment implements View.OnClickListener{
         }
 
         Random rand = new Random();
-        String msg = ("Your verification code is ").concat(String.format("%04d%n", rand.nextInt(10000)));
+        int randNo = rand.nextInt(10000);
+        String msg = ("Your verification code is ").concat(String.format("%04d%n", randNo));
 
-        PendingIntent pi = PendingIntent.getActivity(getActivity(), 0,
-                new Intent(getActivity(), DoctorFragment.class), 0);
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(contactNumber.getText().toString(), null, msg, pi, null);
-        // TODO: 1/30/2018 handle error codes | check number validity
-        dialog.dismiss();
+        try {
+            PendingIntent pi = PendingIntent.getActivity(getActivity(), 0,
+                    new Intent(getActivity(), DoctorFragment.class), 0);
+            SmsManager sms = SmsManager.getDefault();
+            sms.sendTextMessage(contactNumber.getText().toString(), null, msg, pi, null);
+            // TODO: 1/30/2018 handle error codes | check number validity
+            dialog.dismiss();
+            Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
+
+            DoctorCode doctorCode = new DoctorCode();
+            doctorCode.setDoctor_code(randNo);
+            doctorCodeDao.insert(doctorCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
