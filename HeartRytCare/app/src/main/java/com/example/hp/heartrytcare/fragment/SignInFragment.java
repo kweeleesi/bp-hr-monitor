@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.activity.MainMenuActivity;
 import com.example.hp.heartrytcare.helper.Constants;

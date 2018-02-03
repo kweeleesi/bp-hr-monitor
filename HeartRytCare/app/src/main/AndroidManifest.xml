@@ -44,6 +44,14 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.SignupActivity"/>
+
+        <receiver
+            android:name=".helper.SmsBroadcastReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.example.hp.heartrytcare.SMS_RECEIVER" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -72,7 +72,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         eMail = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         age = (EditText) findViewById(R.id.age);
-        height = (EditText) findViewById(R.id.heartRate);
+        height = (EditText) findViewById(R.id.height);
         weight = (EditText) findViewById(R.id.weight);
         loading = (AVLoadingIndicatorView) findViewById(R.id.loading);
 
@@ -151,7 +151,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             user.setHeight(Integer.parseInt(height.getText().toString()));
                             user.setWeight(Integer.parseInt(weight.getText().toString()));
                             user.setGender(maleRb.isChecked() ? 1 : 0); //1 = male, 0 = female
-                            userDao.insert(user);
+                            long rowID = userDao.insert(user);
+                            Log.d("signup", "onComplete: " + rowID);
 
                             Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);
                             startActivity(intent);

@@ -91,7 +91,11 @@ public class MainMenuActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         DaoSession daoSession = ((HeartRytCare) getApplication()).getDaoSession();
         userDao = daoSession.getUserDao();
         QueryBuilder<User> queryUser = userDao.queryBuilder();
@@ -107,9 +111,7 @@ public class MainMenuActivity extends AppCompatActivity
         } else { //doctor
             menu.findItem(R.id.nav_patient).setVisible(true);
             menu.findItem(R.id.nav_doctor).setVisible(false);
-        }
-
-
+    }
     }
 
     @Override
@@ -188,7 +190,10 @@ public class MainMenuActivity extends AppCompatActivity
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
+                    ((HeartRytCare) getApplicationContext()).getFirebaseAuth().signOut();
+                    Intent intent = new Intent(MainMenuActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
             builder.create();
