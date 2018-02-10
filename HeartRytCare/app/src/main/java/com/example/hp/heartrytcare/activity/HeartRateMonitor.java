@@ -143,7 +143,7 @@ public class HeartRateMonitor extends AppCompatActivity {
             if (imgAvg < rollingAverage) {
                 newType = TYPE.RED;
                 if (newType != currentType) {
-                    beats++;
+                    beats++;                                        //count as beat
                     // Log.d(TAG, "BEAT!! beats="+beats);
                 }
             } else if (imgAvg > rollingAverage) {
@@ -162,9 +162,9 @@ public class HeartRateMonitor extends AppCompatActivity {
 
             long endTime = System.currentTimeMillis();
             double totalTimeInSecs = (endTime - startTime) / 1000d;
-            if (totalTimeInSecs >= 10) {
-                double bps = (beats / totalTimeInSecs);
-                int dpm = (int) (bps * 60d);
+            if (totalTimeInSecs >= 10) {                            // hits every 10secs
+                double bps = (beats / totalTimeInSecs);             // beats DIVIDED BY timeInSec above 10secs
+                int dpm = (int) (bps * 60d);                        // bps * 60secs(1min) = 1 BPM value
                 if (dpm < 30 || dpm > 180) {
                     startTime = System.currentTimeMillis();
                     beats = 0;
@@ -187,7 +187,7 @@ public class HeartRateMonitor extends AppCompatActivity {
                         beatsArrayCnt++;
                     }
                 }
-                int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
+                int beatsAvg = (beatsArrayAvg / beatsArrayCnt);     //total average beat for the whole duration of session
                 text.setText(String.valueOf(beatsAvg));
                 startTime = System.currentTimeMillis();
                 beats = 0;
@@ -217,7 +217,7 @@ public class HeartRateMonitor extends AppCompatActivity {
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             Camera.Parameters parameters = camera.getParameters();
-            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_RED_EYE);
             Camera.Size size = getSmallestPreviewSize(width, height, parameters);
             if (size != null) {
                 parameters.setPreviewSize(size.width, size.height);
