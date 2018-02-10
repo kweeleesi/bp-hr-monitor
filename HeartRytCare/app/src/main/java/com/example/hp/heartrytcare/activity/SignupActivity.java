@@ -24,6 +24,7 @@ import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.db.User;
 import com.example.hp.heartrytcare.db.UserDao;
+import com.example.hp.heartrytcare.db.UserFirebase;
 import com.example.hp.heartrytcare.fragment.SignInFragment;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,10 +32,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.wang.avi.AVLoadingIndicatorView;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private final String TAG = getClass().getSimpleName();
     private Button signUp;
     private RadioButton patientRb, doctorRb, maleRb, femaleRb;
     private UserDao userDao;
@@ -42,8 +49,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private LinearLayout licenseLinear;
     private TextView signIn;
     private AVLoadingIndicatorView loading;
+    private String userId;
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +61,25 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_signup);
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("user");
+        firebaseDatabase.getReference("HeartRytCare").setValue("Realtime Database");
+        /*firebaseDatabase.getReference("HeartRytCare").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String appTitle = dataSnapshot.getValue(String.class);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
         initializeFields();
 
-        DaoSession daoSession = ((HeartRytCare) getApplication()).getDaoSession();
-        userDao = daoSession.getUserDao();
+        /*DaoSession daoSession = ((HeartRytCare) getApplication()).getDaoSession();
+        userDao = daoSession.getUserDao();*/
     }
 
     private void initializeFields() {
@@ -138,21 +163,24 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             Log.d(getClass().getSimpleName(), "createUserWithEmail:success");
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             Constants.FIREBASE_UID = firebaseUser.getUid();
-                            User user = new User();
-                            user.setFirebase_user_id(firebaseUser.getUid());
-                            user.setUser_type(doctorRb.isChecked() ? 1 : 0); //1 = doctor, 0 = patient
-                            user.setFirst_name(firstName.getText().toString());
-                            user.setLast_name(lastName.getText().toString());
-                            user.setLicense_number(doctorRb.isChecked() ? licenseNumber.getText().toString() : "NA");
-                            user.setContact_number(contactNumber.getText().toString());
-                            user.setEmail(eMail.getText().toString());
-                            user.setPassword(password.getText().toString());
-                            user.setAge(Integer.parseInt(age.getText().toString()));
-                            user.setHeight(Integer.parseInt(height.getText().toString()));
-                            user.setWeight(Integer.parseInt(weight.getText().toString()));
-                            user.setGender(maleRb.isChecked() ? 1 : 0); //1 = male, 0 = female
-                            long rowID = userDao.insert(user);
-                            Log.d("signup", "onComplete: " + rowID);
+
+                            userId = databaseReference.push().getKey();
+
+                            UserFirebase userFirebase = new UserFirebase(firebaseUser.getUid(),
+                                    doctorRb.isChecked() ? 1 : 0,
+                                    firstName.getText().toString(),
+                                    lastName.getText().toString(),
+                                    doctorRb.isChecked() ? licenseNumber.getText().toString() : "NA",
+                                    contactNumber.getText().toString(),
+                                    eMail.getText().toString(),
+                                    password.getText().toString(),
+                                    Integer.parseInt(age.getText().toString()),
+                                    Integer.parseInt(height.getText().toString()),
+                                    Integer.parseInt(weight.getText().toString()),
+                                    maleRb.isChecked() ? 1 : 0);
+
+                            databaseReference.child(userId).setValue(userFirebase);
+//                            addUserChangeListener();
 
                             Intent intent = new Intent(SignupActivity.this, MainMenuActivity.class);
                             startActivity(intent);
@@ -167,6 +195,25 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
     }
+
+/*    private void addUserChangeListener () {
+        databaseReference.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserFirebase userFirebase = dataSnapshot.getValue(UserFirebase.class);
+
+                if (userFirebase == null) {
+                    Log.e(TAG, "User data is null!");
+                    return;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }*/
 
     private void signIn() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

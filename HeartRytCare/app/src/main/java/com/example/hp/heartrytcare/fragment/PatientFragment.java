@@ -18,8 +18,6 @@ import android.widget.Toast;
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.DaoSession;
-import com.example.hp.heartrytcare.db.DoctorCode;
-import com.example.hp.heartrytcare.db.DoctorCodeDao;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Random;
@@ -32,7 +30,6 @@ public class PatientFragment extends Fragment implements View.OnClickListener{
     private Button cancelSend;
     private Dialog dialog;
     private EditText contactNumber;
-    private DoctorCodeDao doctorCodeDao;
     private FirebaseAuth mAuth;
 
     @Nullable
@@ -42,7 +39,6 @@ public class PatientFragment extends Fragment implements View.OnClickListener{
 
         mAuth = FirebaseAuth.getInstance();
         DaoSession daoSession = ((HeartRytCare) getActivity().getApplication()).getDaoSession();
-        doctorCodeDao = daoSession.getDoctorCodeDao();
 
         initializeFields();
 
@@ -97,9 +93,6 @@ public class PatientFragment extends Fragment implements View.OnClickListener{
             dialog.dismiss();
             Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
 
-            DoctorCode doctorCode = new DoctorCode();
-            doctorCode.setDoctor_code(randNo);
-            doctorCodeDao.insert(doctorCode);
         } catch (Exception e) {
             e.printStackTrace();
         }

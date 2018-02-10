@@ -47,28 +47,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        /*FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }, SPLASH_TIME_OUT);
-        } else {
-            Constants.FIREBASE_UID = currentUser.getUid();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }, SPLASH_TIME_OUT);
-        }*/
     }
 
     @Override

@@ -23,7 +23,6 @@ public class MainGenerator {
 
     private static void addTables(final Schema schema) {
         Entity user = addUser(schema);
-        Entity doctorCode = addDoctorCode(schema);
         Entity doctorPatient = addDoctorPatient(schema);
     }
 
@@ -44,16 +43,6 @@ public class MainGenerator {
         user.addIntProperty("gender").notNull();
 
         return user;
-    }
-
-    private static Entity addDoctorCode(final Schema schema) {
-        Entity doctorCode = schema.addEntity("DoctorCode");
-        doctorCode.addIdProperty().primaryKey().autoincrement();
-        doctorCode.addStringProperty("firebase_user_id").notNull();
-        doctorCode.addIntProperty("doctor_code").notNull();
-        doctorCode.addBooleanProperty("verified").notNull();
-
-        return doctorCode;
     }
 
     private static Entity addDoctorPatient(final Schema schema) {
