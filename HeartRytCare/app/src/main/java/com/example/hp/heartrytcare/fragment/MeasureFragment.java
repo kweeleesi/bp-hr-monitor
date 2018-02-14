@@ -1,6 +1,9 @@
 package com.example.hp.heartrytcare.fragment;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +26,7 @@ public class MeasureFragment extends Fragment implements View.OnClickListener {
 
     private View view;
     private RelativeLayout heartRate, bloodPressure;
+    private AlertDialog.Builder dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,14 +45,27 @@ public class MeasureFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Fragment fragment = null;
+        Fragment fragment;
         switch (view.getId()) {
             case R.id.heartRate:
-                //context = FragmentView.getContext();
-                Intent i = new Intent(getActivity(), HeartRateMonitor.class);
-                getActivity().startActivity(i);
-               /* fragment = new HeartRateFragment();
-                replaceFragment(fragment); */
+                dialog = new AlertDialog.Builder(getActivity());
+                dialog.setTitle(R.string.heart_rate_desc);
+                dialog.setMessage(R.string.instruction);
+                dialog.setPositiveButton("START", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(getActivity(), HeartRateMonitor.class);
+                        getActivity().startActivity(i);
+                    }
+                });
+                dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.create();
+                dialog.show();
                 break;
 
             case R.id.bloodPressure:

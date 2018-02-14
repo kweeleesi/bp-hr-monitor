@@ -1,5 +1,6 @@
 package com.example.hp.heartrytcare.activity;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.helper.ImageProcess;
+import com.wang.avi.AVLoadingIndicatorView;
 
 
 public class HeartRateMonitor extends AppCompatActivity {
@@ -27,8 +29,9 @@ public class HeartRateMonitor extends AppCompatActivity {
     private static SurfaceView preview = null;
     private static SurfaceHolder previewHolder = null;
     private static Camera camera = null;
-    private static View image = null;
-    private static TextView text = null;
+    private static AVLoadingIndicatorView loading = null;
+    private static AlertDialog.Builder dialog = null;
+    private static TextView bpm = null;
 
     private static WakeLock wakeLock = null;
 
@@ -61,9 +64,9 @@ public class HeartRateMonitor extends AppCompatActivity {
         previewHolder = preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
         previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-        image = findViewById(R.id.image);
-        text = (TextView) findViewById(R.id.text);
+        loading = (AVLoadingIndicatorView) findViewById(R.id.progressBar);
+        dialog = new AlertDialog.Builder(getApplicationContext());
+        bpm = (TextView) findViewById(R.id.bpm);
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
@@ -113,6 +116,7 @@ public class HeartRateMonitor extends AppCompatActivity {
          */
         @Override
         public void onPreviewFrame(byte[] data, Camera cam) {
+            int z = 0;
             if (data == null) throw new NullPointerException();
             Camera.Size size = cam.getParameters().getPreviewSize();
             if (size == null) throw new NullPointerException();
@@ -157,7 +161,6 @@ public class HeartRateMonitor extends AppCompatActivity {
             // Transitioned from one state to another to the same
             if (newType != currentType) {
                 currentType = newType;
-                image.postInvalidate();
             }
 
             long endTime = System.currentTimeMillis();
@@ -187,8 +190,9 @@ public class HeartRateMonitor extends AppCompatActivity {
                         beatsArrayCnt++;
                     }
                 }
-                int beatsAvg = (beatsArrayAvg / beatsArrayCnt);     //total average beat for the whole duration of session
-                text.setText(String.valueOf(beatsAvg));
+                int beatsAvg = (beatsArrayAvg / beatsArrayCnt);     //total average beat for the whole duration of session7
+                bpm.setText("Your heart rate is " + String.valueOf(beatsAvg) + " bpm.");
+                loading.setVisibility(View.GONE);
                 startTime = System.currentTimeMillis();
                 beats = 0;
             }
@@ -217,7 +221,7 @@ public class HeartRateMonitor extends AppCompatActivity {
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             Camera.Parameters parameters = camera.getParameters();
-            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_RED_EYE);
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
             Camera.Size size = getSmallestPreviewSize(width, height, parameters);
             if (size != null) {
                 parameters.setPreviewSize(size.width, size.height);
