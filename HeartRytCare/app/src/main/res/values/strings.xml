@@ -6,8 +6,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Help</string>
-    <string name="diet_plan">Diet Plan</string>
-    <string name="vital_signs">Vital Signs</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -77,6 +75,27 @@
     <string name="instruction"> - Place your index finger on the rear camera.\n
                                 - Make sure the camera is fully covered.\n
                                 - Finally, place your finger then press START.</string>
+
+    <!--JOURNAL-->
+    <string name="diet_plan">DIET PLAN</string>
+    <string name="meals_taken">Meals Taken</string>
+    <string name="vital_signs">VITAL SIGNS</string>
+    <string name="heart_rate_bpm">Heart Rate (bpm)</string>
+    <string name="systolic">Systolic</string>
+    <string name="diastolic">Diastolic</string>
+    <string name="mmhg">(mmHG)</string>
+    <string name="temperature">Temperature (°C)</string>
+    <string name="weight_hint">Weight (kg)</string>
+    <string name="medications">MEDICATIONS</string>
+    <string name="medicine_name">Medicine Name</string>
+    <string name="dosage">Dosage</string>
+    <string name="no">No.</string>
+    <string name="how_often">How often? (e.g. once a day)</string>
+    <string name="notes">NOTES</string>
+    <string name="other_details">Other details</string>
+    <string name="save">SAVE</string>
+    <string name="notice">Journal list is empty.\nClick + sign to add journal entry.</string>
+
 </resources>
 
 

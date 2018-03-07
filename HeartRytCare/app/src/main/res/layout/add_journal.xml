@@ -1,0 +1,244 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:background="@color/main_app_bg">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_white_bg"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/dietPlaneLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/diet_plan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@color/red_textcolor"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_meals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/dietPlaneLabel"
+                android:hint="@string/meals_taken"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_white_bg"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/vitalSignsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/vital_signs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@color/red_textcolor"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_heartrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="@string/heart_rate_bpm"
+                android:inputType="number"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_systolic"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="77dp"
+                android:hint="@string/systolic"
+                android:inputType="number"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/et_systolic"
+                android:layout_toEndOf="@+id/et_systolic"
+                android:layout_toRightOf="@+id/et_systolic"
+                android:text="/"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+            <EditText
+                android:id="@+id/et_diastolic"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:hint="@string/diastolic"
+                android:inputType="number"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/et_diastolic"
+                android:layout_alignBottom="@+id/et_diastolic"
+                android:layout_toEndOf="@+id/et_diastolic"
+                android:layout_toRightOf="@+id/et_diastolic"
+                android:text="@string/mmhg"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_temp"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="123dp"
+                android:hint="@string/temperature"
+                android:inputType="number"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_weight"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="123dp"
+                android:layout_toEndOf="@+id/et_temp"
+                android:layout_toRightOf="@+id/et_temp"
+                android:hint="@string/weight_hint"
+                android:inputType="number"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_white_bg"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/txtview3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/medications"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@color/red_textcolor"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_medname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="@string/medicine_name"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_dosage"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="77dp"
+                android:hint="Dosage"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/et_numberofmed"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/et_dosage"
+                android:layout_alignBottom="@+id/et_dosage"
+                android:layout_toEndOf="@+id/et_dosage"
+                android:layout_toRightOf="@+id/et_dosage"
+                android:hint="No."
+                android:inputType="number"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/howOften"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/et_numberofmed"
+                android:layout_alignTop="@+id/et_numberofmed"
+                android:layout_toRightOf="@+id/et_numberofmed"
+                android:hint="How often? (e.g. once a day)"
+                android:singleLine="false"
+                android:textSize="13dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_white_bg"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/txtview4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Notes"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@color/red_textcolor"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_othernotes"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtview4"
+                android:hint="Other details"
+                android:singleLine="false"
+                android:textSize="13dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/btn_journalsave"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/btn_journalcancel"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/cancel" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

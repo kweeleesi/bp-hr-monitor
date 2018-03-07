@@ -42,9 +42,9 @@
         <activity
             android:name=".activity.HeartRateMonitor"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SignupActivity"/>
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.SignupActivity" />
+        <activity android:name=".activity.JournalActivity"></activity>
     </application>
 
 </manifest>

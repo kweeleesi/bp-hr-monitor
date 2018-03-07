@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +18,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
@@ -24,7 +27,7 @@ import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.db.User;
 import com.example.hp.heartrytcare.db.UserDao;
 import com.example.hp.heartrytcare.fragment.DoctorFragment;
-import com.example.hp.heartrytcare.fragment.HealthJournalFragment;
+import com.example.hp.heartrytcare.fragment.AddJournalFragment;
 import com.example.hp.heartrytcare.fragment.MeasureFragment;
 import com.example.hp.heartrytcare.fragment.MessagesFragment;
 import com.example.hp.heartrytcare.fragment.PatientFragment;
@@ -32,7 +35,6 @@ import com.example.hp.heartrytcare.fragment.SchedFragment;
 import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
 import com.example.hp.heartrytcare.helper.Constants;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.List;
 
@@ -105,13 +107,18 @@ public class MainMenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
+        Log.d(TAG, "onResume: headerView count " + navigationView.getHeaderCount());
         if (users.get(0).getUser_type() == 0) { //patient
             menu.findItem(R.id.nav_doctor).setVisible(true);
             menu.findItem(R.id.nav_patient).setVisible(false);
+            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.patient);
+            ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.patient));
         } else { //doctor
             menu.findItem(R.id.nav_patient).setVisible(true);
             menu.findItem(R.id.nav_doctor).setVisible(false);
-    }
+            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.doctor);
+            ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.doctor));
+        }
     }
 
     @Override
@@ -154,7 +161,8 @@ public class MainMenuActivity extends AppCompatActivity
 
         if (id == R.id.nav_journal) {
             setTitle("Journal");
-            replaceFragment(new HealthJournalFragment());
+            Intent intent = new Intent(MainMenuActivity.this, JournalActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sched) {
             setTitle("Schedule");
             replaceFragment(new SchedFragment());

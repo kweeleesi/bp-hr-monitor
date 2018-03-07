@@ -23,6 +23,7 @@ public class MainGenerator {
 
     private static void addTables(final Schema schema) {
         Entity user = addUser(schema);
+        Entity journal = addJournal(schema);
         Entity doctorPatient = addDoctorPatient(schema);
     }
 
@@ -43,6 +44,24 @@ public class MainGenerator {
         user.addIntProperty("gender").notNull();
 
         return user;
+    }
+
+    private static Entity addJournal(final Schema schema) {
+        Entity journal = schema.addEntity("Journal");
+        journal.addIdProperty().primaryKey().autoincrement();
+        journal.addStringProperty("meals_taken");
+        journal.addIntProperty("heart_rate");
+        journal.addStringProperty("systolic");
+        journal.addStringProperty("diastolic");
+        journal.addIntProperty("temperature");
+        journal.addDoubleProperty("weight");
+        journal.addStringProperty("medicine_name");
+        journal.addStringProperty("dosage");
+        journal.addStringProperty("pieces");
+        journal.addStringProperty("how_often");
+        journal.addStringProperty("notes");
+
+        return journal;
     }
 
     private static Entity addDoctorPatient(final Schema schema) {
