@@ -11,4 +11,5 @@
     <color name="main_app_bg">#030d2b</color>
     <color name="red_textcolor">#841014</color>
     <color name="blue_link">#ff4d72e1</color>
+    <color name="gray_text">#9e9e9e</color>
 </resources>

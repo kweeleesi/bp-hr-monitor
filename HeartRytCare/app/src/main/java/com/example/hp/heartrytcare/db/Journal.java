@@ -10,17 +10,21 @@ package com.example.hp.heartrytcare.db;
 public class Journal {
 
     private Long id;
+    /** Not-null value. */
+    private String firebase_user_id;
     private String meals_taken;
-    private Integer heart_rate;
+    private String heart_rate;
     private String systolic;
     private String diastolic;
-    private Integer temperature;
-    private Double weight;
+    private String temperature;
+    private String weight;
     private String medicine_name;
     private String dosage;
     private String pieces;
     private String how_often;
     private String notes;
+    /** Not-null value. */
+    private String entry_date;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -32,8 +36,9 @@ public class Journal {
         this.id = id;
     }
 
-    public Journal(Long id, String meals_taken, Integer heart_rate, String systolic, String diastolic, Integer temperature, Double weight, String medicine_name, String dosage, String pieces, String how_often, String notes) {
+    public Journal(Long id, String firebase_user_id, String meals_taken, String heart_rate, String systolic, String diastolic, String temperature, String weight, String medicine_name, String dosage, String pieces, String how_often, String notes, String entry_date) {
         this.id = id;
+        this.firebase_user_id = firebase_user_id;
         this.meals_taken = meals_taken;
         this.heart_rate = heart_rate;
         this.systolic = systolic;
@@ -45,6 +50,7 @@ public class Journal {
         this.pieces = pieces;
         this.how_often = how_often;
         this.notes = notes;
+        this.entry_date = entry_date;
     }
 
     public Long getId() {
@@ -55,6 +61,16 @@ public class Journal {
         this.id = id;
     }
 
+    /** Not-null value. */
+    public String getFirebase_user_id() {
+        return firebase_user_id;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setFirebase_user_id(String firebase_user_id) {
+        this.firebase_user_id = firebase_user_id;
+    }
+
     public String getMeals_taken() {
         return meals_taken;
     }
@@ -63,11 +79,11 @@ public class Journal {
         this.meals_taken = meals_taken;
     }
 
-    public Integer getHeart_rate() {
+    public String getHeart_rate() {
         return heart_rate;
     }
 
-    public void setHeart_rate(Integer heart_rate) {
+    public void setHeart_rate(String heart_rate) {
         this.heart_rate = heart_rate;
     }
 
@@ -87,19 +103,19 @@ public class Journal {
         this.diastolic = diastolic;
     }
 
-    public Integer getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(Integer temperature) {
+    public void setTemperature(String temperature) {
         this.temperature = temperature;
     }
 
-    public Double getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
@@ -141,6 +157,16 @@ public class Journal {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    /** Not-null value. */
+    public String getEntry_date() {
+        return entry_date;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setEntry_date(String entry_date) {
+        this.entry_date = entry_date;
     }
 
     // KEEP METHODS - put your custom methods here

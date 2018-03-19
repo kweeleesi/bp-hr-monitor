@@ -223,12 +223,26 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
-            <Button
-                android:id="@+id/btn_journalsave"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:text="@string/save" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_journalsave"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="@string/save" />
+
+                <Button
+                    android:id="@+id/btn_journalupdate"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="@string/update"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
 
             <Button
                 android:id="@+id/btn_journalcancel"

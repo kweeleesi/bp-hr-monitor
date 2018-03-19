@@ -35,6 +35,11 @@ import com.example.hp.heartrytcare.fragment.SchedFragment;
 import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
 import com.example.hp.heartrytcare.helper.Constants;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -45,7 +50,8 @@ public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private String TAG = getClass().getSimpleName();
-    private UserDao userDao;
+//    private UserDao userDao;
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,16 +104,17 @@ public class MainMenuActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        DaoSession daoSession = ((HeartRytCare) getApplication()).getDaoSession();
+        /*DaoSession daoSession = ((HeartRytCare) getApplication()).getDaoSession();
         userDao = daoSession.getUserDao();
         QueryBuilder<User> queryUser = userDao.queryBuilder();
         queryUser.where(UserDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
-        List<User> users = queryUser.list();
+        List<User> users = queryUser.list();*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
-        Log.d(TAG, "onResume: headerView count " + navigationView.getHeaderCount());
+        /*Log.d(TAG, "onResume: headerView count " + navigationView.getHeaderCount());
+        Log.e(TAG, "!!!!! hello : " + users.size());
         if (users.get(0).getUser_type() == 0) { //patient
             menu.findItem(R.id.nav_doctor).setVisible(true);
             menu.findItem(R.id.nav_patient).setVisible(false);
@@ -118,7 +125,14 @@ public class MainMenuActivity extends AppCompatActivity
             menu.findItem(R.id.nav_doctor).setVisible(false);
             ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.doctor);
             ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.doctor));
-        }
+        }*/
+
+        /*FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("user");
+
+        myRef.setValue("get user detail");*/
+
+//        getUserDetailsFromFirebase();
     }
 
     @Override
@@ -218,5 +232,24 @@ public class MainMenuActivity extends AppCompatActivity
         transaction.replace(R.id.relativeLayout_for_fragment, someFragment);
         transaction.addToBackStack("");
         transaction.commit();
+    }
+
+    private void getUserDetailsFromFirebase() {
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 }

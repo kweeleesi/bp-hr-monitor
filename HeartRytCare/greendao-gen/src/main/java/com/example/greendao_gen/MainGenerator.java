@@ -49,17 +49,19 @@ public class MainGenerator {
     private static Entity addJournal(final Schema schema) {
         Entity journal = schema.addEntity("Journal");
         journal.addIdProperty().primaryKey().autoincrement();
+        journal.addStringProperty("firebase_user_id").notNull();
         journal.addStringProperty("meals_taken");
-        journal.addIntProperty("heart_rate");
+        journal.addStringProperty("heart_rate");
         journal.addStringProperty("systolic");
         journal.addStringProperty("diastolic");
-        journal.addIntProperty("temperature");
-        journal.addDoubleProperty("weight");
+        journal.addStringProperty("temperature");
+        journal.addStringProperty("weight");
         journal.addStringProperty("medicine_name");
         journal.addStringProperty("dosage");
         journal.addStringProperty("pieces");
         journal.addStringProperty("how_often");
         journal.addStringProperty("notes");
+        journal.addStringProperty("entry_date").notNull();
 
         return journal;
     }

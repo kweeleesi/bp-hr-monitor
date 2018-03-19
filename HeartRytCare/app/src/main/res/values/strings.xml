@@ -94,7 +94,8 @@
     <string name="notes">NOTES</string>
     <string name="other_details">Other details</string>
     <string name="save">SAVE</string>
-    <string name="notice">Journal list is empty.\nClick + sign to add journal entry.</string>
+    <string name="update">UPDATE</string>
+    <string name="notice">Journal list is empty.</string>
 
 </resources>
 

@@ -1,41 +1,42 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/main_app_bg">
-
-    <ListView
-        android:id="@+id/journal_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/round_white_bg"
-        android:layout_margin="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:layout_margin="20dp">
+        android:padding="20dp">
 
-        <TextView
-            android:id="@+id/empty_list"
+        <ListView
+            android:id="@+id/journal_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal|bottom"
-            android:text="@string/notice"
-            android:textSize="15sp"
-            android:textStyle="italic" />
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:background="@drawable/round_white_bg" />
 
-        <ImageView
+        <Button
             android:id="@+id/addJournalEntry"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_add_box_black_24dp"
-            android:tint="@color/red_textcolor"
-            android:layout_gravity="center_horizontal|top" />
+            android:text="Add Journal Entry"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:text="@string/notice"
+        android:textSize="15sp"
+        android:textStyle="italic" />
 
     <FrameLayout
         android:id="@+id/addJournalContainer"
