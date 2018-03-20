@@ -24,6 +24,7 @@ public class MainGenerator {
     private static void addTables(final Schema schema) {
         Entity user = addUser(schema);
         Entity journal = addJournal(schema);
+        Entity medication = addMedicationSched(schema);
         Entity doctorPatient = addDoctorPatient(schema);
     }
 
@@ -64,6 +65,23 @@ public class MainGenerator {
         journal.addStringProperty("entry_date").notNull();
 
         return journal;
+    }
+
+    private static Entity addMedicationSched(final Schema schema) {
+        Entity medication = schema.addEntity("Medication");
+        medication.addIdProperty().primaryKey().autoincrement();
+        medication.addStringProperty("firebase_user_id").notNull();
+        medication.addStringProperty("nameOfMed");
+        medication.addStringProperty("dosage");
+        medication.addStringProperty("numberOfMed");
+        medication.addStringProperty("method");
+        medication.addStringProperty("howOften");
+        medication.addStringProperty("time");
+        medication.addStringProperty("startDate");
+        medication.addStringProperty("duration");
+        medication.addBooleanProperty("alert");
+
+        return medication;
     }
 
     private static Entity addDoctorPatient(final Schema schema) {

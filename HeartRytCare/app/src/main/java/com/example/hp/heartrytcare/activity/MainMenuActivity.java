@@ -174,7 +174,6 @@ public class MainMenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_journal) {
-            setTitle("Journal");
             Intent intent = new Intent(MainMenuActivity.this, JournalActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sched) {

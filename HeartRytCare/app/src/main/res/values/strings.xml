@@ -95,7 +95,25 @@
     <string name="other_details">Other details</string>
     <string name="save">SAVE</string>
     <string name="update">UPDATE</string>
-    <string name="notice">Journal list is empty.</string>
+    <string name="notice">List is empty.</string>
+
+    <!--SCHEDULE-->
+    <string name="schedule_medication">Schedule Medication</string>
+    <string name="name">Name</string>
+    <string name="number">Number</string>
+    <string name="how_is_it_taken">How is it taken</string>
+    <string name="number_of_times">Number of times</string>
+    <string name="medication_time">Medication Time</string>
+    <string name="date_of_commencement">Date of Commencement</string>
+    <string name="number_of_days">Number of Days</string>
+    <string name="alert">Alert</string>
+    <string name="hint_med_name">Name of Medication</string>
+    <string name="hint_num_med">Number of medicines to take</string>
+    <string name="hint_how">e.g. oral</string>
+    <string name="hint_num_times">How often do you need to take the medicine</string>
+    <string name="hint_time">Set Time</string>
+    <string name="hint_date">Select Date</string>
+    <string name="hint_num_days">Set number of days you need to take it.</string>
 
 </resources>
 

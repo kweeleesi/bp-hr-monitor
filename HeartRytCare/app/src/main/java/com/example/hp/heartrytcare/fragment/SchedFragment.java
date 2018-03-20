@@ -1,6 +1,7 @@
 package com.example.hp.heartrytcare.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +12,7 @@ import android.support.v7.widget.CardView;
 import android.widget.RelativeLayout;
 
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.activity.MedicationActivity;
 
 
 /**
@@ -20,6 +22,7 @@ public class SchedFragment extends Fragment implements View.OnClickListener  {
 
     private View view;
     private RelativeLayout medication, appointment;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,8 +45,10 @@ public class SchedFragment extends Fragment implements View.OnClickListener  {
             Fragment fragment = null;
             switch (view.getId()) {
                 case R.id.medication:
-                    fragment = new ScheduleMed();
-                    replaceFragment(fragment);
+                    Intent intent = new Intent(getActivity(), MedicationActivity.class);
+                    startActivity(intent);
+//                    fragment = new ScheduleMed();
+//                    replaceFragment(fragment);
                     break;
                 case R.id.appointment:
                     fragment = new SchedAppointment();

@@ -44,7 +44,8 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.SignupActivity" />
-        <activity android:name=".activity.JournalActivity"></activity>
+        <activity android:name=".activity.JournalActivity" />
+        <activity android:name=".activity.MedicationActivity"></activity>
     </application>
 
 </manifest>
