@@ -124,7 +124,25 @@ public class AddJournalFragment extends Fragment implements View.OnClickListener
     }
 
     private void updateJournal() {
+        Date d = new Date();
+        CharSequence date  = DateFormat.format("EEEE, MMMM d, yyyy\n hh:mm aa", d.getTime());
 
+        journal.setMeals_taken(meals.getText().toString());
+        journal.setHeart_rate(heartrate.getText().toString());
+        journal.setSystolic(systolic.getText().toString());
+        journal.setDiastolic(diastolic.getText().toString());
+        journal.setTemperature(temperature.getText().toString());
+        journal.setWeight(weight.getText().toString());
+        journal.setMedicine_name(medicineName.getText().toString());
+        journal.setDosage(dosage.getText().toString());
+        journal.setPieces(numberOfMed.getText().toString());
+        journal.setHow_often(howOften.getText().toString());
+        journal.setNotes(notes.getText().toString());
+        journal.setEntry_date("Updated at:\n" + date.toString());
+        journalDao.insertOrReplace(journal);
+
+        Toast.makeText(getActivity(), "Journal Entry Updated.", Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();
     }
 
     @Override
