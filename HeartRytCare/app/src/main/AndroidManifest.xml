@@ -45,7 +45,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.JournalActivity" />
-        <activity android:name=".activity.MedicationActivity"></activity>
+        <activity android:name=".activity.MedicationActivity" />
+        <activity android:name=".activity.AppointmentActivity"></activity>
     </application>
 
 </manifest>

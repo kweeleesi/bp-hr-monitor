@@ -1,8 +1,8 @@
 package com.example.hp.heartrytcare.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,57 +12,56 @@ import android.widget.TextView;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
-import com.example.hp.heartrytcare.adapter.JournalListAdapter;
+import com.example.hp.heartrytcare.adapter.AppointmentsAdapter;
+import com.example.hp.heartrytcare.db.Appointment;
+import com.example.hp.heartrytcare.db.AppointmentDao;
 import com.example.hp.heartrytcare.db.DaoSession;
-import com.example.hp.heartrytcare.db.Journal;
-import com.example.hp.heartrytcare.db.JournalDao;
-import com.example.hp.heartrytcare.fragment.AddJournalFragment;
+import com.example.hp.heartrytcare.fragment.SchedAppointment;
 import com.example.hp.heartrytcare.helper.Constants;
 
 import java.util.ArrayList;
 
 import de.greenrobot.dao.query.QueryBuilder;
 
-public class JournalActivity extends AppCompatActivity {
+public class AppointmentActivity extends AppCompatActivity {
 
-    private ListView journalList;
-    private Button addJournal;
+    private ListView apptList;
+    private Button addAppt;
     private TextView emptyList;
-    private JournalDao journalDao;
-    private ArrayList<Journal> journals = new ArrayList<>();
+    private AppointmentDao appointmentDao;
+    private ArrayList<Appointment> appointments = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_entry);
-        setTitle("Journal");
 
-        journalList = (ListView) findViewById(R.id.list);
-        addJournal = (Button) findViewById(R.id.addEntry);
+        apptList = (ListView) findViewById(R.id.list);
+        addAppt = (Button) findViewById(R.id.addEntry);
         emptyList = (TextView) findViewById(R.id.empty_list);
 
-        addJournal.setOnClickListener(new View.OnClickListener() {
+        addAppt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, new AddJournalFragment());
+                transaction.replace(R.id.container, new SchedAppointment());
                 transaction.addToBackStack("");
                 transaction.commit();
             }
         });
 
-        fetchJournalEntries();
-        if (journals != null && journals.size() != 0) {
+        fetchAppointment();
+        if (appointments != null && appointments.size() != 0) {
             emptyList.setVisibility(View.GONE);
         }
 
-        journalList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        apptList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", position);
 
-                AddJournalFragment fragment = new AddJournalFragment();
+                SchedAppointment fragment = new SchedAppointment();
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
@@ -74,22 +73,22 @@ public class JournalActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        fetchJournalEntries();
+        fetchAppointment();
         super.onBackPressed();
     }
 
-    private void fetchJournalEntries() {
+    private void fetchAppointment() {
         DaoSession daoSession = ((HeartRytCare) getApplication()).getDaoSession();
-        journalDao = daoSession.getJournalDao();
-        QueryBuilder<Journal> queryJournal = journalDao.queryBuilder();
-        queryJournal.where(JournalDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
-        journals.clear();
-        journals.addAll(queryJournal.list());
+        appointmentDao = daoSession.getAppointmentDao();
+        QueryBuilder<Appointment> query = appointmentDao.queryBuilder();
+        query.where(AppointmentDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
+        appointments.clear();
+        appointments.addAll(query.list());
 
-        JournalListAdapter adapter = new JournalListAdapter(journals, getApplicationContext());
-        journalList.setAdapter(adapter);
-        journalList.invalidate();
+        AppointmentsAdapter adapter = new AppointmentsAdapter(appointments, getApplicationContext());
+        apptList.setAdapter(adapter);
+        apptList.invalidate();
 
-        Log.e("JournalActivity", "journal size : " + journals.size());
+        Log.e("AppointmentActivity", "appointment size : " + appointments.size());
     }
 }

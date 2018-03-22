@@ -112,8 +112,14 @@
     <string name="hint_how">e.g. oral</string>
     <string name="hint_num_times">How often do you need to take the medicine</string>
     <string name="hint_time">Set Time</string>
-    <string name="hint_date">Select Date</string>
+    <string name="hint_date">Set Date</string>
     <string name="hint_num_days">Set number of days you need to take it.</string>
+    <string name="schedule_appointment">Schedule Appointment</string>
+    <string name="header">Header</string>
+    <string name="hint_header">Clinical Appointment Name</string>
+    <string name="hint_appointment">Appointment Details</string>
+    <string name="appoinment_time">Time of Appointment</string>
+    <string name="appointment_date">Date of Appointment</string>
 
 </resources>
 

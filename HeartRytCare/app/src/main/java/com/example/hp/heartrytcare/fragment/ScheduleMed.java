@@ -2,15 +2,13 @@ package com.example.hp.heartrytcare.fragment;
 
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.icu.util.Calendar;
-import android.media.RemoteController;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,29 +19,30 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.DaoSession;
-import com.example.hp.heartrytcare.db.Journal;
-import com.example.hp.heartrytcare.db.JournalDao;
 import com.example.hp.heartrytcare.db.Medication;
 import com.example.hp.heartrytcare.db.MedicationDao;
 import com.example.hp.heartrytcare.helper.Constants;
+
+import java.util.Calendar;
 
 import de.greenrobot.dao.query.QueryBuilder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScheduleMed extends Fragment {
+public class ScheduleMed extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "ScheduleMed";
 
     private View view;
-    private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
     private ImageView back;
     private Button save, update;
     private MedicationDao medicationDao;
@@ -51,10 +50,6 @@ public class ScheduleMed extends Fragment {
     private TextView startDate, medTime;
     private Switch alert;
     private Medication medication;
-
-    public ScheduleMed() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,58 +60,6 @@ public class ScheduleMed extends Fragment {
 
         DaoSession daoSession = ((HeartRytCare)getActivity().getApplication()).getDaoSession();
         medicationDao = daoSession.getMedicationDao();
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
-
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        getActivity(),
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
-                        month, day, year);
-
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                Log.d(TAG, "onDateSet: mm/dd/yyyy: " + month + "/" + day + "/" + year);
-
-                String date = month + "/" + day + "/" + year;
-                mDisplayDate.setText(date);
-            }
-        };
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                save();
-            }
-        });
-
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                update();
-            }
-        });
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -137,12 +80,33 @@ public class ScheduleMed extends Fragment {
             save.setVisibility(View.GONE);
         }
 
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: mm/dd/yyyy: " + month + "/" + day + "/" + year);
+
+                String date = month + "/" + day + "/" + year;
+                startDate.setText(date);
+            }
+        };
+
+        mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Log.d(TAG, "onTimeSet: hh:mm: " + hourOfDay + ":" + minute);
+
+                String time = hourOfDay + ":" + minute;
+                medTime.setText(time);
+            }
+        };
+
         return view;
     }
 
     private void initializeFields() {
         back = (ImageView) view.findViewById(R.id.img_arrowback);
-        mDisplayDate = (TextView) view.findViewById(R.id.tv_scheddate);
+        startDate = (TextView) view.findViewById(R.id.tv_scheddate);
         save = (Button) view.findViewById(R.id.addSched);
         update = (Button) view.findViewById(R.id.updateSched);
         name = (EditText) view.findViewById(R.id.et_medname);
@@ -152,8 +116,13 @@ public class ScheduleMed extends Fragment {
         howOften = (EditText) view.findViewById(R.id.et_times);
         duration = (EditText) view.findViewById(R.id.et_numofdays);
         medTime = (TextView) view.findViewById(R.id.et_settime);
-        startDate = (TextView) view.findViewById(R.id.tv_scheddate);
         alert = (Switch) view.findViewById(R.id.alertSwitch);
+
+        back.setOnClickListener(this);
+        save.setOnClickListener(this);
+        update.setOnClickListener(this);
+        startDate.setOnClickListener(this);
+        medTime.setOnClickListener(this);
     }
 
     private void save() {
@@ -189,5 +158,48 @@ public class ScheduleMed extends Fragment {
 
         Toast.makeText(getActivity(), "Schedule successfully updated.", Toast.LENGTH_SHORT).show();
         getActivity().onBackPressed();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onClick(View v) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+
+        switch (v.getId()) {
+            case R.id.img_arrowback:
+                getActivity().onBackPressed();
+                break;
+            case R.id.tv_scheddate:
+                DatePickerDialog datePicker = new DatePickerDialog(
+                        getActivity(),
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        month, day, year);
+                datePicker.updateDate(year, month, day);
+                datePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePicker.show();
+                break;
+            case R.id.et_settime:
+                TimePickerDialog timePicker = new TimePickerDialog(
+                        getActivity(),
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mTimeSetListener,
+                        hour, minute, false);
+                timePicker.updateTime(hour, minute);
+                timePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePicker.show();
+                break;
+            case R.id.addSched:
+                save();
+                break;
+            case R.id.updateSched:
+                update();
+                break;
+        }
     }
 }

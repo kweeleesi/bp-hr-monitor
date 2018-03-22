@@ -26,6 +26,7 @@ public class MainGenerator {
         Entity journal = addJournal(schema);
         Entity medication = addMedicationSched(schema);
         Entity doctorPatient = addDoctorPatient(schema);
+        Entity appt = addAppointment(schema);
     }
 
     private static Entity addUser(final Schema schema) {
@@ -82,6 +83,18 @@ public class MainGenerator {
         medication.addBooleanProperty("alert");
 
         return medication;
+    }
+
+    private static Entity addAppointment(final Schema schema) {
+        Entity appt = schema.addEntity("Appointment");
+        appt.addIdProperty().primaryKey().notNull().autoincrement();
+        appt.addStringProperty("firebase_user_id").notNull();
+        appt.addStringProperty("header");
+        appt.addStringProperty("notes");
+        appt.addStringProperty("time");
+        appt.addStringProperty("date");
+
+        return appt;
     }
 
     private static Entity addDoctorPatient(final Schema schema) {

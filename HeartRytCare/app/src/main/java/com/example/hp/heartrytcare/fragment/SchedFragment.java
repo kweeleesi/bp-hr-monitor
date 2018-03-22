@@ -12,6 +12,7 @@ import android.support.v7.widget.CardView;
 import android.widget.RelativeLayout;
 
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.activity.AppointmentActivity;
 import com.example.hp.heartrytcare.activity.MedicationActivity;
 
 
@@ -42,25 +43,15 @@ public class SchedFragment extends Fragment implements View.OnClickListener  {
 
         @Override
         public void onClick(View view) {
-            Fragment fragment = null;
             switch (view.getId()) {
                 case R.id.medication:
                     Intent intent = new Intent(getActivity(), MedicationActivity.class);
                     startActivity(intent);
-//                    fragment = new ScheduleMed();
-//                    replaceFragment(fragment);
                     break;
                 case R.id.appointment:
-                    fragment = new SchedAppointment();
-                    replaceFragment(fragment);
+                    Intent ntnt = new Intent(getActivity(), AppointmentActivity.class);
+                    startActivity(ntnt);
                     break;
             }
         }
-
-    public void replaceFragment(Fragment someFragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.relativeLayout_for_fragment, someFragment);
-        transaction.addToBackStack("");
-        transaction.commit();
-    }
 }
