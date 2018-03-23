@@ -3,6 +3,8 @@ package com.example.hp.heartrytcare.activity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.content.Context;
@@ -11,13 +13,19 @@ import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.DaoSession;
+import com.example.hp.heartrytcare.db.HeartRateData;
+import com.example.hp.heartrytcare.db.HeartRateDataDao;
+import com.example.hp.heartrytcare.helper.Constants;
 import com.example.hp.heartrytcare.helper.ImageProcess;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -38,6 +46,8 @@ public class HeartRateMonitor extends AppCompatActivity {
     private static int averageIndex = 0;
     private static final int averageArraySize = 4;
     private static final int[] averageArray = new int[averageArraySize];
+
+    private static HeartRateDataDao hrDao;
 
     public static enum TYPE {
         GREEN, RED
@@ -70,6 +80,9 @@ public class HeartRateMonitor extends AppCompatActivity {
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
+
+        DaoSession daoSession = ((HeartRytCare)getApplicationContext()).getDaoSession();
+        hrDao = daoSession.getHeartRateDataDao();
     }
 
     /**
@@ -195,6 +208,15 @@ public class HeartRateMonitor extends AppCompatActivity {
                 loading.setVisibility(View.GONE);
                 startTime = System.currentTimeMillis();
                 beats = 0;
+
+                Date d = new Date();
+                CharSequence date  = DateFormat.format("EEEE, MMMM d, yyyy hh:mm aa", d.getTime());
+
+                HeartRateData hr = new HeartRateData();
+                hr.setFirebase_user_id(Constants.FIREBASE_UID);
+                hr.setBpm(beatsAvg);
+                hr.setDate(date.toString());
+                hrDao.insert(hr);
             }
             processing.set(false);
         }

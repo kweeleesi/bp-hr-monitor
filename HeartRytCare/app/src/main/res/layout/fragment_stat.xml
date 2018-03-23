@@ -1,21 +1,13 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:background="@color/main_app_bg"
-    tools:context="com.example.hp.heartrytcare.fragment.SchedFragment">
+    android:background="@color/main_app_bg">
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/img_bpchart"
-            android:layout_width="500dp"
-            android:layout_height="500dp"
-            android:src="@drawable/bpchart"
-            android:layout_margin="15dp"/>
-            </RelativeLayout>
-
-
-</ScrollView>
+</FrameLayout>

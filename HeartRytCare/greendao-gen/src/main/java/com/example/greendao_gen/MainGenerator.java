@@ -27,6 +27,8 @@ public class MainGenerator {
         Entity medication = addMedicationSched(schema);
         Entity doctorPatient = addDoctorPatient(schema);
         Entity appt = addAppointment(schema);
+        Entity hr = addHeartRateData(schema);
+        Entity bp = addBloodPressureData(schema);
     }
 
     private static Entity addUser(final Schema schema) {
@@ -95,6 +97,27 @@ public class MainGenerator {
         appt.addStringProperty("date");
 
         return appt;
+    }
+
+    private static Entity addHeartRateData(final Schema schema) {
+        Entity hr = schema.addEntity("HeartRateData");
+        hr.addIdProperty().primaryKey().notNull().autoincrement();
+        hr.addStringProperty("firebase_user_id").notNull();
+        hr.addIntProperty("bpm").notNull();
+        hr.addStringProperty("date").notNull();
+
+        return hr;
+    }
+
+    private static Entity addBloodPressureData(final Schema schema) {
+        Entity bp = schema.addEntity("BloodPressureData");
+        bp.addIdProperty().primaryKey().autoincrement().notNull();
+        bp.addStringProperty("firebase_user_id").notNull();
+        bp.addIntProperty("systolic").notNull();
+        bp.addIntProperty("diastolic").notNull();
+        bp.addStringProperty("date").notNull();
+
+        return bp;
     }
 
     private static Entity addDoctorPatient(final Schema schema) {
