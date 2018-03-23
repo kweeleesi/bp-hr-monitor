@@ -46,7 +46,8 @@
         <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.JournalActivity" />
         <activity android:name=".activity.MedicationActivity" />
-        <activity android:name=".activity.AppointmentActivity"></activity>
+        <activity android:name=".activity.AppointmentActivity" />
+        <activity android:name=".activity.AlarmActivity"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,32 +17,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
-import com.example.hp.heartrytcare.db.DaoSession;
-import com.example.hp.heartrytcare.db.User;
-import com.example.hp.heartrytcare.db.UserDao;
 import com.example.hp.heartrytcare.fragment.DoctorFragment;
-import com.example.hp.heartrytcare.fragment.AddJournalFragment;
 import com.example.hp.heartrytcare.fragment.MeasureFragment;
 import com.example.hp.heartrytcare.fragment.MessagesFragment;
 import com.example.hp.heartrytcare.fragment.PatientFragment;
 import com.example.hp.heartrytcare.fragment.SchedFragment;
 import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
-import com.example.hp.heartrytcare.helper.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
-
-import de.greenrobot.dao.query.QueryBuilder;
 
 
 public class MainMenuActivity extends AppCompatActivity
