@@ -1,7 +1,6 @@
 package com.example.hp.heartrytcare.fragment;
 
 
-import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -13,28 +12,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.helper.BTMessageReceiver;
 import com.example.hp.heartrytcare.helper.BluetoothBPHelper;
-import com.example.hp.heartrytcare.helper.ConnectedThread;
 import com.example.hp.heartrytcare.helper.Constants;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BloodPressureFragment extends Fragment implements View.OnClickListener{
+public class BloodPressureFragment extends Fragment implements View.OnClickListener, BTMessageReceiver{
 
     public static IncomingMessageHandler incomingMessageHandler;
 
     private static final String TAG = "BloodPressureFragment";
 
-    public ConnectedThread connectedThread;
-    private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path
     private BluetoothBPHelper btHelper;
+
+    private TextView systolicBPValue;
+    private TextView diastolicBPValue;
+    private TextView dateTaken;
 
     public BloodPressureFragment() {
         // Required empty public constructor
@@ -43,7 +47,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        incomingMessageHandler = new IncomingMessageHandler();
+        incomingMessageHandler = new IncomingMessageHandler(this);
         btHelper = BluetoothBPHelper.getInstance();
     }
 
@@ -51,9 +55,13 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View FragmentView = inflater.inflate(R.layout.fragment_blood_pressure, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_blood_pressure, container, false);
 
-        ImageView back = (ImageView) FragmentView.findViewById(R.id.img_arrowback);
+        systolicBPValue = (TextView) fragmentView.findViewById(R.id.systolicValue);
+        diastolicBPValue = (TextView) fragmentView.findViewById(R.id.diastolicValue);
+        dateTaken = (TextView) fragmentView.findViewById(R.id.dateTaken);
+
+        ImageView back = (ImageView) fragmentView.findViewById(R.id.img_arrowback);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,16 +73,16 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
             }
         });
 
-        Button bpsettings = (Button) FragmentView.findViewById(R.id.btn_bpSettings);
+        Button bpsettings = (Button) fragmentView.findViewById(R.id.btn_bpSettings);
         bpsettings.setOnClickListener(this);
 
-        Button bphistory = (Button) FragmentView.findViewById(R.id.btn_bpHistory);
+        Button bphistory = (Button) fragmentView.findViewById(R.id.btn_bpHistory);
         bphistory.setOnClickListener(this);
 
-        Button bpconnect = (Button) FragmentView.findViewById(R.id.btn_bpconnect);
+        Button bpconnect = (Button) fragmentView.findViewById(R.id.btn_bpconnect);
         bpconnect.setOnClickListener(this);
 
-        return FragmentView;
+        return fragmentView;
     }
 
     @Override
@@ -108,11 +116,68 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    private void parseMessage(String message) {
-
+    @Override
+    public void onMessageReceived(String string) {
+        String message = parseMessage(string);
+        if (message == null) {
+            systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
+            diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
+            dateTaken.setVisibility(View.GONE);
+        } else {
+            try {
+                String[] bpValues = parseMessage(string).split(",");
+                if (Integer.parseInt(bpValues[0]) == 0 || Integer.parseInt(bpValues[1]) == 0) {
+                    systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
+                    diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
+                    dateTaken.setText("");
+                } else {
+                    if (systolicBPValue != null || diastolicBPValue != null || dateTaken != null) {
+                        systolicBPValue.setText(String.format(getActivity().getString(R.string.blood_pressure_systolic), bpValues[0]));
+                        diastolicBPValue.setText(String.format(getActivity().getString(R.string.blood_pressure_diastolic), bpValues[1]));
+                        setFormattedDate(dateTaken, System.currentTimeMillis());
+                    }
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // PRIVATE METHODS
+    ///////////////////////////////////////////////////////////////////////////
+    private String parseMessage(String message) {
+        String trimmedString = "";
+        if (message.contains("error")) {
+            return null;
+        }
+        //trim message
+        for (int i = 0; i < message.length(); i++) {
+            if (Character.isDigit(message.charAt(i)) || message.charAt(i) == ',') {
+                trimmedString = trimmedString.concat(String.valueOf(message.charAt(i)));
+            }
+        }
+        return trimmedString;
+    }
+
+    private void setFormattedDate(TextView dateTextView, long l) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm", Locale.getDefault());
+        Date resultDate = new Date(l);
+        dateTextView.setText(sdf.format(resultDate));
+        dateTextView.invalidate();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // STATIC CLASS
+    ///////////////////////////////////////////////////////////////////////////
     public static class IncomingMessageHandler extends Handler {
+
+        private BTMessageReceiver listener;
+
+        public IncomingMessageHandler(BTMessageReceiver listener) {
+            this.listener = listener;
+        }
+
         public void handleMessage(android.os.Message msg){
             if(msg.what == Constants.MESSAGE_READ){
                 String readMessage = null;
@@ -123,7 +188,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                 }
                 // TODO: Mar 24, 0024 callback here...
                 Log.d(TAG, "handleMessage: " + readMessage);
-                BloodPressureFragment.parseMessage(readMessage);
+                this.listener.onMessageReceived(readMessage);
             }
 
             if(msg.what == Constants.CONNECTING_STATUS){
@@ -136,4 +201,5 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
             }
         }
     }
+
 }

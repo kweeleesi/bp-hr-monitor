@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,9 +18,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.UserFirebase;
 import com.example.hp.heartrytcare.fragment.DoctorFragment;
 import com.example.hp.heartrytcare.fragment.MeasureFragment;
 import com.example.hp.heartrytcare.fragment.MessagesFragment;
@@ -27,9 +32,11 @@ import com.example.hp.heartrytcare.fragment.PatientFragment;
 import com.example.hp.heartrytcare.fragment.SchedFragment;
 import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
+import com.example.hp.heartrytcare.helper.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -91,35 +98,9 @@ public class MainMenuActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        /*DaoSession daoSession = ((HeartRytCare) getApplication()).getDaoSession();
-        userDao = daoSession.getUserDao();
-        QueryBuilder<User> queryUser = userDao.queryBuilder();
-        queryUser.where(UserDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
-        List<User> users = queryUser.list();*/
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        Menu menu = navigationView.getMenu();
-        /*Log.d(TAG, "onResume: headerView count " + navigationView.getHeaderCount());
-        Log.e(TAG, "!!!!! hello : " + users.size());
-        if (users.get(0).getUser_type() == 0) { //patient
-            menu.findItem(R.id.nav_doctor).setVisible(true);
-            menu.findItem(R.id.nav_patient).setVisible(false);
-            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.patient);
-            ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.patient));
-        } else { //doctor
-            menu.findItem(R.id.nav_patient).setVisible(true);
-            menu.findItem(R.id.nav_doctor).setVisible(false);
-            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.doctor);
-            ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.doctor));
-        }*/
-
-        /*FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("user");
-
-        myRef.setValue("get user detail");*/
-
-//        getUserDetailsFromFirebase();
+        getUserDetailsFromFirebase();
     }
 
     @Override
@@ -141,7 +122,8 @@ public class MainMenuActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {         // Handle action bar item clicks here. The action bar will
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
@@ -187,7 +169,7 @@ public class MainMenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_signout) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Sign Out");
-            builder.setMessage("Are you sure you want to sing out?");
+            builder.setMessage("Are you sure you want to sign out?");
             builder.setCancelable(false);
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
@@ -213,6 +195,23 @@ public class MainMenuActivity extends AppCompatActivity
         return true;
     }
 
+    public void setUserInformation(UserFirebase userFirebase) {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        Menu menu = navigationView.getMenu();
+        if (userFirebase.user_type == 0) { //patient
+            menu.findItem(R.id.nav_doctor).setVisible(true);
+            menu.findItem(R.id.nav_patient).setVisible(false);
+            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.patient);
+            ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.patient));
+        } else { //doctor
+            menu.findItem(R.id.nav_patient).setVisible(true);
+            menu.findItem(R.id.nav_doctor).setVisible(false);
+            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.doctor);
+            ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.doctor));
+        }
+    }
+
     public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.relativeLayout_for_fragment, someFragment);
@@ -227,8 +226,19 @@ public class MainMenuActivity extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
+                UserFirebase user = null;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    user = snapshot.getValue(UserFirebase.class);
+                    if (user != null) {
+                        if (Constants.FIREBASE_UID.equals(user.firebase_user_id)) {
+                            setUserInformation(user);
+                        }
+                    }
+                }
+                if (user == null) {
+                    Toast.makeText(MainMenuActivity.this, "User detail not found.", Toast.LENGTH_LONG).show();
+                }
+
             }
 
             @Override
