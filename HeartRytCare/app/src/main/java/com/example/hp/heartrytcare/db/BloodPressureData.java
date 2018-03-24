@@ -16,6 +16,7 @@ public class BloodPressureData {
     private int diastolic;
     /** Not-null value. */
     private String date;
+    private long timestamp;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -27,12 +28,13 @@ public class BloodPressureData {
         this.id = id;
     }
 
-    public BloodPressureData(Long id, String firebase_user_id, int systolic, int diastolic, String date) {
+    public BloodPressureData(Long id, String firebase_user_id, int systolic, int diastolic, String date, long timestamp) {
         this.id = id;
         this.firebase_user_id = firebase_user_id;
         this.systolic = systolic;
         this.diastolic = diastolic;
         this.date = date;
+        this.timestamp = timestamp;
     }
 
     public Long getId() {
@@ -77,6 +79,14 @@ public class BloodPressureData {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     // KEEP METHODS - put your custom methods here

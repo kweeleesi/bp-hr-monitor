@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hp.heartrytcare.HeartRytCare;
@@ -52,6 +54,14 @@ public class StatFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_stat, container, false);
 
         chart = (LineChart) view.findViewById(R.id.chart);
+        ImageView share = (ImageView) view.findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chart.saveToGallery("Chart", 100);
+                // TODO: 3/24/2018 open ang share fragment
+            }
+        });
 
         fetchHrData();
         int x = 0;
@@ -67,14 +77,14 @@ public class StatFragment extends Fragment {
 //            temp systolic data
             systolicEntries.add(new Entry(0, 120));
             systolicEntries.add(new Entry(1, 110));
-            systolicEntries.add(new Entry(2, 130));
+            systolicEntries.add(new Entry(2, 0));
             systolicEntries.add(new Entry(3, 115));
 
 //            temp diastolic data
             diastolicEntries.add(new Entry(0, 80));
             diastolicEntries.add(new Entry(1, 90));
             diastolicEntries.add(new Entry(2, 100));
-            diastolicEntries.add(new Entry(3, 70));
+//            diastolicEntries.add(new Entry(3, 70));
 
             LineDataSet hrDataSet = new LineDataSet(hrEntries, "Heart Rate (bpm)");
             hrDataSet.setColor(Color.RED);

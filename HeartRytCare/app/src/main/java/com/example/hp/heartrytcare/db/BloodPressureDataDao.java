@@ -28,6 +28,7 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
         public final static Property Systolic = new Property(2, int.class, "systolic", false, "SYSTOLIC");
         public final static Property Diastolic = new Property(3, int.class, "diastolic", false, "DIASTOLIC");
         public final static Property Date = new Property(4, String.class, "date", false, "DATE");
+        public final static Property Timestamp = new Property(5, long.class, "timestamp", false, "TIMESTAMP");
     };
 
 
@@ -47,7 +48,8 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
                 "\"FIREBASE_USER_ID\" TEXT NOT NULL ," + // 1: firebase_user_id
                 "\"SYSTOLIC\" INTEGER NOT NULL ," + // 2: systolic
                 "\"DIASTOLIC\" INTEGER NOT NULL ," + // 3: diastolic
-                "\"DATE\" TEXT NOT NULL );"); // 4: date
+                "\"DATE\" TEXT NOT NULL ," + // 4: date
+                "\"TIMESTAMP\" INTEGER NOT NULL );"); // 5: timestamp
     }
 
     /** Drops the underlying database table. */
@@ -69,6 +71,7 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
         stmt.bindLong(3, entity.getSystolic());
         stmt.bindLong(4, entity.getDiastolic());
         stmt.bindString(5, entity.getDate());
+        stmt.bindLong(6, entity.getTimestamp());
     }
 
     /** @inheritdoc */
@@ -85,7 +88,8 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
             cursor.getString(offset + 1), // firebase_user_id
             cursor.getInt(offset + 2), // systolic
             cursor.getInt(offset + 3), // diastolic
-            cursor.getString(offset + 4) // date
+            cursor.getString(offset + 4), // date
+            cursor.getLong(offset + 5) // timestamp
         );
         return entity;
     }
@@ -98,6 +102,7 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
         entity.setSystolic(cursor.getInt(offset + 2));
         entity.setDiastolic(cursor.getInt(offset + 3));
         entity.setDate(cursor.getString(offset + 4));
+        entity.setTimestamp(cursor.getLong(offset + 5));
      }
     
     /** @inheritdoc */

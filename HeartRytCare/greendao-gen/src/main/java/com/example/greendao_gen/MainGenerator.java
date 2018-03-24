@@ -105,6 +105,7 @@ public class MainGenerator {
         hr.addStringProperty("firebase_user_id").notNull();
         hr.addIntProperty("bpm").notNull();
         hr.addStringProperty("date").notNull();
+        hr.addLongProperty("timestamp").notNull();
 
         return hr;
     }
@@ -116,6 +117,7 @@ public class MainGenerator {
         bp.addIntProperty("systolic").notNull();
         bp.addIntProperty("diastolic").notNull();
         bp.addStringProperty("date").notNull();
+        bp.addLongProperty("timestamp").notNull();
 
         return bp;
     }

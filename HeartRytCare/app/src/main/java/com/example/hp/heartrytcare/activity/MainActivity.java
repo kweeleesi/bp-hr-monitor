@@ -28,7 +28,8 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 2000;
-    private static final String[] REQUIRED_PERMISSIONS = {Manifest.permission.SEND_SMS, Manifest.permission.CAMERA};
+    private static final String[] REQUIRED_PERMISSIONS = {Manifest.permission.SEND_SMS,
+            Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final int PERMISSION_REQUESTS_CODE = 1001;
 
     private FirebaseAuth mAuth;

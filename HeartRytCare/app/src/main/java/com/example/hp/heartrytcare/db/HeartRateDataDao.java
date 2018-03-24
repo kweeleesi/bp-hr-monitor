@@ -27,6 +27,7 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
         public final static Property Firebase_user_id = new Property(1, String.class, "firebase_user_id", false, "FIREBASE_USER_ID");
         public final static Property Bpm = new Property(2, int.class, "bpm", false, "BPM");
         public final static Property Date = new Property(3, String.class, "date", false, "DATE");
+        public final static Property Timestamp = new Property(4, long.class, "timestamp", false, "TIMESTAMP");
     };
 
 
@@ -45,7 +46,8 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"FIREBASE_USER_ID\" TEXT NOT NULL ," + // 1: firebase_user_id
                 "\"BPM\" INTEGER NOT NULL ," + // 2: bpm
-                "\"DATE\" TEXT NOT NULL );"); // 3: date
+                "\"DATE\" TEXT NOT NULL ," + // 3: date
+                "\"TIMESTAMP\" INTEGER NOT NULL );"); // 4: timestamp
     }
 
     /** Drops the underlying database table. */
@@ -66,6 +68,7 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
         stmt.bindString(2, entity.getFirebase_user_id());
         stmt.bindLong(3, entity.getBpm());
         stmt.bindString(4, entity.getDate());
+        stmt.bindLong(5, entity.getTimestamp());
     }
 
     /** @inheritdoc */
@@ -81,7 +84,8 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // firebase_user_id
             cursor.getInt(offset + 2), // bpm
-            cursor.getString(offset + 3) // date
+            cursor.getString(offset + 3), // date
+            cursor.getLong(offset + 4) // timestamp
         );
         return entity;
     }
@@ -93,6 +97,7 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
         entity.setFirebase_user_id(cursor.getString(offset + 1));
         entity.setBpm(cursor.getInt(offset + 2));
         entity.setDate(cursor.getString(offset + 3));
+        entity.setTimestamp(cursor.getLong(offset + 4));
      }
     
     /** @inheritdoc */

@@ -15,6 +15,7 @@ public class HeartRateData {
     private int bpm;
     /** Not-null value. */
     private String date;
+    private long timestamp;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -26,11 +27,12 @@ public class HeartRateData {
         this.id = id;
     }
 
-    public HeartRateData(Long id, String firebase_user_id, int bpm, String date) {
+    public HeartRateData(Long id, String firebase_user_id, int bpm, String date, long timestamp) {
         this.id = id;
         this.firebase_user_id = firebase_user_id;
         this.bpm = bpm;
         this.date = date;
+        this.timestamp = timestamp;
     }
 
     public Long getId() {
@@ -67,6 +69,14 @@ public class HeartRateData {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     // KEEP METHODS - put your custom methods here

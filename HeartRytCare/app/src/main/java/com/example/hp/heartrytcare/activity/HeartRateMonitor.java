@@ -216,6 +216,7 @@ public class HeartRateMonitor extends AppCompatActivity {
                 hr.setFirebase_user_id(Constants.FIREBASE_UID);
                 hr.setBpm(beatsAvg);
                 hr.setDate(date.toString());
+                hr.setTimestamp(System.currentTimeMillis());
                 hrDao.insert(hr);
             }
             processing.set(false);
