@@ -27,7 +27,7 @@ import java.io.IOException;
  * com.example.hp.heartrytcare.fragment
  */
 
-public class BluetoothConnectFragment extends DialogFragment implements AdapterView.OnItemClickListener{
+public class BluetoothConnectDialogFragment extends DialogFragment implements AdapterView.OnItemClickListener{
 
     private ListView bluetoothDevices;
     private ArrayAdapter<String> btArrayAdapter;
@@ -37,11 +37,11 @@ public class BluetoothConnectFragment extends DialogFragment implements AdapterV
 
     private ConnectedThread mConnectedThread;
 
-    public static BluetoothConnectFragment newInstance() {
+    public static BluetoothConnectDialogFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        BluetoothConnectFragment fragment = new BluetoothConnectFragment();
+        BluetoothConnectDialogFragment fragment = new BluetoothConnectDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }

@@ -96,8 +96,8 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btn_bpconnect:
                 FragmentManager fm = getFragmentManager();
-                BluetoothConnectFragment bluetoothConnectFragment = BluetoothConnectFragment.newInstance();
-                bluetoothConnectFragment.show(fm, "connectFragment");
+                BluetoothConnectDialogFragment bluetoothConnectDialogFragment = BluetoothConnectDialogFragment.newInstance();
+                bluetoothConnectDialogFragment.show(fm, "connectFragment");
                 break;
             case R.id.btn_bpSettings:
                 /*AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
