@@ -23,7 +23,7 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, long.class, "id", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Firebase_user_id = new Property(1, String.class, "firebase_user_id", false, "FIREBASE_USER_ID");
         public final static Property Bpm = new Property(2, int.class, "bpm", false, "BPM");
         public final static Property Date = new Property(3, String.class, "date", false, "DATE");
@@ -42,7 +42,7 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"HEART_RATE_DATA\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"FIREBASE_USER_ID\" TEXT NOT NULL ," + // 1: firebase_user_id
                 "\"BPM\" INTEGER NOT NULL ," + // 2: bpm
                 "\"DATE\" TEXT NOT NULL );"); // 3: date
@@ -58,7 +58,11 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, HeartRateData entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
         stmt.bindString(2, entity.getFirebase_user_id());
         stmt.bindLong(3, entity.getBpm());
         stmt.bindString(4, entity.getDate());
@@ -67,14 +71,14 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
     /** @inheritdoc */
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public HeartRateData readEntity(Cursor cursor, int offset) {
         HeartRateData entity = new HeartRateData( //
-            cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // firebase_user_id
             cursor.getInt(offset + 2), // bpm
             cursor.getString(offset + 3) // date
@@ -85,7 +89,7 @@ public class HeartRateDataDao extends AbstractDao<HeartRateData, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, HeartRateData entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setFirebase_user_id(cursor.getString(offset + 1));
         entity.setBpm(cursor.getInt(offset + 2));
         entity.setDate(cursor.getString(offset + 3));

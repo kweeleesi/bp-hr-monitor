@@ -121,6 +121,9 @@
     <string name="appoinment_time">Time of Appointment</string>
     <string name="appointment_date">Date of Appointment</string>
 
+    <!--STATISTICS-->
+    <string name="chart_title">Blood Pressure and Heart Rate\nData Chart</string>
+
 </resources>
 
 

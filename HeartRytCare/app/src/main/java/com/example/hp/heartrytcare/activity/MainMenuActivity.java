@@ -54,8 +54,8 @@ public class MainMenuActivity extends AppCompatActivity
                     AlertDialog.Builder builder = new AlertDialog.Builder(
                             MainMenuActivity.this);
                     builder.setTitle("Help");
-                    builder.setMessage("Setting up the connection between your blood pressure monitor and your mobile device: " + " " +
-                            " When the application is first started, it will check if this is the very first time the application has started or if the application has been updated since it was last started");
+//                    builder.setMessage("Setting up the connection between your blood pressure monitor and your mobile device: " + " " +
+//                            " When the application is first started, it will check if this is the very first time the application has started or if the application has been updated since it was last started");
                     builder.setPositiveButton("OK",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
@@ -63,7 +63,7 @@ public class MainMenuActivity extends AppCompatActivity
                                 //    Toast.makeText(getApplicationContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
                                 }
                             });
-                    builder.show();
+//                    builder.show();
                 }
             });
 

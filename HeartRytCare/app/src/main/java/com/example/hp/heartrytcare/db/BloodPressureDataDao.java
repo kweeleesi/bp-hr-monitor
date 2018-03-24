@@ -23,7 +23,7 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, long.class, "id", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Firebase_user_id = new Property(1, String.class, "firebase_user_id", false, "FIREBASE_USER_ID");
         public final static Property Systolic = new Property(2, int.class, "systolic", false, "SYSTOLIC");
         public final static Property Diastolic = new Property(3, int.class, "diastolic", false, "DIASTOLIC");
@@ -43,7 +43,7 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"BLOOD_PRESSURE_DATA\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"FIREBASE_USER_ID\" TEXT NOT NULL ," + // 1: firebase_user_id
                 "\"SYSTOLIC\" INTEGER NOT NULL ," + // 2: systolic
                 "\"DIASTOLIC\" INTEGER NOT NULL ," + // 3: diastolic
@@ -60,7 +60,11 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, BloodPressureData entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
         stmt.bindString(2, entity.getFirebase_user_id());
         stmt.bindLong(3, entity.getSystolic());
         stmt.bindLong(4, entity.getDiastolic());
@@ -70,14 +74,14 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
     /** @inheritdoc */
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public BloodPressureData readEntity(Cursor cursor, int offset) {
         BloodPressureData entity = new BloodPressureData( //
-            cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // firebase_user_id
             cursor.getInt(offset + 2), // systolic
             cursor.getInt(offset + 3), // diastolic
@@ -89,7 +93,7 @@ public class BloodPressureDataDao extends AbstractDao<BloodPressureData, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, BloodPressureData entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setFirebase_user_id(cursor.getString(offset + 1));
         entity.setSystolic(cursor.getInt(offset + 2));
         entity.setDiastolic(cursor.getInt(offset + 3));

@@ -9,7 +9,7 @@ package com.example.hp.heartrytcare.db;
  */
 public class HeartRateData {
 
-    private long id;
+    private Long id;
     /** Not-null value. */
     private String firebase_user_id;
     private int bpm;
@@ -22,22 +22,22 @@ public class HeartRateData {
     public HeartRateData() {
     }
 
-    public HeartRateData(long id) {
+    public HeartRateData(Long id) {
         this.id = id;
     }
 
-    public HeartRateData(long id, String firebase_user_id, int bpm, String date) {
+    public HeartRateData(Long id, String firebase_user_id, int bpm, String date) {
         this.id = id;
         this.firebase_user_id = firebase_user_id;
         this.bpm = bpm;
         this.date = date;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
