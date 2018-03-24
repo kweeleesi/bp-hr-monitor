@@ -1,100 +1,171 @@
 package com.example.hp.heartrytcare.fragment;
 
-import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.telephony.SmsManager;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
-import com.example.hp.heartrytcare.db.DaoSession;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.hp.heartrytcare.db.RelationModel;
+import com.example.hp.heartrytcare.db.UserFirebase;
+import com.example.hp.heartrytcare.helper.Constants;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-public class PatientFragment extends Fragment implements View.OnClickListener{
+public class PatientFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener{
+
+    private static final String TAG = "PatientFragment";
 
     private View view;
     private Button addPatient;
-    private Button sendCode;
-    private Button cancelSend;
-    private Dialog dialog;
-    private EditText contactNumber;
-    private FirebaseAuth mAuth;
+    private ListView patientList;
+
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase database;
+
+    private UserFirebase userModel;
+    private List<RelationModel> relationModelList;
+    private ArrayAdapter<String> patientRelationAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_patient, container, false);
-
-        mAuth = FirebaseAuth.getInstance();
-        DaoSession daoSession = ((HeartRytCare) getActivity().getApplication()).getDaoSession();
+        view = inflater.inflate(R.layout.fragment_doctor, container, false);
 
         initializeFields();
 
         return view;
     }
 
-    private void initializeFields() {
-        dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_send_code);
-        dialog.setCancelable(false);
-        addPatient = (Button) view.findViewById(R.id.addPatient);
-        sendCode = (Button) dialog.findViewById(R.id.sendCode);
-        cancelSend = (Button) dialog.findViewById(R.id.cancelSend);
-        contactNumber = (EditText) dialog.findViewById(R.id.contactNumber);
-
-        addPatient.setOnClickListener(this);
-        sendCode.setOnClickListener(this);
-        cancelSend.setOnClickListener(this);
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addPatient:
-                dialog.show();
+                addPatient();
                 break;
-            case R.id.sendCode:
-                send();
-                break;
-            case R.id.cancelSend:
-                dialog.dismiss();
+            case R.id.verifyCode:
+                verify();
                 break;
         }
     }
 
-    private void send() {
-        if (TextUtils.isEmpty(contactNumber.getText())) {
-            contactNumber.setError("This item cannot be empty");
-            return;
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // PRIVATE METHODS
+    ///////////////////////////////////////////////////////////////////////////
+    private void initializeFields() {
+        addPatient = (Button) view.findViewById(R.id.addPatient);
+        addPatient.setOnClickListener(this);
+
+        patientList = (ListView) view.findViewById(R.id.patientList);
+        patientList.setOnItemClickListener(this);
+
+        database = FirebaseDatabase.getInstance();
+        relationModelList = new ArrayList<>();
+        getMyPatientRelationList(Constants.FIREBASE_UID);
+    }
+
+    private void getMyPatientRelationList(final String selfUID) {
+        databaseReference = database.getReference("relations");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        RelationModel model = snapshot.getValue(RelationModel.class);
+                        if (model != null) {
+                            if (model.doctorUID.equals(selfUID)) {
+                                relationModelList.add(model);
+                            }
+                        } else {
+                            Log.w(TAG, "onDataChange: model is null!");
+                        }
+                    }
+                    getRelatedUserInformation();
+                } else {
+                    Log.d(TAG, "onDataChange: no records on connected patients!");
+                    Toast.makeText(getActivity(), "No records on connected patients!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "onCancelled: " + databaseError.getMessage());
+            }
+        });
+    }
+
+    private void getRelatedUserInformation() {
+        if (relationModelList != null) {
+            databaseReference = database.getReference("user");
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    List<String> userList = new ArrayList<>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        UserFirebase user = snapshot.getValue(UserFirebase.class);
+                        if (user != null) {
+                            boolean found = false;
+                            for (RelationModel model : relationModelList) {
+                                if (model.patientUID.equals(user.firebase_user_id)) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (found) {
+                                userList.add(user.last_name.toUpperCase(Locale.getDefault()) + ", " + user.first_name);
+                            }
+                        }
+                    }
+                    if (userList.size() > 0) {
+                        setupRelatedPatientList(userList);
+                    } else {
+                        Log.d(TAG, "onDataChange: empty relation list");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w(TAG, "onCancelled: " + databaseError.getMessage());
+                }
+            });
         }
+    }
 
-        Random rand = new Random();
-        int randNo = rand.nextInt(10000);
-        String msg = ("Your verification code is ").concat(String.format("%04d%n", randNo));
-
-        try {
-            PendingIntent pi = PendingIntent.getActivity(getActivity(), 0,
-                    new Intent(getActivity(), DoctorFragment.class), 0);
-            SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(contactNumber.getText().toString(), null, msg, pi, null);
-            // TODO: 1/30/2018 handle error codes | check number validity
-            dialog.dismiss();
-            Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void setupRelatedPatientList(List<String> relatedPatients) {
+        if (relationModelList != null) {
+            patientRelationAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+            patientRelationAdapter.addAll(relatedPatients);
+            patientList.setAdapter(patientRelationAdapter);
+        } else {
+            Toast.makeText(getActivity(), "No Patients registered!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void addPatient() {
+
+    }
+
+    private void verify() {
+
     }
 }

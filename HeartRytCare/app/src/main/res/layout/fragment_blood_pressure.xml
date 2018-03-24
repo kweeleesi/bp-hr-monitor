@@ -34,7 +34,6 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:scaleType="fitXY"
-                    android:onClick="true"
                     android:clickable="true"
                     android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
@@ -69,7 +68,7 @@
                 android:layout_marginBottom="27dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginStart="15dp"
-                android:text="Bluetooth  :"
+                android:text="Bluetooth:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 android:textColor="#f2eeef"
                 android:textSize="15dp" />
@@ -118,10 +117,10 @@
                 android:layout_margin="5dp">
 
                 <TextView
-                    android:id="@+id/txtview1"
+                    android:id="@+id/systolicValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Systolic BP :"
+                    android:text="@string/blood_pressure_systolic"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="@color/red_textcolor"
                     android:textSize="15dp"
@@ -130,22 +129,22 @@
                     android:layout_alignParentStart="true" />
 
                 <TextView
-                    android:id="@+id/txtview2"
+                    android:id="@+id/diastolicValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/txtview1"
-                    android:layout_alignStart="@+id/txtview1"
+                    android:layout_alignLeft="@+id/systolicValue"
+                    android:layout_alignStart="@+id/systolicValue"
                     android:layout_centerVertical="true"
-                    android:text="Diastolic BP :"
+                    android:text="@string/blood_pressure_diastolic"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="@color/red_textcolor"
                     android:textSize="15dp" />
 
                 <TextView
-                    android:id="@+id/txtview3"
+                    android:id="@+id/dateTaken"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Time Taken :"
+                    android:text="@string/blood_pressure_time_taken"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="@color/red_textcolor"
                     android:textSize="15dp"
@@ -166,9 +165,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="61dp">
-
-
-
 
                 <Button
                     android:id="@+id/btn_bpSettings"

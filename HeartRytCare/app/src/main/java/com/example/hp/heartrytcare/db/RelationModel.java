@@ -1,0 +1,20 @@
+package com.example.hp.heartrytcare.db;
+
+/**
+ * Created by OMIPLEKEVIN on March 24, 2018.
+ * HeartRytCare
+ * com.example.hp.heartrytcare.db
+ */
+
+public class RelationModel {
+
+    public String patientUID;
+
+    public String doctorUID;
+
+    public String verficationCode;
+
+    public long validity;
+
+    public boolean verified = false;
+}

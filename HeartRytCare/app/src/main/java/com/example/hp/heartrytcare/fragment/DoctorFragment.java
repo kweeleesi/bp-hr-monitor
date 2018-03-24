@@ -1,28 +1,44 @@
 package com.example.hp.heartrytcare.fragment;
 
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.telephony.SmsManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.DaoSession;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class DoctorFragment extends Fragment implements View.OnClickListener {
+import java.util.Random;
+
+public class DoctorFragment extends Fragment implements View.OnClickListener{
 
     private View view;
-    private Button addDoctor;
-    private Button verifyCode;
-    private Button cancelVerification;
+    private Button addPatient;
+    private Button sendCode;
+    private Button cancelSend;
     private Dialog dialog;
+    private EditText contactNumber;
+    private FirebaseAuth mAuth;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_doctor, container, false);
+        view = inflater.inflate(R.layout.fragment_patient, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        DaoSession daoSession = ((HeartRytCare) getActivity().getApplication()).getDaoSession();
 
         initializeFields();
 
@@ -31,34 +47,54 @@ public class DoctorFragment extends Fragment implements View.OnClickListener {
 
     private void initializeFields() {
         dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_verify_code);
+        dialog.setContentView(R.layout.dialog_send_code);
         dialog.setCancelable(false);
-        addDoctor = (Button) view.findViewById(R.id.addDoctor);
-        verifyCode = (Button) dialog.findViewById(R.id.verifyCode);
-        cancelVerification = (Button) dialog.findViewById(R.id.cancelVerification);
+        addPatient = (Button) view.findViewById(R.id.addPatient);
+        sendCode = (Button) dialog.findViewById(R.id.sendCode);
+        cancelSend = (Button) dialog.findViewById(R.id.cancelSend);
+        contactNumber = (EditText) dialog.findViewById(R.id.contactNumber);
 
-        addDoctor.setOnClickListener(this);
-        verifyCode.setOnClickListener(this);
-        cancelVerification.setOnClickListener(this);
+        addPatient.setOnClickListener(this);
+        sendCode.setOnClickListener(this);
+        cancelSend.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.addDoctor:
+            case R.id.addPatient:
                 dialog.show();
                 break;
-            case R.id.verifyCode:
-                verify();
+            case R.id.sendCode:
+                send();
                 break;
-            case R.id.cancelVerification:
+            case R.id.cancelSend:
                 dialog.dismiss();
                 break;
         }
     }
 
-    private void verify() {
+    private void send() {
+        if (TextUtils.isEmpty(contactNumber.getText())) {
+            contactNumber.setError("This item cannot be empty");
+            return;
+        }
 
+        Random rand = new Random();
+        int randNo = rand.nextInt(10000);
+        String msg = ("Your verification code is ").concat(String.format("%04d%n", randNo));
+
+        try {
+            PendingIntent pi = PendingIntent.getActivity(getActivity(), 0,
+                    new Intent(getActivity(), PatientFragment.class), 0);
+            SmsManager sms = SmsManager.getDefault();
+            sms.sendTextMessage(contactNumber.getText().toString(), null, msg, pi, null);
+            // TODO: 1/30/2018 handle error codes | check number validity
+            dialog.dismiss();
+            Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
 }

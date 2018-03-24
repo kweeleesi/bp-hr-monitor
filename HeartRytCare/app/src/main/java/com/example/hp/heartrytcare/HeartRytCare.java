@@ -6,16 +6,19 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.hp.heartrytcare.db.DaoMaster;
 import com.example.hp.heartrytcare.db.DaoSession;
+import com.example.hp.heartrytcare.helper.BluetoothBPHelper;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HeartRytCare extends Application {
 
     private FirebaseAuth firebaseAuth;
+    public BluetoothBPHelper bluetoothBPHelper;
 
     @Override
     public void onCreate() {
         super.onCreate();
         firebaseAuth = FirebaseAuth.getInstance();
+        bluetoothBPHelper = BluetoothBPHelper.getInstance();
 
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.example.hp.heartrytcare.SMS_RECEIVER");
