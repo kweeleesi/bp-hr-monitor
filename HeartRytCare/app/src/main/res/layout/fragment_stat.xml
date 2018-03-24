@@ -9,26 +9,49 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:text="@string/chart_title"
         android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_gravity="center"
-        android:background="@color/white"/>
+        android:background="@color/white" />
 
-    <ImageView
-        android:id="@+id/share"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_share"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/share"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_weight=""
+            android:text="Share"
+            android:drawableLeft="@drawable/ic_menu_share"
+            android:drawableTint="@color/blue_link"
+            android:drawablePadding="5dp"/>
+
+        <Button
+            android:id="@+id/history"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="History"
+            android:drawableLeft="@drawable/ic_history"
+            android:drawableTint="@color/blue_link"
+            android:drawablePadding="5dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
