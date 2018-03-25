@@ -5,8 +5,12 @@ import java.util.Calendar;
 public class Constants {
 
     public static String FIREBASE_UID;
+    public static int FIREBASE_USER_TYPE = -1;
 
     public static Calendar CALENDAR = Calendar.getInstance();
+
+    public static final int TYPE_USER_DOCTOR = 1;
+    public static final int TYPE_USER_PATIENT = 0;
 
     ///////////////////////////////////////////////////////////////////////////
     // BLUETOOTH FIELDS

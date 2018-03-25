@@ -199,6 +199,7 @@ public class MainMenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
+        Constants.FIREBASE_USER_TYPE = userFirebase.user_type;
         if (userFirebase.user_type == 0) { //patient
             menu.findItem(R.id.nav_doctor).setVisible(true);
             menu.findItem(R.id.nav_patient).setVisible(false);
