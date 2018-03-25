@@ -21,11 +21,6 @@ import com.example.hp.heartrytcare.helper.Constants;
 
 import java.io.IOException;
 
-/**
- * Created by OMIPLEKEVIN on March 24, 2018.
- * HeartRytCare
- * com.example.hp.heartrytcare.fragment
- */
 
 public class BluetoothConnectDialogFragment extends DialogFragment implements AdapterView.OnItemClickListener{
 

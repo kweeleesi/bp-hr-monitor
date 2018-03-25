@@ -1,8 +1,12 @@
 package com.example.hp.heartrytcare.fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.DynamicLayout;
 import android.text.format.DateFormat;
@@ -12,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.Manifest;
@@ -34,6 +39,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +47,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.BlockingDeque;
 
@@ -73,7 +80,9 @@ public class StatFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chart.saveToGallery("Chart", 100);
+                String chartName = "StatChart-" + System.currentTimeMillis() + ".jpg";
+                chart.saveToGallery(chartName, 100);
+                actionSendToEmail(chartName);
                 // TODO: 3/24/2018 open ang share fragment
             }
         });
@@ -95,6 +104,26 @@ public class StatFragment extends Fragment {
         drawChart();
 
         return view;
+    }
+
+    private void actionSendToEmail(String chartName) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("image/jpeg");
+//        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]
+//                {"me@gmail.com"});
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                "Vitals report as of " + setFormattedDate(System.currentTimeMillis()));
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                "Attached is my vital record(s)");
+        Log.v(getClass().getSimpleName(), "sPhotoUri=" + Uri.parse("file://"+ Environment.getExternalStorageDirectory() + "/DCIM/" + chartName));
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+ Environment.getExternalStorageDirectory() + "/DCIM/" + chartName));
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+    }
+
+    private String setFormattedDate(long l) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm", Locale.getDefault());
+        Date resultDate = new Date(l);
+        return sdf.format(resultDate);
     }
 
     private void fetchHrData() {
@@ -130,7 +159,7 @@ public class StatFragment extends Fragment {
             } else {
                 latest = bpList.get(bpList.size() - 1).getTimestamp();
             }
-        } /*else {
+        } else {
             if (hrList == null || hrList.size() == 0) {
                 earliest = bpList.get(0).getTimestamp();
                 latest = bpList.get(bpList.size() - 1).getTimestamp();
@@ -139,7 +168,7 @@ public class StatFragment extends Fragment {
                 earliest = hrList.get(0).getTimestamp();
                 latest = hrList.get(hrList.size() - 1).getTimestamp();
             }
-        }*/
+        }
 
         Log.e(TAG, "earliest : " + earliest + " | latest : " + latest);
     }

@@ -1,10 +1,5 @@
 package com.example.hp.heartrytcare.db;
 
-/**
- * Created by OMIPLEKEVIN on March 24, 2018.
- * HeartRytCare
- * com.example.hp.heartrytcare.db
- */
 
 public class RelationModel {
 

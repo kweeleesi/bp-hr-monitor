@@ -9,12 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 
-/**
- * Created by OMIPLEKEVIN on March 23, 2018.
- * BluetoothOpenReceiver
- * com.android.omiplekevin.bluetoothopenreceiver.helper
- */
-
 public class ConnectedThread extends Thread {
     private final BluetoothSocket mmSocket;
     private Handler mHandler;

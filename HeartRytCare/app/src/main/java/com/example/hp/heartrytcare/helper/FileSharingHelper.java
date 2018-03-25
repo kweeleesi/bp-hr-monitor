@@ -17,11 +17,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 
-/**
- * Created by OMIPLEKEVIN on March 25, 2018.
- * HeartRytCare
- * com.example.hp.heartrytcare.helper
- */
 
 public class FileSharingHelper {
 
