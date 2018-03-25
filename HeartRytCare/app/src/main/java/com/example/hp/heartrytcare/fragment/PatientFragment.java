@@ -3,6 +3,7 @@ package com.example.hp.heartrytcare.fragment;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.telephony.SmsManager;
@@ -35,7 +36,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class PatientFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AddPatientDialogFragment.OnUserSelected {
+public class PatientFragment extends Fragment implements
+        View.OnClickListener,
+        AdapterView.OnItemClickListener,
+        AddPatientDialogFragment.OnUserSelected,
+        RelationModelListAdapter.VerificationRefresh {
 
     private static final String TAG = "PatientFragment";
 
@@ -81,12 +86,21 @@ public class PatientFragment extends Fragment implements View.OnClickListener, A
     @Override
     public void onSelected(UserFirebase userModel) {
         if (userModel != null) {
-            RelationModel model = generateRelationModel(Constants.FIREBASE_UID, userModel);
+            RelationModel model = generateRelationModel(Constants.FIREBASE_UID, userModel.firebase_user_id);
             databaseReference = database.getReference("relations");
             String relationId = databaseReference.push().getKey();
+            model.firebaseKey = relationId;
             databaseReference.child(relationId).setValue(model);
             send(userModel, model.verficationCode);
         }
+    }
+
+    @Override
+    public void onRefreshRequest(RelationModel model) {
+        RelationModel newModel = generateRelationModel(model.doctorUID, model.patientUID);
+        newModel.firebaseKey = model.firebaseKey;
+        Log.d(TAG, "onRefreshRequest: " + newModel.verified + ", " + model.verficationCode + " => " + newModel.verficationCode);
+        database.getReference().child("relations").child(model.firebaseKey).setValue(newModel);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -217,6 +231,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener, A
     private void setupRelatedPatientList(List<UserFirebase> relatedPatients) {
         if (relationModelList != null) {
             patientRelationAdapter = new RelationModelListAdapter(getContext(), R.layout.listview_relation_items, relationModelList, relatedPatients);
+            patientRelationAdapter.setVerificationRefreshRequest(this);
             patientList.setAdapter(patientRelationAdapter);
         } else {
             Toast.makeText(getActivity(), "No Patients registered!", Toast.LENGTH_SHORT).show();
@@ -229,10 +244,10 @@ public class PatientFragment extends Fragment implements View.OnClickListener, A
         addPatientDialogFragment.show(getFragmentManager(), "addPatient");
     }
 
-    private RelationModel generateRelationModel(String doctorUID, UserFirebase userModel) {
+    private RelationModel generateRelationModel(String doctorUID, String patientUID) {
         RelationModel model = new RelationModel();
         model.doctorUID = doctorUID;
-        model.patientUID = userModel.firebase_user_id;
+        model.patientUID = patientUID;
 
         Date dt = new Date();
         Calendar calendar = Calendar.getInstance();
@@ -241,7 +256,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener, A
         Date time = calendar.getTime();
         String hash = md5(String.valueOf(time.getTime()));
         model.verficationCode = hash.substring(hash.length() - 6, hash.length());
-        model.validity = time.getTime() + 300000;
+        model.validity = time.getTime() + 300000; //5mins
 
         return model;
     }
@@ -255,8 +270,9 @@ public class PatientFragment extends Fragment implements View.OnClickListener, A
 
             // Create Hex String
             StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++)
+            for (int i = 0; i < messageDigest.length; i++) {
                 hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            }
 
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
@@ -272,7 +288,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener, A
             return;
         }
 
-        String msg = ("Your verification code is ").concat(verificationCode);
+        String msg = getActivity().getString(R.string.sms_message_template, verificationCode);
 
         try {
             PendingIntent pi = PendingIntent.getActivity(getActivity(), 0,

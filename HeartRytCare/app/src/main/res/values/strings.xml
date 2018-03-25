@@ -74,6 +74,7 @@
     <string name="send_code">SEND CODE</string>
     <string name="cancel">CANCEL</string>
     <string name="hint_phone_number">09xxxxxxxxx</string>
+    <string name="sms_message_template">Your verification code is %1$s. Code validity is 5 minutes. To renew, contact your assigning doctor</string>
 
     <!--HEART RATE MONITOR-->
     <string name="heartrate">Heart Rate: </string>

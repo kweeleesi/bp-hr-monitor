@@ -4,25 +4,35 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.RelationModel;
 import com.example.hp.heartrytcare.db.UserFirebase;
 import com.example.hp.heartrytcare.helper.Constants;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class RelationModelListAdapter extends ArrayAdapter<RelationModel> {
 
     private List<RelationModel> relationModelList;
     private List<UserFirebase> userRelatedList;
     private Context context;
+    private VerificationRefresh verificationRefresh;
 
     public RelationModelListAdapter(@NonNull Context context, int resource, List<RelationModel> relationModelList, List<UserFirebase> userRelatedList) {
         super(context, resource);
@@ -49,7 +59,7 @@ public class RelationModelListAdapter extends ArrayAdapter<RelationModel> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -58,6 +68,7 @@ public class RelationModelListAdapter extends ArrayAdapter<RelationModel> {
             viewHolder.patientNumber = (TextView) convertView.findViewById(R.id.patientNumber);
             viewHolder.verificationStatus = (TextView) convertView.findViewById(R.id.verificationStatus);
             viewHolder.verificationCode = (TextView) convertView.findViewById(R.id.vCode);
+            viewHolder.refreshCode = (ImageButton) convertView.findViewById(R.id.resetVerificationCode);
 
             convertView.setTag(viewHolder);
         } else {
@@ -81,6 +92,18 @@ public class RelationModelListAdapter extends ArrayAdapter<RelationModel> {
                     )
             );
             if (!this.relationModelList.get(position).verified) {
+                if (isCodeValid(this.relationModelList.get(position).validity)) {
+                    viewHolder.refreshCode.setVisibility(View.VISIBLE);
+                    viewHolder.refreshCode.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(context, "refresh verification code...", Toast.LENGTH_SHORT).show();
+                            if (verificationRefresh != null) {
+                                verificationRefresh.onRefreshRequest(relationModelList.get(position));
+                            }
+                        }
+                    });
+                }
                 viewHolder.verificationCode.setVisibility(View.VISIBLE);
                 viewHolder.verificationCode.setText(this.relationModelList.get(position).verficationCode);
             }
@@ -101,10 +124,38 @@ public class RelationModelListAdapter extends ArrayAdapter<RelationModel> {
         return null;
     }
 
+    private boolean isCodeValid(long timestamp) {
+        Date dt = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        calendar.setTime(dt);
+        Date time = calendar.getTime();
+        Log.d("isCodeValid", "isCodeValid: " + (time.getTime()-timestamp));
+        return (time.getTime()-timestamp) > 300000;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // PUBLIC METHODS
+    ///////////////////////////////////////////////////////////////////////////
+    public void setVerificationRefreshRequest(VerificationRefresh verificationRefreshRequest) {
+        this.verificationRefresh = verificationRefreshRequest;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // INTERFACE
+    ///////////////////////////////////////////////////////////////////////////
+    public interface VerificationRefresh{
+        void onRefreshRequest(RelationModel model);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // STATIC CLASS
+    ///////////////////////////////////////////////////////////////////////////
     static class ViewHolder {
         public TextView patientName;
         public TextView patientNumber;
         public TextView verificationStatus;
         public TextView verificationCode;
+        public ImageButton refreshCode;
     }
 }

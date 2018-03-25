@@ -9,17 +9,15 @@
         android:id="@+id/patientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DOE, John"
-        android:textSize="17sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/patientNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/patientName"
-        android:textSize="15sp"
-        android:text="09999999999"/>
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/vCode"
@@ -28,10 +26,10 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textAllCaps="false"
-        android:visibility="gone"
-        android:textSize="21sp"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/verificationStatus"
@@ -40,7 +38,17 @@
         android:layout_below="@id/vCode"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textAllCaps="true"
-        android:text="verified"/>
+        android:textAllCaps="true" />
+
+    <ImageButton
+        android:id="@+id/resetVerificationCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="5dp"
+        android:src="@drawable/ic_refresh"
+        android:layout_toStartOf="@id/verificationStatus"
+        android:layout_toLeftOf="@id/verificationStatus"
+        android:visibility="gone" />
 
 </RelativeLayout>
