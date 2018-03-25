@@ -218,6 +218,8 @@ public class HeartRateMonitor extends AppCompatActivity {
                 hr.setDate(date.toString());
                 hr.setTimestamp(System.currentTimeMillis());
                 hrDao.insert(hr);
+
+                Log.e("HeartRateMonitor", "SAVED!!!");
             }
             processing.set(false);
         }

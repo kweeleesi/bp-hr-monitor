@@ -260,7 +260,8 @@
                 android:layout_margin="2dp"
                 android:background="@drawable/round_white_bg"
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:padding="5dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
