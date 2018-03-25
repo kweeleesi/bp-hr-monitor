@@ -59,7 +59,9 @@ public class AddPatientDialogFragment extends DialogFragment implements View.OnC
                 //send code
                 if (onUserSelected != null) {
                     onUserSelected.onSelected(
-                            getUserModel(autoCompleteTextView.getText().toString())
+                            getUserModel(autoCompleteTextView.getText().toString()
+                                    .replaceAll("\\D+","")
+                                    .replaceAll(" ",""))
                     );
                 }
                 dismiss();
@@ -105,7 +107,9 @@ public class AddPatientDialogFragment extends DialogFragment implements View.OnC
         }
         this.userNumberList.clear();
         for (UserFirebase user : this.userDataList) {
-            this.userNumberList.add(user.contact_number);
+            this.userNumberList.add(user.last_name + " "
+                    + user.first_name + " "
+                    + user.contact_number);
         }
 
         return this;
