@@ -2891,7 +2891,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521987519942" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521987482114" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2938,7 +2938,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521987519942" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521987482114" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3212,6 +3212,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3321,8 +3322,7 @@
     <MESSAGE value="WIP adding doctor" />
     <MESSAGE value="working adding of doctor with confirmation - WIP validity time verification" />
     <MESSAGE value="remove file headers - WIP validity time verification" />
-    <MESSAGE value="validity time verification and refresh code functionality now working" />
-    <option name="LAST_COMMIT_MESSAGE" value="validity time verification and refresh code functionality now working" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove file headers - WIP validity time verification" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
