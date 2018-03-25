@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.RelationModel;
 import com.example.hp.heartrytcare.db.UserFirebase;
+import com.example.hp.heartrytcare.helper.Constants;
 
 import java.util.List;
 import java.util.Locale;
@@ -59,17 +60,22 @@ public class RelationModelListAdapter extends ArrayAdapter<RelationModel> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(this.context).inflate(R.layout.listview_relation_items, parent, false);
-            viewHolder.patientName = (TextView)convertView.findViewById(R.id.patientName);
-            viewHolder.patientNumber = (TextView)convertView.findViewById(R.id.patientNumber);
-            viewHolder.verificationStatus = (TextView)convertView.findViewById(R.id.verificationStatus);
-            viewHolder.verificationCode = (TextView)convertView.findViewById(R.id.vCode);
+            viewHolder.patientName = (TextView) convertView.findViewById(R.id.patientName);
+            viewHolder.patientNumber = (TextView) convertView.findViewById(R.id.patientNumber);
+            viewHolder.verificationStatus = (TextView) convertView.findViewById(R.id.verificationStatus);
+            viewHolder.verificationCode = (TextView) convertView.findViewById(R.id.vCode);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        UserFirebase userFirebase = getUserInfo(this.relationModelList.get(position).patientUID);
+        UserFirebase userFirebase;
+        if (Constants.FIREBASE_USER_TYPE == Constants.TYPE_USER_PATIENT) {
+            userFirebase = getUserInfo(this.relationModelList.get(position).doctorUID);
+        } else {
+            userFirebase = getUserInfo(this.relationModelList.get(position).patientUID);
+        }
         if (userFirebase != null) {
             viewHolder.patientName.setText(userFirebase.last_name.toString().toUpperCase(Locale.getDefault()) + ", " + userFirebase.first_name);
             viewHolder.patientNumber.setText(userFirebase.contact_number);
