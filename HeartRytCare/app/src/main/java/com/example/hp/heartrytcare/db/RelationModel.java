@@ -1,6 +1,5 @@
 package com.example.hp.heartrytcare.db;
 
-
 public class RelationModel {
 
     public String firebaseKey;

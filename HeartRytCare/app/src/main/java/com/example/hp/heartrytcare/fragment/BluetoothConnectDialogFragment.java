@@ -21,7 +21,6 @@ import com.example.hp.heartrytcare.helper.Constants;
 
 import java.io.IOException;
 
-
 public class BluetoothConnectDialogFragment extends DialogFragment implements AdapterView.OnItemClickListener{
 
     private ListView bluetoothDevices;
