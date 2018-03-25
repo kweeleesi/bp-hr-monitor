@@ -19,14 +19,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4f268c6a-f98f-4a4f-9478-1562d3d557ed" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/db/RelationModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/db/RelationModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BluetoothConnectDialogFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BluetoothConnectDialogFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/StatFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/StatFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/BTMessageReceiver.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/BTMessageReceiver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/ConnectedThread.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/ConnectedThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/FileSharingHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/FileSharingHelper.java" />
     </list>
     <ignored path="HeartRyt Care.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -150,12 +143,14 @@
       <file leaf-file-name="StatFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/StatFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="112" column="36" lean-forward="false" selection-start-line="112" selection-start-column="36" selection-end-line="112" selection-end-column="36" />
+            <state relative-caret-position="1268">
+              <caret line="163" column="9" lean-forward="false" selection-start-line="163" selection-start-column="9" selection-end-line="163" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2963#3324#0" expanded="true" />
                 <element signature="e#3323#3324#0" expanded="true" />
+                <marker date="1522002899721" expanded="false" signature="11947:12086" ph="(value, axis) → {" />
+                <marker date="1522002899721" expanded="false" signature="12158:12181" ph="}" />
               </folding>
             </state>
           </provider>
@@ -206,7 +201,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Constants.FIREBAS</find>
       <find>Constants.FIREBASE</find>
       <find>Constants.FIREBASE_</find>
       <find>Constants.FIREBASE_U</find>
@@ -234,8 +228,9 @@
       <find>checkPermission</find>
       <find>REQUIRED_PERMISSIONS</find>
       <find>Permission</find>
-      <find>kevin</find>
       <find>saveToGallery</find>
+      <find>kevin</find>
+      <find>else if (hrList.size() == 0 &amp;&amp; bpList.size() == 0)</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2924,7 +2919,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522001967510" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522002923288" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2971,7 +2966,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522001967510" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522002923288" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3238,7 +3233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521987521364</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="email sending now working">
+      <created>1522002051652</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1522002051653</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -3257,7 +3259,7 @@
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19271624" sideWeight="0.51342285" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32825205" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4576087" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4576087" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3270,7 +3272,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.228125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5077951" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5076087" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4576087" sideWeight="0.50208336" order="10" side_tool="true" content_ui="tabs" />
@@ -3363,7 +3365,8 @@
     <MESSAGE value="working adding of doctor with confirmation - WIP validity time verification" />
     <MESSAGE value="remove file headers - WIP validity time verification" />
     <MESSAGE value="validity time verification and refresh code functionality now working" />
-    <option name="LAST_COMMIT_MESSAGE" value="validity time verification and refresh code functionality now working" />
+    <MESSAGE value="email sending now working" />
+    <option name="LAST_COMMIT_MESSAGE" value="email sending now working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3848,12 +3851,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/StatFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="112" column="36" lean-forward="false" selection-start-line="112" selection-start-column="36" selection-end-line="112" selection-end-column="36" />
+        <state relative-caret-position="1268">
+          <caret line="163" column="9" lean-forward="false" selection-start-line="163" selection-start-column="9" selection-end-line="163" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2963#3324#0" expanded="true" />
             <element signature="e#3323#3324#0" expanded="true" />
+            <marker date="1522002899721" expanded="false" signature="11947:12086" ph="(value, axis) → {" />
+            <marker date="1522002899721" expanded="false" signature="12158:12181" ph="}" />
           </folding>
         </state>
       </provider>

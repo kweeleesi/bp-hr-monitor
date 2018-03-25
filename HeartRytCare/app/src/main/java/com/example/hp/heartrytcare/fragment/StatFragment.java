@@ -159,6 +159,8 @@ public class StatFragment extends Fragment {
             } else {
                 latest = bpList.get(bpList.size() - 1).getTimestamp();
             }
+        } else if (hrList.size() == 0 && bpList.size() == 0) {
+            //do nothing
         } else {
             if (hrList == null || hrList.size() == 0) {
                 earliest = bpList.get(0).getTimestamp();
