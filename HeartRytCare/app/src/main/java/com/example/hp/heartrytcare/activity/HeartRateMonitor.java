@@ -210,13 +210,16 @@ public class HeartRateMonitor extends AppCompatActivity {
                 beats = 0;
 
                 Date d = new Date();
-                CharSequence date  = DateFormat.format("EEEE, MMMM d, yyyy hh:mm aa", d.getTime());
+                CharSequence date  = DateFormat.format("MM/dd", d.getTime());
 
                 HeartRateData hr = new HeartRateData();
                 hr.setFirebase_user_id(Constants.FIREBASE_UID);
                 hr.setBpm(beatsAvg);
                 hr.setDate(date.toString());
+                hr.setTimestamp(System.currentTimeMillis());
                 hrDao.insert(hr);
+
+                Log.e("HeartRateMonitor", "SAVED!!!");
             }
             processing.set(false);
         }

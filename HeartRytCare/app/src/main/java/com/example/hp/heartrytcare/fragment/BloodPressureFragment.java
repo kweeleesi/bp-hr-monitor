@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.BloodPressureData;
+import com.example.hp.heartrytcare.db.BloodPressureDataDao;
+import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.helper.BTMessageReceiver;
 import com.example.hp.heartrytcare.helper.BluetoothBPHelper;
 import com.example.hp.heartrytcare.helper.Constants;
@@ -35,20 +40,22 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     private static final String TAG = "BloodPressureFragment";
 
     private BluetoothBPHelper btHelper;
+    private BloodPressureDataDao bpDao;
 
     private TextView systolicBPValue;
     private TextView diastolicBPValue;
     private TextView dateTaken;
 
-    public BloodPressureFragment() {
-        // Required empty public constructor
-    }
+    private Boolean isSaved = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         incomingMessageHandler = new IncomingMessageHandler(this);
         btHelper = BluetoothBPHelper.getInstance();
+
+        DaoSession daoSession = ((HeartRytCare) getActivity().getApplicationContext()).getDaoSession();
+        bpDao = daoSession.getBloodPressureDataDao();
     }
 
     @Override
@@ -73,12 +80,6 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
             }
         });
 
-        Button bpsettings = (Button) fragmentView.findViewById(R.id.btn_bpSettings);
-        bpsettings.setOnClickListener(this);
-
-        Button bphistory = (Button) fragmentView.findViewById(R.id.btn_bpHistory);
-        bphistory.setOnClickListener(this);
-
         Button bpconnect = (Button) fragmentView.findViewById(R.id.btn_bpconnect);
         bpconnect.setOnClickListener(this);
 
@@ -99,20 +100,6 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                 BluetoothConnectDialogFragment bluetoothConnectDialogFragment = BluetoothConnectDialogFragment.newInstance();
                 bluetoothConnectDialogFragment.show(fm, "connectFragment");
                 break;
-            case R.id.btn_bpSettings:
-                /*AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-                alert.setTitle("Settings");
-                alert.setMessage("It will display settings on configuring blood pressure measurement.");
-                alert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                alert.show();*/
-                break;
-            case R.id.btn_bpHistory:
-
-                break;
         }
     }
 
@@ -130,11 +117,29 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                     systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
                     diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
                     dateTaken.setText("");
+                    isSaved = false;
                 } else {
                     if (systolicBPValue != null || diastolicBPValue != null || dateTaken != null) {
-                        systolicBPValue.setText(String.format(getActivity().getString(R.string.blood_pressure_systolic), bpValues[0]));
-                        diastolicBPValue.setText(String.format(getActivity().getString(R.string.blood_pressure_diastolic), bpValues[1]));
+                        systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_systolic) + " " + bpValues[0]);
+                        diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_diastolic) + " " + bpValues[1]);
                         setFormattedDate(dateTaken, System.currentTimeMillis());
+                        dateTaken.setVisibility(View.VISIBLE);
+
+                        if (!isSaved) {
+                            Date d = new Date();
+                            CharSequence date  = DateFormat.format("MM/dd", d.getTime());
+
+                            BloodPressureData bp = new BloodPressureData();
+                            bp.setFirebase_user_id(Constants.FIREBASE_UID);
+                            bp.setSystolic(Integer.parseInt(bpValues[0]));
+                            bp.setDiastolic(Integer.parseInt(bpValues[1]));
+                            bp.setDate(date.toString());
+                            bp.setTimestamp(System.currentTimeMillis());
+                            bpDao.insert(bp);
+                            isSaved = true;
+
+                            Log.e(TAG, "!!!!!!!!!!!! SAVED!");
+                        }
                     }
                 }
             } catch (NumberFormatException e) {

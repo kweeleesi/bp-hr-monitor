@@ -89,7 +89,7 @@ public class MainGenerator {
 
     private static Entity addAppointment(final Schema schema) {
         Entity appt = schema.addEntity("Appointment");
-        appt.addIdProperty().primaryKey().notNull().autoincrement();
+        appt.addIdProperty().primaryKey().autoincrement();
         appt.addStringProperty("firebase_user_id").notNull();
         appt.addStringProperty("header");
         appt.addStringProperty("notes");
@@ -101,21 +101,23 @@ public class MainGenerator {
 
     private static Entity addHeartRateData(final Schema schema) {
         Entity hr = schema.addEntity("HeartRateData");
-        hr.addIdProperty().primaryKey().notNull().autoincrement();
+        hr.addIdProperty().primaryKey().autoincrement();
         hr.addStringProperty("firebase_user_id").notNull();
         hr.addIntProperty("bpm").notNull();
         hr.addStringProperty("date").notNull();
+        hr.addLongProperty("timestamp").notNull();
 
         return hr;
     }
 
     private static Entity addBloodPressureData(final Schema schema) {
         Entity bp = schema.addEntity("BloodPressureData");
-        bp.addIdProperty().primaryKey().autoincrement().notNull();
+        bp.addIdProperty().primaryKey().autoincrement();
         bp.addStringProperty("firebase_user_id").notNull();
         bp.addIntProperty("systolic").notNull();
         bp.addIntProperty("diastolic").notNull();
         bp.addStringProperty("date").notNull();
+        bp.addLongProperty("timestamp").notNull();
 
         return bp;
     }

@@ -23,7 +23,7 @@ public class AppointmentDao extends AbstractDao<Appointment, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, long.class, "id", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Firebase_user_id = new Property(1, String.class, "firebase_user_id", false, "FIREBASE_USER_ID");
         public final static Property Header = new Property(2, String.class, "header", false, "HEADER");
         public final static Property Notes = new Property(3, String.class, "notes", false, "NOTES");
@@ -44,7 +44,7 @@ public class AppointmentDao extends AbstractDao<Appointment, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"APPOINTMENT\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"FIREBASE_USER_ID\" TEXT NOT NULL ," + // 1: firebase_user_id
                 "\"HEADER\" TEXT," + // 2: header
                 "\"NOTES\" TEXT," + // 3: notes
@@ -62,7 +62,11 @@ public class AppointmentDao extends AbstractDao<Appointment, Long> {
     @Override
     protected void bindValues(SQLiteStatement stmt, Appointment entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
         stmt.bindString(2, entity.getFirebase_user_id());
  
         String header = entity.getHeader();
@@ -89,14 +93,14 @@ public class AppointmentDao extends AbstractDao<Appointment, Long> {
     /** @inheritdoc */
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Appointment readEntity(Cursor cursor, int offset) {
         Appointment entity = new Appointment( //
-            cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // firebase_user_id
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // header
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // notes
@@ -109,7 +113,7 @@ public class AppointmentDao extends AbstractDao<Appointment, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Appointment entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setFirebase_user_id(cursor.getString(offset + 1));
         entity.setHeader(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setNotes(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
