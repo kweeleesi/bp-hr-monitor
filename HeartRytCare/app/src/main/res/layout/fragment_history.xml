@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_app_bg">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/round_white_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/hrBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/enterVCode"
+                android:layout_weight="1"
+                android:text="Heart Rate" />
+
+            <Button
+                android:id="@+id/bpBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/enterVCode"
+                android:layout_weight="1"
+                android:text="Blood Pressure" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/historyList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/empty_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/gray_text"
+                android:gravity="center"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

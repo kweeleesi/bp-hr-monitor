@@ -4,17 +4,14 @@ package com.example.hp.heartrytcare.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.DynamicLayout;
-import android.text.format.DateFormat;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.example.hp.heartrytcare.HeartRytCare;
-import com.example.hp.heartrytcare.Manifest;
 import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.BloodPressureData;
 import com.example.hp.heartrytcare.db.BloodPressureDataDao;
@@ -37,12 +34,8 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.BlockingDeque;
 
 import de.greenrobot.dao.query.QueryBuilder;
 
@@ -82,7 +75,10 @@ public class StatFragment extends Fragment {
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 3/25/2018 open history
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, new HistoryFragment());
+                transaction.addToBackStack("");
+                transaction.commit();
             }
         });
 
