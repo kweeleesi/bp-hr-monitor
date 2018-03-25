@@ -8,6 +8,9 @@ public class Constants {
 
     public static Calendar CALENDAR = Calendar.getInstance();
 
+    public static final int TYPE_USER_DOCTOR = 1;
+    public static final int TYPE_USER_PATIENT = 0;
+
     ///////////////////////////////////////////////////////////////////////////
     // BLUETOOTH FIELDS
     ///////////////////////////////////////////////////////////////////////////

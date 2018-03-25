@@ -6,17 +6,19 @@
     android:background="@color/main_app_bg">
 
     <Button
-        android:id="@+id/addDoctor"
+        android:id="@+id/addPatient"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="@string/add_doctor"
+        android:text="@string/add_patient"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:enabled="false"/>
 
     <ListView
-        android:id="@+id/doctorList"
+        android:id="@+id/patientList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
 
 </LinearLayout>
