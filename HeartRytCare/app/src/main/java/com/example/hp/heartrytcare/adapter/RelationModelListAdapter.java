@@ -18,12 +18,6 @@ import com.example.hp.heartrytcare.helper.Constants;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by OMIPLEKEVIN on March 25, 2018.
- * HeartRytCare
- * com.example.hp.heartrytcare.adapter
- */
-
 public class RelationModelListAdapter extends ArrayAdapter<RelationModel> {
 
     private List<RelationModel> relationModelList;
