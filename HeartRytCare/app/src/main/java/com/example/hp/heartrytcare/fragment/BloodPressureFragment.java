@@ -53,6 +53,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     private TextView dateTaken;
 
     private Boolean isSaved = false;
+    private String[] sysDia;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +69,9 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         query.where(LimitValuesDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
         if (query.list() != null && query.list().size() != 0) {
             lv = query.list().get(0);
+            sysDia = lv.getBpLimit().split("/");
+
+            Log.e("TAG", "!!!!!!!!!!!!!!!!! " + sysDia.length);
         }
     }
 
@@ -152,8 +156,8 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                             isSaved = true;
 
                             if (lv != null && !lv.getBpLimit().equals("")) {
-                                if (bp.getSystolic() > Integer.parseInt(lv.getBpLimit().substring(0, '/')) ||
-                                        bp.getDiastolic() > Integer.parseInt(lv.getBpLimit().substring('/', lv.getBpLimit().length()))) {
+                                if (bp.getSystolic() > Integer.parseInt(sysDia[0]) ||
+                                        bp.getDiastolic() > Integer.parseInt(sysDia[1])) {
                                     checkBPAlert(bp.getSystolic(), bp.getDiastolic());
                                 }
                             }
