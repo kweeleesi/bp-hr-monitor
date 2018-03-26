@@ -40,8 +40,10 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.BlockingDeque;
 
@@ -63,6 +65,7 @@ public class StatFragment extends Fragment {
     private ArrayList<BloodPressureData> bpList = new ArrayList<>();
     private long earliest, latest;
     private List<String> dates = new ArrayList<>();
+    private String shareContent = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,7 +80,6 @@ public class StatFragment extends Fragment {
                 String chartName = "StatChart-" + System.currentTimeMillis() + ".jpg";
                 chart.saveToGallery(chartName, 100);
                 actionSendToEmail(chartName);
-                // TODO: 3/24/2018 open ang share fragment
             }
         });
 
@@ -96,6 +98,8 @@ public class StatFragment extends Fragment {
         fetchHrData();
         fetchBpData();
 
+        createContentMessage();
+
         getEarliestAndLatestDate();
 
         drawChart();
@@ -111,16 +115,38 @@ public class StatFragment extends Fragment {
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
                 "Vitals report as of " + setFormattedDate(System.currentTimeMillis()));
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-                "Attached is my vital record(s)");
+                shareContent);
         Log.v(getClass().getSimpleName(), "sPhotoUri=" + Uri.parse("file://"+ Environment.getExternalStorageDirectory() + "/DCIM/" + chartName));
         emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+ Environment.getExternalStorageDirectory() + "/DCIM/" + chartName));
         startActivity(Intent.createChooser(emailIntent, "Send mail..."));
     }
 
     private String setFormattedDate(long l) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault());
         Date resultDate = new Date(l);
         return sdf.format(resultDate);
+    }
+
+    private void createContentMessage() {
+        if (hrList != null && hrList.size() != 0) {
+            shareContent += "HEART RATE HISTORY\n\n";
+            for (HeartRateData hr : hrList) {
+                shareContent = shareContent.concat(String.format("%25s%10s", setFormattedDate(hr.getTimestamp()), hr.getBpm()))
+                        .concat(" bpm")
+                        .concat("\n");
+            }
+            shareContent = shareContent.concat("\n\n");
+        }
+
+        if (bpList != null && bpList.size() != 0) {
+            shareContent += "BLOOD PRESSURE HISTORY\n\n";
+            for (BloodPressureData bp : bpList) {
+                shareContent = shareContent.concat(String.format("%25s%10d/%d", setFormattedDate(bp.getTimestamp()), bp.getSystolic(), bp.getDiastolic()))
+                        .concat( " mmHg")
+                        .concat("\n");
+            }
+        }
+
     }
 
     private void fetchHrData() {
