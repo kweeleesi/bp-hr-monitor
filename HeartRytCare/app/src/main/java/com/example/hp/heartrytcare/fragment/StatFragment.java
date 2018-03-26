@@ -1,8 +1,12 @@
 package com.example.hp.heartrytcare.fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -10,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
@@ -31,11 +36,14 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.BlockingDeque;
 
 import de.greenrobot.dao.query.QueryBuilder;
 
@@ -66,7 +74,9 @@ public class StatFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chart.saveToGallery("Chart", 100);
+                String chartName = "StatChart-" + System.currentTimeMillis() + ".jpg";
+                chart.saveToGallery(chartName, 100);
+                actionSendToEmail(chartName);
                 // TODO: 3/24/2018 open ang share fragment
             }
         });
@@ -91,6 +101,26 @@ public class StatFragment extends Fragment {
         drawChart();
 
         return view;
+    }
+
+    private void actionSendToEmail(String chartName) {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("image/jpeg");
+//        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]
+//                {"me@gmail.com"});
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                "Vitals report as of " + setFormattedDate(System.currentTimeMillis()));
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                "Attached is my vital record(s)");
+        Log.v(getClass().getSimpleName(), "sPhotoUri=" + Uri.parse("file://"+ Environment.getExternalStorageDirectory() + "/DCIM/" + chartName));
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+ Environment.getExternalStorageDirectory() + "/DCIM/" + chartName));
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+    }
+
+    private String setFormattedDate(long l) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm", Locale.getDefault());
+        Date resultDate = new Date(l);
+        return sdf.format(resultDate);
     }
 
     private void fetchHrData() {

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -33,11 +34,16 @@ import com.example.hp.heartrytcare.fragment.SchedFragment;
 import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
 import com.example.hp.heartrytcare.helper.Constants;
+import com.example.hp.heartrytcare.helper.FileSharingHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
 
 
 public class MainMenuActivity extends AppCompatActivity
@@ -101,6 +107,16 @@ public class MainMenuActivity extends AppCompatActivity
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("user");
         getUserDetailsFromFirebase();
+
+        /*FileSharingHelper fileSharingHelper = new FileSharingHelper(this);
+        fileSharingHelper.uploadFile(new File(Environment.getExternalStorageDirectory() + "/Download/testimg.jpg"),
+                new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        System.out.println("Upload is " + progress + "% done");
+                    }
+                });*/
     }
 
     @Override
