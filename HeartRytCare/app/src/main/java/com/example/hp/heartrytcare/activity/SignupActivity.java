@@ -134,7 +134,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signUp() {
-        /*if (TextUtils.isEmpty(firstName.getText())) {
+        if (TextUtils.isEmpty(firstName.getText())) {
             firstName.setError("This item cannot be empty");
             return;
         }
@@ -142,7 +142,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if (TextUtils.isEmpty(lastName.getText())) {
             lastName.setError("This item cannot be empty");
             return;
-        }*/
+        }
+
+        if (TextUtils.isEmpty(contactNumber.getText())) {
+            contactNumber.setError("This item cannot be empty");
+            return;
+        }
 
         if (TextUtils.isEmpty(eMail.getText())) {
             eMail.setError("This item cannot be empty");
@@ -151,6 +156,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         if (TextUtils.isEmpty(password.getText())) {
             password.setError("This item cannot be empty");
+            return;
+        }
+
+        if (TextUtils.isEmpty(age.getText())) {
+            age.setError("This item cannot be empty");
             return;
         }
 
@@ -202,25 +212,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
     }
-
-/*    private void addUserChangeListener () {
-        databaseReference.child(userId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                UserFirebase userFirebase = dataSnapshot.getValue(UserFirebase.class);
-
-                if (userFirebase == null) {
-                    Log.e(TAG, "User data is null!");
-                    return;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }*/
 
     private void signIn() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
