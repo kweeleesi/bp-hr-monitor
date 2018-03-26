@@ -20,6 +20,8 @@ import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.BloodPressureData;
 import com.example.hp.heartrytcare.db.BloodPressureDataDao;
 import com.example.hp.heartrytcare.db.DaoSession;
+import com.example.hp.heartrytcare.db.LimitValues;
+import com.example.hp.heartrytcare.db.LimitValuesDao;
 import com.example.hp.heartrytcare.helper.BTMessageReceiver;
 import com.example.hp.heartrytcare.helper.BluetoothBPHelper;
 import com.example.hp.heartrytcare.helper.Constants;
@@ -28,6 +30,8 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import de.greenrobot.dao.query.QueryBuilder;
 
 
 /**
@@ -41,6 +45,8 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
 
     private BluetoothBPHelper btHelper;
     private BloodPressureDataDao bpDao;
+    private LimitValuesDao lvDao;
+    private LimitValues lv;
 
     private TextView systolicBPValue;
     private TextView diastolicBPValue;
@@ -56,6 +62,13 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
 
         DaoSession daoSession = ((HeartRytCare) getActivity().getApplicationContext()).getDaoSession();
         bpDao = daoSession.getBloodPressureDataDao();
+        lvDao = daoSession.getLimitValuesDao();
+
+        QueryBuilder<LimitValues> query = lvDao.queryBuilder();
+        query.where(LimitValuesDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
+        if (query.list() != null && query.list().size() != 0) {
+            lv = query.list().get(0);
+        }
     }
 
     @Override
@@ -137,7 +150,14 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                             bp.setTimestamp(System.currentTimeMillis());
                             bpDao.insert(bp);
                             isSaved = true;
-                            checkBPAlert(bp.getSystolic(), bp.getDiastolic());
+
+                            if (lv != null && !lv.getBpLimit().equals("")) {
+                                if (bp.getSystolic() > Integer.parseInt(lv.getBpLimit().substring(0, '/')) ||
+                                        bp.getDiastolic() > Integer.parseInt(lv.getBpLimit().substring('/', lv.getBpLimit().length()))) {
+                                    checkBPAlert(bp.getSystolic(), bp.getDiastolic());
+                                }
+                            }
+
                             Log.e(TAG, "!!!!!!!!!!!! SAVED!");
                         }
                     }
@@ -175,7 +195,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     private void checkBPAlert(int systolic, int diastolic) {
         CriticalRateFragment criticalRateFragment = CriticalRateFragment.newInstance(
                 CriticalRateFragment.CASE_TYPE_BP,
-                "120/80",
+                lv.getBpLimit(),
                 systolic + "/" + diastolic);
         criticalRateFragment.show(getFragmentManager(), "criticalState");
     }

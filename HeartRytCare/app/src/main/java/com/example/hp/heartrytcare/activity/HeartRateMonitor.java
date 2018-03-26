@@ -26,6 +26,8 @@ import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.db.HeartRateData;
 import com.example.hp.heartrytcare.db.HeartRateDataDao;
+import com.example.hp.heartrytcare.db.LimitValues;
+import com.example.hp.heartrytcare.db.LimitValuesDao;
 import com.example.hp.heartrytcare.fragment.CriticalRateFragment;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.example.hp.heartrytcare.helper.ImageProcess;
@@ -34,6 +36,8 @@ import com.wang.avi.AVLoadingIndicatorView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import de.greenrobot.dao.query.QueryBuilder;
 
 
 public class HeartRateMonitor extends FragmentActivity {
@@ -54,6 +58,8 @@ public class HeartRateMonitor extends FragmentActivity {
     private static final int[] averageArray = new int[averageArraySize];
 
     private static HeartRateDataDao hrDao;
+    private static LimitValuesDao lvDao;
+    private static LimitValues lv;
 
     public static enum TYPE {
         GREEN, RED
@@ -94,6 +100,13 @@ public class HeartRateMonitor extends FragmentActivity {
 
         DaoSession daoSession = ((HeartRytCare)getApplicationContext()).getDaoSession();
         hrDao = daoSession.getHeartRateDataDao();
+        lvDao = daoSession.getLimitValuesDao();
+
+        QueryBuilder<LimitValues> query = lvDao.queryBuilder();
+        query.where(LimitValuesDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
+        if (query.list() != null && query.list().size() != 0) {
+            lv = query.list().get(0);
+        }
     }
 
     /**
@@ -235,9 +248,15 @@ public class HeartRateMonitor extends FragmentActivity {
                 hr.setDate(date.toString());
                 hr.setTimestamp(System.currentTimeMillis());
                 hrDao.insert(hr);
-                MessageEvent event = new MessageEvent();
-                event.hr = beatsAvg;
-                EventBus.getDefault().post(event);
+
+                if (lv != null && !lv.getHrLimit().equals("")) {
+                    if (beatsAvg > Integer.parseInt(lv.getHrLimit())) {
+                        MessageEvent event = new MessageEvent();
+                        event.hr = beatsAvg;
+                        EventBus.getDefault().post(event);
+                    }
+                }
+
                 Log.e("HeartRateMonitor", "SAVED!!!");
             }
             processing.set(false);
@@ -248,7 +267,7 @@ public class HeartRateMonitor extends FragmentActivity {
     public void checkBPAlert(MessageEvent event) {
         CriticalRateFragment criticalRateFragment = CriticalRateFragment.newInstance(
                 CriticalRateFragment.CASE_TYPE_HR,
-                "91",
+                lv.getHrLimit(),
                 String.valueOf(event.hr));
         criticalRateFragment.show(getSupportFragmentManager(), "criticalState");
     }

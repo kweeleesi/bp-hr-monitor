@@ -147,7 +147,9 @@ public class DoctorFragment extends Fragment implements View.OnClickListener{
     private void getLimitValues() {
         QueryBuilder<LimitValues> query = lvDao.queryBuilder();
         query.where(LimitValuesDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
-        limitValues = query.list().get(0);
+        if (query.list() != null && query.list().size() != 0) {
+            limitValues = query.list().get(0);
+        }
     }
 
     private void getDoctorList() {
