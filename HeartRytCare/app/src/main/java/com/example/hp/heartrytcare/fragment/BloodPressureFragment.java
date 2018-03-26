@@ -137,7 +137,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                             bp.setTimestamp(System.currentTimeMillis());
                             bpDao.insert(bp);
                             isSaved = true;
-
+                            checkBPAlert(bp.getSystolic(), bp.getDiastolic());
                             Log.e(TAG, "!!!!!!!!!!!! SAVED!");
                         }
                     }
@@ -170,6 +170,14 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         Date resultDate = new Date(l);
         dateTextView.setText(sdf.format(resultDate));
         dateTextView.invalidate();
+    }
+
+    private void checkBPAlert(int systolic, int diastolic) {
+        CriticalRateFragment criticalRateFragment = CriticalRateFragment.newInstance(
+                CriticalRateFragment.CASE_TYPE_BP,
+                "120/80",
+                systolic + "/" + diastolic);
+        criticalRateFragment.show(getFragmentManager(), "criticalState");
     }
 
     ///////////////////////////////////////////////////////////////////////////

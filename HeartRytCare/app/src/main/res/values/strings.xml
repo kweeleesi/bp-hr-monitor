@@ -6,6 +6,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Help</string>
+    <string name="compose_message_label">Message:</string>
+    <string name="advised">Advised:</string>
+    <string name="btn_send">Send</string>
+    <string name="current_reading">Current Reading:</string>
+    <string name="btn_ignore">Ignore</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -63,6 +68,8 @@
     <string name="blood_pressure_time_taken">Time Taken:</string>
     <string name="blood_pressure_error">Error: please restart BP device</string>
     <string name="blood_pressure_reading">Reading...</string>
+    <string name="blood_pressure_critical">Critical Blood Pressure rate! Compose message and notify your doctor. Otherwise, ignore this alert.</string>
+    <string name="blood_pressure_msg_template">Need immediate consultation! I reached critical blood pressure rate. %1$s</string>
 
     <!--DOCTOR FRAGMENT-->
     <string name="add_doctor">ADD DOCTOR</string>
@@ -76,12 +83,15 @@
     <string name="hint_phone_number">09xxxxxxxxx</string>
     <string name="sms_message_template">Your verification code is %1$s. Code validity is 5 minutes. To renew, contact your assigning doctor</string>
 
+
     <!--HEART RATE MONITOR-->
     <string name="heartrate">Heart Rate: </string>
     <string name="bpm">BPM</string>
     <string name="instruction"> - Place your index finger on the rear camera.\n
                                 - Make sure the camera is fully covered.\n
                                 - Finally, place your finger then press START.</string>
+    <string name="heartrate_critical">Heart Rate critical! Compose message and notify your doctor. Otherwise, ignore this alert.</string>
+    <string name="heartrate_msg_template">Need immediate consultation! I reached critical heart rate. %1$s</string>
 
     <!--JOURNAL-->
     <string name="diet_plan">DIET PLAN</string>

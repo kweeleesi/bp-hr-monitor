@@ -134,7 +134,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signUp() {
-        /*if (TextUtils.isEmpty(firstName.getText())) {
+        if (TextUtils.isEmpty(firstName.getText())) {
             firstName.setError("This item cannot be empty");
             return;
         }
@@ -142,7 +142,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if (TextUtils.isEmpty(lastName.getText())) {
             lastName.setError("This item cannot be empty");
             return;
-        }*/
+        }
 
         if (TextUtils.isEmpty(eMail.getText())) {
             eMail.setError("This item cannot be empty");
