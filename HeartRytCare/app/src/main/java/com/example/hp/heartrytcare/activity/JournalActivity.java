@@ -52,9 +52,6 @@ public class JournalActivity extends AppCompatActivity {
         });
 
         fetchJournalEntries();
-        if (journals != null && journals.size() != 0) {
-            emptyList.setVisibility(View.GONE);
-        }
 
         journalList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -89,6 +86,10 @@ public class JournalActivity extends AppCompatActivity {
         JournalListAdapter adapter = new JournalListAdapter(journals, getApplicationContext());
         journalList.setAdapter(adapter);
         journalList.invalidate();
+
+        if (journals != null && journals.size() != 0) {
+            emptyList.setVisibility(View.GONE);
+        }
 
         Log.e("JournalActivity", "journal size : " + journals.size());
     }

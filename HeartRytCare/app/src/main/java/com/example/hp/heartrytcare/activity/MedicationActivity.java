@@ -50,9 +50,6 @@ public class MedicationActivity extends AppCompatActivity {
         });
 
         fetchMedicationSched();
-        if (sched != null && sched.size() != 0) {
-            emptyList.setVisibility(View.GONE);
-        }
 
         medList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -95,6 +92,10 @@ public class MedicationActivity extends AppCompatActivity {
         MedicationSchedAdapter adapter = new MedicationSchedAdapter(sched, getApplicationContext());
         medList.setAdapter(adapter);
         medList.invalidate();
+
+        if (sched != null && sched.size() != 0) {
+            emptyList.setVisibility(View.GONE);
+        }
 
         Log.e("MedicationSchedAdapter", "med sched size : " + sched.size());
     }

@@ -8,10 +8,8 @@ import android.util.Log;
 import de.greenrobot.dao.AbstractDaoMaster;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
 
-import com.example.hp.heartrytcare.db.UserDao;
 import com.example.hp.heartrytcare.db.JournalDao;
 import com.example.hp.heartrytcare.db.MedicationDao;
-import com.example.hp.heartrytcare.db.DoctorPatientDao;
 import com.example.hp.heartrytcare.db.AppointmentDao;
 import com.example.hp.heartrytcare.db.HeartRateDataDao;
 import com.example.hp.heartrytcare.db.BloodPressureDataDao;
@@ -25,10 +23,8 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(SQLiteDatabase db, boolean ifNotExists) {
-        UserDao.createTable(db, ifNotExists);
         JournalDao.createTable(db, ifNotExists);
         MedicationDao.createTable(db, ifNotExists);
-        DoctorPatientDao.createTable(db, ifNotExists);
         AppointmentDao.createTable(db, ifNotExists);
         HeartRateDataDao.createTable(db, ifNotExists);
         BloodPressureDataDao.createTable(db, ifNotExists);
@@ -36,10 +32,8 @@ public class DaoMaster extends AbstractDaoMaster {
     
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(SQLiteDatabase db, boolean ifExists) {
-        UserDao.dropTable(db, ifExists);
         JournalDao.dropTable(db, ifExists);
         MedicationDao.dropTable(db, ifExists);
-        DoctorPatientDao.dropTable(db, ifExists);
         AppointmentDao.dropTable(db, ifExists);
         HeartRateDataDao.dropTable(db, ifExists);
         BloodPressureDataDao.dropTable(db, ifExists);
@@ -74,10 +68,8 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(SQLiteDatabase db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(UserDao.class);
         registerDaoClass(JournalDao.class);
         registerDaoClass(MedicationDao.class);
-        registerDaoClass(DoctorPatientDao.class);
         registerDaoClass(AppointmentDao.class);
         registerDaoClass(HeartRateDataDao.class);
         registerDaoClass(BloodPressureDataDao.class);

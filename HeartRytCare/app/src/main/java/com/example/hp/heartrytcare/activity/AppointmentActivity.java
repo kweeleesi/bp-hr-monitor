@@ -51,9 +51,6 @@ public class AppointmentActivity extends AppCompatActivity {
         });
 
         fetchAppointment();
-        if (appointments != null && appointments.size() != 0) {
-            emptyList.setVisibility(View.GONE);
-        }
 
         apptList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,6 +85,10 @@ public class AppointmentActivity extends AppCompatActivity {
         AppointmentsAdapter adapter = new AppointmentsAdapter(appointments, getApplicationContext());
         apptList.setAdapter(adapter);
         apptList.invalidate();
+
+        if (appointments != null && appointments.size() != 0) {
+            emptyList.setVisibility(View.GONE);
+        }
 
         Log.e("AppointmentActivity", "appointment size : " + appointments.size());
     }

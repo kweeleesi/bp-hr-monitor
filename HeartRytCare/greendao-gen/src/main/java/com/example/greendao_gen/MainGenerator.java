@@ -22,32 +22,11 @@ public class MainGenerator {
     }
 
     private static void addTables(final Schema schema) {
-        Entity user = addUser(schema);
         Entity journal = addJournal(schema);
         Entity medication = addMedicationSched(schema);
-        Entity doctorPatient = addDoctorPatient(schema);
         Entity appt = addAppointment(schema);
         Entity hr = addHeartRateData(schema);
         Entity bp = addBloodPressureData(schema);
-    }
-
-    private static Entity addUser(final Schema schema) {
-        Entity user = schema.addEntity("User");
-        user.addIdProperty().primaryKey().autoincrement();
-        user.addStringProperty("firebase_user_id").notNull();
-        user.addIntProperty("user_type").notNull(); // 1 = doctor | 0 = patient
-        user.addStringProperty("last_name").notNull();
-        user.addStringProperty("first_name").notNull();
-        user.addStringProperty("license_number");
-        user.addStringProperty("email").notNull();
-        user.addStringProperty("contact_number");
-        user.addStringProperty("password").notNull();
-        user.addIntProperty("age").notNull();
-        user.addIntProperty("height").notNull();
-        user.addDoubleProperty("weight").notNull();
-        user.addIntProperty("gender").notNull();
-
-        return user;
     }
 
     private static Entity addJournal(final Schema schema) {
@@ -120,14 +99,5 @@ public class MainGenerator {
         bp.addLongProperty("timestamp").notNull();
 
         return bp;
-    }
-
-    private static Entity addDoctorPatient(final Schema schema) {
-        Entity doctorPatient = schema.addEntity("DoctorPatient");
-        doctorPatient.addIdProperty().primaryKey().autoincrement();
-        doctorPatient.addStringProperty("doctor_firebase_uid").notNull();
-        doctorPatient.addStringProperty("patient_firebase_uid").notNull();
-
-        return doctorPatient;
     }
 }

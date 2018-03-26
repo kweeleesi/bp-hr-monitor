@@ -1,12 +1,9 @@
 package com.example.hp.heartrytcare.fragment;
 
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -18,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -29,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
-import com.example.hp.heartrytcare.activity.AlarmActivity;
 import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.db.Medication;
 import com.example.hp.heartrytcare.db.MedicationDao;
@@ -56,7 +51,6 @@ public class ScheduleMed extends Fragment implements View.OnClickListener{
     private TextView startDate, medTime;
     private Switch alert;
     private Medication medication;
-    private AlarmManager alarm;
     private PendingIntent alarmIntent;
 
     @Override
@@ -124,35 +118,12 @@ public class ScheduleMed extends Fragment implements View.OnClickListener{
         howOften = (EditText) view.findViewById(R.id.et_times);
         duration = (EditText) view.findViewById(R.id.et_numofdays);
         medTime = (TextView) view.findViewById(R.id.et_settime);
-        alert = (Switch) view.findViewById(R.id.alertSwitch);
 
         back.setOnClickListener(this);
         save.setOnClickListener(this);
         update.setOnClickListener(this);
         startDate.setOnClickListener(this);
         medTime.setOnClickListener(this);
-        alert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Set the alarm to start at approximately 2:00 p.m.
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(System.currentTimeMillis());
-                    calendar.set(Calendar.HOUR_OF_DAY, 12);
-                    calendar.set(Calendar.MINUTE, 23);
-
-                    // With setInexactRepeating(), you have to use one of the AlarmManager interval
-                    // constants--in this case, AlarmManager.INTERVAL_DAY.
-                    alarm = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
-                    Intent intent = new Intent(getActivity(), AlarmActivity.class);
-                    alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-                    alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                            AlarmManager.INTERVAL_DAY, alarmIntent);
-
-                    Toast.makeText(getActivity(), "SUCCESSFUL", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void save() {
