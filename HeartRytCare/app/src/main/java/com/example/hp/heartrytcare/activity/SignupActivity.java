@@ -28,6 +28,7 @@ import com.example.hp.heartrytcare.db.UserFirebase;
 import com.example.hp.heartrytcare.fragment.SignInFragment;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -133,7 +134,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signUp() {
-        if (TextUtils.isEmpty(firstName.getText())) {
+        /*if (TextUtils.isEmpty(firstName.getText())) {
             firstName.setError("This item cannot be empty");
             return;
         }
@@ -141,7 +142,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if (TextUtils.isEmpty(lastName.getText())) {
             lastName.setError("This item cannot be empty");
             return;
-        }
+        }*/
 
         if (TextUtils.isEmpty(eMail.getText())) {
             eMail.setError("This item cannot be empty");
@@ -188,10 +189,16 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         } else {
                             // If sign in fails, display a message to the user.
                             loading.setVisibility(View.GONE);
-                            Log.w(getClass().getSimpleName(), "createUserWithEmail:failure", task.getException());
+                            /*Log.w(getClass().getSimpleName(), "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignupActivity.this, "Authentication failed. Please try again.",
-                                    Toast.LENGTH_SHORT).show();
+                                    Toast.LENGTH_SHORT).show();*/
                         }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SignupActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
