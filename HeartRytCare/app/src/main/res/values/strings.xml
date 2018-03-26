@@ -129,6 +129,8 @@
     <!--STATISTICS-->
     <string name="chart_title">Blood Pressure and Heart Rate\nData Chart</string>
 
+    <string name="footnote">When your heart rate and blood pressure exceed\nthe values above, a message\nwill be sent to your doctor.</string>
+
 </resources>
 
 

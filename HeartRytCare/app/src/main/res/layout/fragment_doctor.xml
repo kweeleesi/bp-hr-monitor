@@ -1,23 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/main_app_bg">
 
     <Button
         android:id="@+id/addDoctor"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="@string/add_doctor"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:text="@string/add_doctor" />
 
-    <ListView
-        android:id="@+id/doctorList"
+    <LinearLayout
+        android:id="@+id/drDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"/>
+        android:orientation="vertical"
+        android:visibility="gone">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/drName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_white_bg"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Heart Rate Limit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@color/red_textcolor"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/hrLimit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Heart rate limit"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_white_bg"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Blood Pressure Limit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@color/red_textcolor"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/bpLimit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Blood pressure limit"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/saveLimit"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/updateLimit"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="@string/update"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/footnote"
+            android:textColor="@color/gray_text"
+            android:textSize="13sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
+</FrameLayout>

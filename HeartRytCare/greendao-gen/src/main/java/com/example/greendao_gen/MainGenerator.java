@@ -27,6 +27,7 @@ public class MainGenerator {
         Entity appt = addAppointment(schema);
         Entity hr = addHeartRateData(schema);
         Entity bp = addBloodPressureData(schema);
+        Entity lmt = addLimitValues(schema);
     }
 
     private static Entity addJournal(final Schema schema) {
@@ -99,5 +100,15 @@ public class MainGenerator {
         bp.addLongProperty("timestamp").notNull();
 
         return bp;
+    }
+
+    private static Entity addLimitValues(final Schema schema) {
+        Entity lmt = schema.addEntity("LimitValues");
+        lmt.addIdProperty().primaryKey().autoincrement();
+        lmt.addStringProperty("firebase_user_id").notNull();
+        lmt.addStringProperty("bpLimit");
+        lmt.addStringProperty("hrLimit");
+
+        return lmt;
     }
 }
