@@ -1,5 +1,6 @@
 package com.example.hp.heartrytcare.activity;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,12 +26,17 @@ import com.example.hp.heartrytcare.R;
 import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.db.HeartRateData;
 import com.example.hp.heartrytcare.db.HeartRateDataDao;
+import com.example.hp.heartrytcare.fragment.CriticalRateFragment;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.example.hp.heartrytcare.helper.ImageProcess;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
-public class HeartRateMonitor extends AppCompatActivity {
+
+public class HeartRateMonitor extends FragmentActivity {
     private static final String TAG = "HeartRateMonitor";
     private static final AtomicBoolean processing = new AtomicBoolean(false);
 
@@ -65,6 +71,11 @@ public class HeartRateMonitor extends AppCompatActivity {
     private static double beats = 0;
     private static long startTime = 0;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +131,12 @@ public class HeartRateMonitor extends AppCompatActivity {
         camera.stopPreview();
         camera.release();
         camera = null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     private static PreviewCallback previewCallback = new PreviewCallback() {
@@ -218,12 +235,23 @@ public class HeartRateMonitor extends AppCompatActivity {
                 hr.setDate(date.toString());
                 hr.setTimestamp(System.currentTimeMillis());
                 hrDao.insert(hr);
-
+                MessageEvent event = new MessageEvent();
+                event.hr = beatsAvg;
+                EventBus.getDefault().post(event);
                 Log.e("HeartRateMonitor", "SAVED!!!");
             }
             processing.set(false);
         }
     };
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void checkBPAlert(MessageEvent event) {
+        CriticalRateFragment criticalRateFragment = CriticalRateFragment.newInstance(
+                CriticalRateFragment.CASE_TYPE_HR,
+                "91",
+                String.valueOf(event.hr));
+        criticalRateFragment.show(getSupportFragmentManager(), "criticalState");
+    }
 
     private static SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
 
@@ -282,5 +310,9 @@ public class HeartRateMonitor extends AppCompatActivity {
         }
 
         return result;
+    }
+
+    public static class MessageEvent {
+        public int hr;
     }
 }
