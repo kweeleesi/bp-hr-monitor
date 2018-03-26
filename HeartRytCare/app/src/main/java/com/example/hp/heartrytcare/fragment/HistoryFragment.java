@@ -4,6 +4,7 @@ import android.app.DownloadManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,11 @@ public class HistoryFragment extends Fragment implements View.OnClickListener{
     }
 
     private void showHrHistory() {
+        hrBtn.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.red_textcolor));
+        hrBtn.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white));
+        bpBtn.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.gray_text));
+        bpBtn.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black));
+
         QueryBuilder<HeartRateData> query = hrDao.queryBuilder();
         query.where(HeartRateDataDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
         hrList.clear();
@@ -95,6 +101,11 @@ public class HistoryFragment extends Fragment implements View.OnClickListener{
     }
 
     private void showBpHistory() {
+        bpBtn.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.red_textcolor));
+        bpBtn.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.white));
+        hrBtn.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.gray_text));
+        hrBtn.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.black));
+
         QueryBuilder<BloodPressureData> query = bpDao.queryBuilder();
         query.where(BloodPressureDataDao.Properties.Firebase_user_id.eq(Constants.FIREBASE_UID));
         bpList.clear();

@@ -80,7 +80,7 @@ public class HrBpListAdapter extends BaseAdapter {
             cal.setTimeInMillis(bpList.get(position).getTimestamp());
             viewHolder.date.setText(sdf.format(cal.getTime()));
             viewHolder.measure.setText(bpList.get(position).getSystolic() + "/"
-                    + bpList.get(position).getDiastolic());
+                    + bpList.get(position).getDiastolic() + " mmHg");
         }
 
         return convertView;

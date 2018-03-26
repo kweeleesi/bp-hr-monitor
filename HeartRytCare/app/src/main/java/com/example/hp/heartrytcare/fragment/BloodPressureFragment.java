@@ -168,7 +168,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     private void setFormattedDate(TextView dateTextView, long l) {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm", Locale.getDefault());
         Date resultDate = new Date(l);
-        dateTextView.setText(sdf.format(resultDate));
+        dateTextView.setText("Date taken:" + sdf.format(resultDate));
         dateTextView.invalidate();
     }
 
