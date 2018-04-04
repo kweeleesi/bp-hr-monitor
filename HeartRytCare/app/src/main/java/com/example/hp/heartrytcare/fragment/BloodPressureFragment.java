@@ -42,6 +42,8 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     public static IncomingMessageHandler incomingMessageHandler;
 
     private static final String TAG = "BloodPressureFragment";
+    private static final int UNITS_HIGH = 10;
+    private static final int UNITS_LOW = 10;
 
     private BluetoothBPHelper btHelper;
     private BloodPressureDataDao bpDao;
@@ -70,8 +72,6 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         if (query.list() != null && query.list().size() != 0) {
             lv = query.list().get(0);
             sysDia = lv.getBpLimit().split("/");
-
-            Log.e("TAG", "!!!!!!!!!!!!!!!!! " + sysDia.length);
         }
     }
 
@@ -156,9 +156,21 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                             isSaved = true;
 
                             if (lv != null && !lv.getBpLimit().equals("")) {
-                                if (bp.getSystolic() > Integer.parseInt(sysDia[0]) ||
-                                        bp.getDiastolic() > Integer.parseInt(sysDia[1])) {
-                                    checkBPAlert(bp.getSystolic(), bp.getDiastolic());
+                                int highSys = (Integer.parseInt(sysDia[0]) + UNITS_HIGH);
+                                int highDia = (Integer.parseInt(sysDia[1]) + UNITS_HIGH);
+                                if (bp.getSystolic() >= highSys ||
+                                        bp.getDiastolic() >= highDia) {
+                                    checkBPAlert(bp.getSystolic(), bp.getDiastolic(), Constants.RANGE_HIGH);
+                                }
+
+                                int lowSys = (Integer.parseInt(sysDia[0]) - UNITS_LOW);
+                                int lowDia = (Integer.parseInt(sysDia[1]) - UNITS_LOW);
+                                //guard for negative result inputs
+                                if (lowSys > UNITS_LOW && lowDia > UNITS_LOW) {
+                                    if (bp.getSystolic() <= lowSys ||
+                                            bp.getDiastolic() <= lowDia) {
+                                        checkBPAlert(bp.getSystolic(), bp.getDiastolic(), Constants.RANGE_LOW);
+                                    }
                                 }
                             }
 
@@ -196,10 +208,17 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         dateTextView.invalidate();
     }
 
-    private void checkBPAlert(int systolic, int diastolic) {
+    /**
+     *
+     * @param systolic
+     * @param diastolic
+     * @param state 1 = HIGH, 0 = LOW
+     */
+    private void checkBPAlert(int systolic, int diastolic, int state) {
         CriticalRateFragment criticalRateFragment = CriticalRateFragment.newInstance(
                 CriticalRateFragment.CASE_TYPE_BP,
                 lv.getBpLimit(),
+                state,
                 systolic + "/" + diastolic);
         criticalRateFragment.show(getFragmentManager(), "criticalState");
     }

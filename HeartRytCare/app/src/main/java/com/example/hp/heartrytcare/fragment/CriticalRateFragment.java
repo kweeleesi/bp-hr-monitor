@@ -43,10 +43,12 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
     private final static String BUNDLE_KEY_FORMATTED_ADVISED = "formattedAdv";
     private final static String BUNDLE_KEY_FORMATTED_CURRENT = "formattedCur";
     private final static String BUNDLE_KEY_CASE_TYPE = "caseType";
+    private final static String BUNDLE_KEY_RANGE_STATE = "state";
 
     private String formattedAdv;
     private String formattedCur;
     private String caseType;
+    private int state;
     private List<UserFirebase> doctorRelatedList = new ArrayList<>();
     private List<UserFirebase> doctorList = new ArrayList<>();
 
@@ -67,12 +69,14 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
      * @param formattedCurrentRate
      * @return
      */
-    public static CriticalRateFragment newInstance(String caseType, String formattedAdvisedRate, String formattedCurrentRate) {
+    public static CriticalRateFragment newInstance(String caseType, String formattedAdvisedRate, int state, String formattedCurrentRate) {
 
         Bundle args = new Bundle();
         args.putString(BUNDLE_KEY_CASE_TYPE, caseType);
         args.putString(BUNDLE_KEY_FORMATTED_ADVISED, formattedAdvisedRate);
         args.putString(BUNDLE_KEY_FORMATTED_CURRENT, formattedCurrentRate);
+        args.putInt(BUNDLE_KEY_RANGE_STATE, state);
+
 
         CriticalRateFragment fragment = new CriticalRateFragment();
         fragment.setArguments(args);
@@ -85,6 +89,7 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
         formattedAdv = getArguments().getString(BUNDLE_KEY_FORMATTED_ADVISED, "");
         formattedCur = getArguments().getString(BUNDLE_KEY_FORMATTED_CURRENT, "");
         caseType = getArguments().getString(BUNDLE_KEY_CASE_TYPE, "");
+        state = getArguments().getInt(BUNDLE_KEY_RANGE_STATE);
     }
 
     @Nullable
@@ -105,9 +110,14 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
 
         composeMessage = (EditText) view.findViewById(R.id.composeMessage);
         if (caseType.equals(CASE_TYPE_HR)) {
-            composeMessage.setText(getActivity().getString(R.string.heartrate_msg_template, formattedCur));
+            composeMessage.setText(getActivity().getString(
+                    R.string.heartrate_msg_template,
+                    formattedCur));
         } else if (caseType.equals(CASE_TYPE_BP)) {
-            composeMessage.setText(getActivity().getString(R.string.blood_pressure_msg_template, formattedCur));
+            composeMessage.setText(getActivity().getString(
+                    R.string.blood_pressure_msg_template,
+                    (state == Constants.RANGE_HIGH ? "high" : "low"),
+                    formattedCur));
         }
 
         ignoreBtn.setOnClickListener(this);

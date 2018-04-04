@@ -10,6 +10,9 @@ public class Constants {
     public static UserFirebase FIREBASE_USER_DATA;
     public static int FIREBASE_USER_TYPE = -1;
 
+    public static final int RANGE_HIGH = 1;
+    public static final int RANGE_LOW = 0;
+
     public static Calendar CALENDAR = Calendar.getInstance();
 
     public static final int TYPE_USER_DOCTOR = 1;

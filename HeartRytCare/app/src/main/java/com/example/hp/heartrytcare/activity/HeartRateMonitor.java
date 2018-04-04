@@ -268,6 +268,7 @@ public class HeartRateMonitor extends FragmentActivity {
         CriticalRateFragment criticalRateFragment = CriticalRateFragment.newInstance(
                 CriticalRateFragment.CASE_TYPE_HR,
                 lv.getHrLimit(),
+                -1,
                 String.valueOf(event.hr));
         criticalRateFragment.show(getSupportFragmentManager(), "criticalState");
     }
