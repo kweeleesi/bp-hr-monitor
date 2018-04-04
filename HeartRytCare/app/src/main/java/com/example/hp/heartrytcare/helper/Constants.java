@@ -1,11 +1,17 @@
 package com.example.hp.heartrytcare.helper;
 
+import com.example.hp.heartrytcare.db.UserFirebase;
+
 import java.util.Calendar;
 
 public class Constants {
 
     public static String FIREBASE_UID;
+    public static UserFirebase FIREBASE_USER_DATA;
     public static int FIREBASE_USER_TYPE = -1;
+
+    public static final int RANGE_HIGH = 1;
+    public static final int RANGE_LOW = 0;
 
     public static Calendar CALENDAR = Calendar.getInstance();
 

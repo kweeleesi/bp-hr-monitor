@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStructure;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -23,6 +22,7 @@ import com.example.hp.heartrytcare.db.LimitValuesDao;
 import com.example.hp.heartrytcare.db.RelationModel;
 import com.example.hp.heartrytcare.db.UserFirebase;
 import com.example.hp.heartrytcare.helper.Constants;
+import com.example.hp.heartrytcare.helper.NotificationHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,8 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.net.ssl.SSLContextSpi;
 
 import de.greenrobot.dao.query.QueryBuilder;
 
@@ -54,6 +52,7 @@ public class DoctorFragment extends Fragment implements View.OnClickListener{
     private FirebaseDatabase database;
     private LimitValuesDao lvDao;
     private LimitValues limitValues;
+    private NotificationHelper notificationHelper;
 
     @Nullable
     @Override

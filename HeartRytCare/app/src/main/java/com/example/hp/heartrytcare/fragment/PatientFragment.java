@@ -294,7 +294,7 @@ public class PatientFragment extends Fragment implements
             SmsManager sms = SmsManager.getDefault();
             sms.sendTextMessage(userFirebase.contact_number, null, msg, pi, null);
             // TODO: 1/30/2018 handle error codes | check number validity
-            Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "MessageData Sent", Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();

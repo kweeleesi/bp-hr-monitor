@@ -10,6 +10,7 @@ public class UserFirebase {
     public String contact_number;
     public String email;
     public String password;
+    public String _FCMtoken;
     public int age;
     public int height;
     public int weight;

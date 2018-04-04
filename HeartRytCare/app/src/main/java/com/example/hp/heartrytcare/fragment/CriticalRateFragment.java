@@ -17,9 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.MessageData;
+import com.example.hp.heartrytcare.db.NotificationData;
 import com.example.hp.heartrytcare.db.RelationModel;
 import com.example.hp.heartrytcare.db.UserFirebase;
 import com.example.hp.heartrytcare.helper.Constants;
+import com.example.hp.heartrytcare.helper.NotificationHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,10 +43,12 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
     private final static String BUNDLE_KEY_FORMATTED_ADVISED = "formattedAdv";
     private final static String BUNDLE_KEY_FORMATTED_CURRENT = "formattedCur";
     private final static String BUNDLE_KEY_CASE_TYPE = "caseType";
+    private final static String BUNDLE_KEY_RANGE_STATE = "state";
 
     private String formattedAdv;
     private String formattedCur;
     private String caseType;
+    private int state;
     private List<UserFirebase> doctorRelatedList = new ArrayList<>();
     private List<UserFirebase> doctorList = new ArrayList<>();
 
@@ -64,12 +69,14 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
      * @param formattedCurrentRate
      * @return
      */
-    public static CriticalRateFragment newInstance(String caseType, String formattedAdvisedRate, String formattedCurrentRate) {
+    public static CriticalRateFragment newInstance(String caseType, String formattedAdvisedRate, int state, String formattedCurrentRate) {
 
         Bundle args = new Bundle();
         args.putString(BUNDLE_KEY_CASE_TYPE, caseType);
         args.putString(BUNDLE_KEY_FORMATTED_ADVISED, formattedAdvisedRate);
         args.putString(BUNDLE_KEY_FORMATTED_CURRENT, formattedCurrentRate);
+        args.putInt(BUNDLE_KEY_RANGE_STATE, state);
+
 
         CriticalRateFragment fragment = new CriticalRateFragment();
         fragment.setArguments(args);
@@ -82,6 +89,7 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
         formattedAdv = getArguments().getString(BUNDLE_KEY_FORMATTED_ADVISED, "");
         formattedCur = getArguments().getString(BUNDLE_KEY_FORMATTED_CURRENT, "");
         caseType = getArguments().getString(BUNDLE_KEY_CASE_TYPE, "");
+        state = getArguments().getInt(BUNDLE_KEY_RANGE_STATE);
     }
 
     @Nullable
@@ -102,9 +110,14 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
 
         composeMessage = (EditText) view.findViewById(R.id.composeMessage);
         if (caseType.equals(CASE_TYPE_HR)) {
-            composeMessage.setText(getActivity().getString(R.string.heartrate_msg_template, formattedCur));
+            composeMessage.setText(getActivity().getString(
+                    R.string.heartrate_msg_template,
+                    formattedCur));
         } else if (caseType.equals(CASE_TYPE_BP)) {
-            composeMessage.setText(getActivity().getString(R.string.blood_pressure_msg_template, formattedCur));
+            composeMessage.setText(getActivity().getString(
+                    R.string.blood_pressure_msg_template,
+                    (state == Constants.RANGE_HIGH ? "high" : "low"),
+                    formattedCur));
         }
 
         ignoreBtn.setOnClickListener(this);
@@ -210,7 +223,18 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
                         new Intent(getActivity(), PatientFragment.class), 0);
                 SmsManager sms = SmsManager.getDefault();
                 sms.sendTextMessage(doctorRelatedList.get(0).contact_number, null, msg, pi, null);
-                Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "MessageData Sent", Toast.LENGTH_SHORT).show();
+
+                NotificationHelper helper = new NotificationHelper(getActivity());
+                String patientName = Constants.FIREBASE_USER_DATA.first_name + " " + Constants.FIREBASE_USER_DATA.last_name;
+                NotificationData notificationData = new NotificationData(
+                        getActivity().getString(R.string.patient_label_template, patientName),
+                        msg);
+                MessageData messageData = new MessageData(
+                        doctorRelatedList.get(0)._FCMtoken,
+                        notificationData);
+                helper.sendNotification(messageData);
+
                 dismiss();
             } catch (Exception e) {
                 e.printStackTrace();
