@@ -17,9 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.MessageData;
+import com.example.hp.heartrytcare.db.NotificationData;
 import com.example.hp.heartrytcare.db.RelationModel;
 import com.example.hp.heartrytcare.db.UserFirebase;
 import com.example.hp.heartrytcare.helper.Constants;
+import com.example.hp.heartrytcare.helper.NotificationHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -210,7 +213,18 @@ public class CriticalRateFragment extends DialogFragment implements View.OnClick
                         new Intent(getActivity(), PatientFragment.class), 0);
                 SmsManager sms = SmsManager.getDefault();
                 sms.sendTextMessage(doctorRelatedList.get(0).contact_number, null, msg, pi, null);
-                Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "MessageData Sent", Toast.LENGTH_SHORT).show();
+
+                NotificationHelper helper = new NotificationHelper(getActivity());
+                String patientName = Constants.FIREBASE_USER_DATA.first_name + " " + Constants.FIREBASE_USER_DATA.last_name;
+                NotificationData notificationData = new NotificationData(
+                        getActivity().getString(R.string.patient_label_template, patientName),
+                        msg);
+                MessageData messageData = new MessageData(
+                        doctorRelatedList.get(0)._FCMtoken,
+                        notificationData);
+                helper.sendNotification(messageData);
+
                 dismiss();
             } catch (Exception e) {
                 e.printStackTrace();

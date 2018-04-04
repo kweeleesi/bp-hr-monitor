@@ -35,11 +35,13 @@ import com.example.hp.heartrytcare.fragment.ShareFragment;
 import com.example.hp.heartrytcare.fragment.StatFragment;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.example.hp.heartrytcare.helper.FileSharingHelper;
+import com.example.hp.heartrytcare.service.FirebaseInstanceImpl;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
 
@@ -238,6 +240,7 @@ public class MainMenuActivity extends AppCompatActivity
 
     private void getUserDetailsFromFirebase() {
         // Read from the database
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -248,7 +251,10 @@ public class MainMenuActivity extends AppCompatActivity
                     user = snapshot.getValue(UserFirebase.class);
                     if (user != null) {
                         if (Constants.FIREBASE_UID.equals(user.firebase_user_id)) {
+                            Constants.FIREBASE_USER_DATA = user;
+                            myRef.removeEventListener(this);
                             setUserInformation(user);
+                            updateUserFCMToken(snapshot.getKey(), user);
                         }
                     }
                 }
@@ -264,5 +270,11 @@ public class MainMenuActivity extends AppCompatActivity
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    private void updateUserFCMToken(String key, UserFirebase user) {
+        myRef = FirebaseDatabase.getInstance().getReference("user").child(key);
+        user._FCMtoken = FirebaseInstanceId.getInstance().getToken();
+        myRef.setValue(user);
     }
 }

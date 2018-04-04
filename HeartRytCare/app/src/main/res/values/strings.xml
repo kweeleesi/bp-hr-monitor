@@ -11,6 +11,7 @@
     <string name="btn_send">Send</string>
     <string name="current_reading">Current Reading:</string>
     <string name="btn_ignore">Ignore</string>
+    <string name="patient_label_template">Patient %1$s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -66,7 +67,7 @@
     <string name="blood_pressure_time_taken">Time Taken:</string>
     <string name="blood_pressure_error">Error: please restart BP device</string>
     <string name="blood_pressure_reading">Reading...</string>
-    <string name="blood_pressure_critical">Critical Blood Pressure rate! Compose message and notify your doctor. Otherwise, ignore this alert.</string>
+    <string name="blood_pressure_critical">Critical Blood Pressure rate! Compose messageData and notify your doctor. Otherwise, ignore this alert.</string>
     <string name="blood_pressure_msg_template">Need immediate consultation! I reached critical blood pressure rate. %1$s</string>
 
     <!--DOCTOR FRAGMENT-->
@@ -88,7 +89,7 @@
     <string name="instruction"> - Place your index finger on the rear camera.\n
                                 - Make sure the camera is fully covered.\n
                                 - Finally, place your finger then press START.</string>
-    <string name="heartrate_critical">Heart Rate critical! Compose message and notify your doctor. Otherwise, ignore this alert.</string>
+    <string name="heartrate_critical">Heart Rate critical! Compose messageData and notify your doctor. Otherwise, ignore this alert.</string>
     <string name="heartrate_msg_template">Need immediate consultation! I reached critical heart rate. %1$s</string>
 
     <!--JOURNAL-->
@@ -139,7 +140,7 @@
     <!--STATISTICS-->
     <string name="chart_title">Blood Pressure and Heart Rate\nData Chart</string>
 
-    <string name="footnote">When your heart rate and blood pressure exceed\nthe values above, a message\nwill be sent to your doctor.</string>
+    <string name="footnote">When your heart rate and blood pressure exceed\nthe values above, a messageData\nwill be sent to your doctor.</string>
 
 </resources>
 
