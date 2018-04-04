@@ -14,6 +14,8 @@ import com.example.hp.heartrytcare.activity.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Map;
+
 public class FirebaseMessagingImpl extends FirebaseMessagingService {
 
     private static final String TAG = "FirebaseMessagingImpl";
@@ -29,20 +31,20 @@ public class FirebaseMessagingImpl extends FirebaseMessagingService {
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "MessageData data payload: " + remoteMessage.getData());
-
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "MessageData Notification Body: " + remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage.getNotification().getBody());
+            sendNotification(
+                    remoteMessage.getNotification().getTitle(),
+                    remoteMessage.getNotification().getBody());
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
 
-    private void sendNotification(String body) {
+    private void sendNotification(String title, String body) {
         Intent sendNotifIntent = new Intent(this, MainActivity.class);
         sendNotifIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -51,9 +53,11 @@ public class FirebaseMessagingImpl extends FirebaseMessagingService {
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("FCM")
+                .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
+                .setSound(notificationSound, NotificationCompat.STREAM_DEFAULT)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body))
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
