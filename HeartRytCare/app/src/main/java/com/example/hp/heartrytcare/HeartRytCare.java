@@ -1,6 +1,7 @@
 package com.example.hp.heartrytcare;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -13,6 +14,7 @@ public class HeartRytCare extends Application {
 
     private FirebaseAuth firebaseAuth;
     public BluetoothBPHelper bluetoothBPHelper;
+    private static Context context;
 
     @Override
     public void onCreate() {
@@ -22,6 +24,8 @@ public class HeartRytCare extends Application {
 
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.example.hp.heartrytcare.SMS_RECEIVER");
+
+        HeartRytCare.context = getApplicationContext();
     }
 
     public DaoSession getDaoSession() {
@@ -33,5 +37,9 @@ public class HeartRytCare extends Application {
 
     public FirebaseAuth getFirebaseAuth() {
         return firebaseAuth;
+    }
+
+    public static Context getAppContext() {
+        return HeartRytCare.context;
     }
 }

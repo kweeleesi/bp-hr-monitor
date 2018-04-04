@@ -216,15 +216,16 @@ public class MainMenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu = navigationView.getMenu();
         Constants.FIREBASE_USER_TYPE = userFirebase.user_type;
+
+        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(userFirebase.first_name + " " + userFirebase.last_name);
         if (userFirebase.user_type == 0) { //patient
             menu.findItem(R.id.nav_doctor).setVisible(true);
             menu.findItem(R.id.nav_patient).setVisible(false);
-            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.patient);
             ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.patient));
         } else { //doctor
             menu.findItem(R.id.nav_patient).setVisible(true);
             menu.findItem(R.id.nav_doctor).setVisible(false);
-            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(R.string.doctor);
+//            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.userType)).setText(userFirebase.first_name + " " + userFirebase.last_name);
             ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.userIcon)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.doctor));
         }
     }

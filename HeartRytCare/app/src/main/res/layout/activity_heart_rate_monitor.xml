@@ -1,40 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/layout">
+    android:background="@color/main_app_bg">
 
     <FrameLayout
         android:id="@+id/top"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/bpm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:textSize="15sp"
             android:gravity="center"
-            android:textStyle="bold"/>
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp">
+
+        <com.github.lzyzsd.circleprogress.ArcProgress
+            android:id="@+id/arc_progress"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:arc_stroke_width="15dp"
+            app:arc_text_color="@color/white"
+            app:arc_text_size="70sp"
+            app:arc_suffix_text_size="30sp"
+            custom:arc_bottom_text="HEART RATE"
+            custom:arc_progress="55" />
 
         <com.wang.avi.AVLoadingIndicatorView
-            android:id="@+id/progressBar"
+            android:id="@+id/loading"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            app:indicatorName="LineScalePulseOutRapidIndicator"/>
+
+        <TextView
+            android:id="@+id/bpmFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_gravity="center"
-            app:indicatorName="BallScaleMultipleIndicator"/>
+            android:background="@color/main_app_bg"
+            android:textSize="75sp"/>
+
+        <TextView
+            android:id="@+id/bpmLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_gravity="center|bottom"
+            android:text="BPM"
+            android:visibility="gone"
+            android:textSize="20sp"/>
 
     </FrameLayout>
 
     <SurfaceView
         android:id="@+id/preview"
-        android:layout_weight="1"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp" />
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom" />
 
-</LinearLayout>
+</FrameLayout>

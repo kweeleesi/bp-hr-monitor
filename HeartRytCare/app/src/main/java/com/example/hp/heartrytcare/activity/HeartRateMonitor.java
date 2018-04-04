@@ -1,6 +1,7 @@
 package com.example.hp.heartrytcare.activity;
 
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.example.hp.heartrytcare.db.LimitValuesDao;
 import com.example.hp.heartrytcare.fragment.CriticalRateFragment;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.example.hp.heartrytcare.helper.ImageProcess;
+import com.github.lzyzsd.circleprogress.ArcProgress;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -44,12 +46,16 @@ public class HeartRateMonitor extends FragmentActivity {
     private static final String TAG = "HeartRateMonitor";
     private static final AtomicBoolean processing = new AtomicBoolean(false);
 
+    private static Context context;
     private static SurfaceView preview = null;
     private static SurfaceHolder previewHolder = null;
     private static Camera camera = null;
-    private static AVLoadingIndicatorView loading = null;
     private static AlertDialog.Builder dialog = null;
     private static TextView bpm = null;
+    private static ArcProgress arcProgress = null;
+    private static AVLoadingIndicatorView loading = null;
+    private static TextView bpmFinal;
+    private static TextView bpmLabel;
 
     private static WakeLock wakeLock = null;
 
@@ -76,6 +82,9 @@ public class HeartRateMonitor extends FragmentActivity {
     private static final int[] beatsArray = new int[beatsArraySize];
     private static double beats = 0;
     private static long startTime = 0;
+    private static float progress = 0;
+    private static float percentage = 0;
+    private static boolean isSaved = false;
 
     @Override
     protected void onStart() {
@@ -91,9 +100,13 @@ public class HeartRateMonitor extends FragmentActivity {
         previewHolder = preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
         previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        loading = (AVLoadingIndicatorView) findViewById(R.id.progressBar);
         dialog = new AlertDialog.Builder(getApplicationContext());
         bpm = (TextView) findViewById(R.id.bpm);
+        loading = (AVLoadingIndicatorView) findViewById(R.id.loading);
+        arcProgress = (ArcProgress) findViewById(R.id.arc_progress);
+        arcProgress.setMax(100);
+        bpmFinal = (TextView) findViewById(R.id.bpmFinal);
+        bpmLabel = (TextView) findViewById(R.id.bpmLabel);
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
@@ -125,6 +138,10 @@ public class HeartRateMonitor extends FragmentActivity {
         super.onResume();
 
         wakeLock.acquire();
+
+        isSaved = false;
+        percentage = 0f;
+        progress = 0f;
 
         camera = Camera.open();
 
@@ -206,6 +223,11 @@ public class HeartRateMonitor extends FragmentActivity {
                 currentType = newType;
             }
 
+            if (!isSaved) {
+                progress = (percentage++ / 140f) * 100f;
+                arcProgress.setProgress((int) progress);
+            }
+
             long endTime = System.currentTimeMillis();
             double totalTimeInSecs = (endTime - startTime) / 1000d;
             if (totalTimeInSecs >= 10) {                            // hits every 10secs
@@ -234,30 +256,40 @@ public class HeartRateMonitor extends FragmentActivity {
                     }
                 }
                 int beatsAvg = (beatsArrayAvg / beatsArrayCnt);     //total average beat for the whole duration of session7
-                bpm.setText("Your heart rate is " + String.valueOf(beatsAvg) + " bpm.");
-                loading.setVisibility(View.GONE);
-                startTime = System.currentTimeMillis();
-                beats = 0;
 
-                Date d = new Date();
-                CharSequence date  = DateFormat.format("MM/dd", d.getTime());
+                if (!isSaved) {
+                    bpm.setText("YOUR HEART RATE IS");
+                    startTime = System.currentTimeMillis();
+                    beats = 0;
+                    arcProgress.setProgress(100);
+                    arcProgress.setSuffixText("");
+                    arcProgress.setTextColor(ContextCompat.getColor(HeartRytCare.getAppContext(), R.color.main_app_bg));
+                    loading.setVisibility(View.GONE);
+                    bpmLabel.setVisibility(View.VISIBLE);
+                    bpmFinal.setVisibility(View.VISIBLE);
+                    bpmFinal.setText(String.valueOf(beatsAvg));
 
-                HeartRateData hr = new HeartRateData();
-                hr.setFirebase_user_id(Constants.FIREBASE_UID);
-                hr.setBpm(beatsAvg);
-                hr.setDate(date.toString());
-                hr.setTimestamp(System.currentTimeMillis());
-                hrDao.insert(hr);
+                    Date d = new Date();
+                    CharSequence date = DateFormat.format("MM/dd", d.getTime());
 
-                if (lv != null && !lv.getHrLimit().equals("")) {
-                    if (beatsAvg > Integer.parseInt(lv.getHrLimit())) {
-                        MessageEvent event = new MessageEvent();
-                        event.hr = beatsAvg;
-                        EventBus.getDefault().post(event);
+                    HeartRateData hr = new HeartRateData();
+                    hr.setFirebase_user_id(Constants.FIREBASE_UID);
+                    hr.setBpm(beatsAvg);
+                    hr.setDate(date.toString());
+                    hr.setTimestamp(System.currentTimeMillis());
+                    hrDao.insert(hr);
+
+                    if (lv != null && !lv.getHrLimit().equals("")) {
+                        if (beatsAvg > Integer.parseInt(lv.getHrLimit())) {
+                            MessageEvent event = new MessageEvent();
+                            event.hr = beatsAvg;
+                            EventBus.getDefault().post(event);
+                        }
                     }
-                }
 
-                Log.e("HeartRateMonitor", "SAVED!!!");
+                    Log.e("HeartRateMonitor", "SAVED!!!");
+                    isSaved = true;
+                }
             }
             processing.set(false);
         }
