@@ -136,6 +136,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onMessageReceived(String string) {
+        if (getActivity() != null) {
         String message = parseMessage(string);
         if (message == null) {
             systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
@@ -148,7 +149,8 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
             bpFinal.setVisibility(View.GONE);
         } else {
             try {
-                String[] bpValues = parseMessage(string).split(",");
+                    String[] arrayInputs = string.split("\\n");
+                    String[] bpValues = parseMessage(arrayInputs[0]).split(",");
                 if (Integer.parseInt(bpValues[0]) == 0 || Integer.parseInt(bpValues[1]) == 0) {
                     float tempProgress = progress;
                     if ((tempProgress + 1) > progress) {
@@ -214,7 +216,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                                         bpLabel.setText("LOW");
                                         bpLabel.setTextColor(Color.BLUE);
                                     }
-                                }
+                                    }
                                 //within normal range
                                 else {
                                     bpLabel.setText("NORMAL");
@@ -230,6 +232,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                 e.printStackTrace();
             }
         }
+    }
     }
 
     ///////////////////////////////////////////////////////////////////////////
