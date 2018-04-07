@@ -1,11 +1,13 @@
 package com.example.hp.heartrytcare.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.util.LogWriter;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +27,8 @@ import com.example.hp.heartrytcare.db.LimitValuesDao;
 import com.example.hp.heartrytcare.helper.BTMessageReceiver;
 import com.example.hp.heartrytcare.helper.BluetoothBPHelper;
 import com.example.hp.heartrytcare.helper.Constants;
+import com.github.lzyzsd.circleprogress.ArcProgress;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -53,9 +57,14 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     private TextView systolicBPValue;
     private TextView diastolicBPValue;
     private TextView dateTaken;
+    private ArcProgress arcProgress;
+    private AVLoadingIndicatorView loading;
+    private TextView bpFinal;
+    private TextView bpLabel;
 
     private Boolean isSaved = false;
     private String[] sysDia;
+    private int progress = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,13 +94,17 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         diastolicBPValue = (TextView) fragmentView.findViewById(R.id.diastolicValue);
         dateTaken = (TextView) fragmentView.findViewById(R.id.dateTaken);
 
+        arcProgress = (ArcProgress) fragmentView.findViewById(R.id.arc_progress);
+        loading = (AVLoadingIndicatorView) fragmentView.findViewById(R.id.loading);
+        bpFinal = (TextView) fragmentView.findViewById(R.id.bpFinal);
+        bpLabel = (TextView) fragmentView.findViewById(R.id.bpLabel);
+        arcProgress.setMax(46);
+
         ImageView back = (ImageView) fragmentView.findViewById(R.id.img_arrowback);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MeasureFragment measureFragment = new MeasureFragment();
-                // ScheduleMed scheduleMed = new ScheduleMed();
-
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, measureFragment, measureFragment.getTag()).commit();
             }
@@ -127,7 +140,10 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
             systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
             diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
             dateTaken.setVisibility(View.GONE);
+            arcProgress.setProgress(0);
+            loading.setVisibility(View.GONE);
         } else {
+            arcProgress.setProgress(progress++);
             try {
                 String[] bpValues = parseMessage(string).split(",");
                 if (Integer.parseInt(bpValues[0]) == 0 || Integer.parseInt(bpValues[1]) == 0) {
@@ -135,6 +151,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                     diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
                     dateTaken.setText("");
                     isSaved = false;
+                    loading.setVisibility(View.VISIBLE);
                 } else {
                     if (systolicBPValue != null || diastolicBPValue != null || dateTaken != null) {
                         systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_systolic) + " " + bpValues[0]);
@@ -155,22 +172,33 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                             bpDao.insert(bp);
                             isSaved = true;
 
+                            bpFinal.setText((bpValues[0] + "/" + bpValues[1]));
+                            loading.setVisibility(View.GONE);
+
                             if (lv != null && !lv.getBpLimit().equals("")) {
                                 int highSys = (Integer.parseInt(sysDia[0]) + UNITS_HIGH);
                                 int highDia = (Integer.parseInt(sysDia[1]) + UNITS_HIGH);
+                                int lowSys = (Integer.parseInt(sysDia[0]) - UNITS_LOW);
+                                int lowDia = (Integer.parseInt(sysDia[1]) - UNITS_LOW);
                                 if (bp.getSystolic() >= highSys ||
                                         bp.getDiastolic() >= highDia) {
                                     checkBPAlert(bp.getSystolic(), bp.getDiastolic(), Constants.RANGE_HIGH);
+                                    bpLabel.setText("HIGH");
+                                    bpLabel.setTextColor(Color.RED);
                                 }
-
-                                int lowSys = (Integer.parseInt(sysDia[0]) - UNITS_LOW);
-                                int lowDia = (Integer.parseInt(sysDia[1]) - UNITS_LOW);
                                 //guard for negative result inputs
-                                if (lowSys > UNITS_LOW && lowDia > UNITS_LOW) {
+                                else if (lowSys > UNITS_LOW && lowDia > UNITS_LOW) {
                                     if (bp.getSystolic() <= lowSys ||
                                             bp.getDiastolic() <= lowDia) {
                                         checkBPAlert(bp.getSystolic(), bp.getDiastolic(), Constants.RANGE_LOW);
+                                        bpLabel.setText("LOW");
+                                        bpLabel.setTextColor(Color.BLUE);
                                     }
+                                }
+                                //within normal range
+                                else {
+                                    bpLabel.setText("NORMAL");
+                                    bpLabel.setTextColor(Color.GREEN);
                                 }
                             }
 
