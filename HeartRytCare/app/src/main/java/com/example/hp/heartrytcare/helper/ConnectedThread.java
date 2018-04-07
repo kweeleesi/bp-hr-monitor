@@ -49,8 +49,9 @@ public class ConnectedThread extends Thread {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-
                 break;
+            } catch (ArrayIndexOutOfBoundsException arrex) {
+                arrex.printStackTrace();
             }
         }
     }

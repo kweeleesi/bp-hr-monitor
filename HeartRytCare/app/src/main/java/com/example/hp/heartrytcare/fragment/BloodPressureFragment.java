@@ -122,64 +122,67 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onMessageReceived(String string) {
-        String message = parseMessage(string);
-        if (message == null) {
-            systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
-            diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
-            dateTaken.setVisibility(View.GONE);
-        } else {
-            try {
-                String[] bpValues = parseMessage(string).split(",");
-                if (Integer.parseInt(bpValues[0]) == 0 || Integer.parseInt(bpValues[1]) == 0) {
-                    systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
-                    diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
-                    dateTaken.setText("");
-                    isSaved = false;
-                } else {
-                    if (systolicBPValue != null || diastolicBPValue != null || dateTaken != null) {
-                        systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_systolic) + " " + bpValues[0]);
-                        diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_diastolic) + " " + bpValues[1]);
-                        setFormattedDate(dateTaken, System.currentTimeMillis());
-                        dateTaken.setVisibility(View.VISIBLE);
+        if (getActivity() != null) {
+            String message = parseMessage(string);
+            if (message == null) {
+                systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
+                diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
+                dateTaken.setVisibility(View.GONE);
+            } else {
+                try {
+                    String[] arrayInputs = string.split("\\n");
+                    String[] bpValues = parseMessage(arrayInputs[0]).split(",");
+                    if (Integer.parseInt(bpValues[0]) == 0 || Integer.parseInt(bpValues[1]) == 0) {
+                        systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
+                        diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
+                        dateTaken.setText("");
+                        isSaved = false;
+                    } else {
+                        if (systolicBPValue != null || diastolicBPValue != null || dateTaken != null) {
+                            systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_systolic) + " " + bpValues[0]);
+                            diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_diastolic) + " " + bpValues[1]);
+                            setFormattedDate(dateTaken, System.currentTimeMillis());
+                            dateTaken.setVisibility(View.VISIBLE);
 
-                        if (!isSaved) {
-                            Date d = new Date();
-                            CharSequence date  = DateFormat.format("MM/dd", d.getTime());
+                            if (!isSaved) {
+                                Date d = new Date();
+                                CharSequence date  = DateFormat.format("MM/dd", d.getTime());
 
-                            BloodPressureData bp = new BloodPressureData();
-                            bp.setFirebase_user_id(Constants.FIREBASE_UID);
-                            bp.setSystolic(Integer.parseInt(bpValues[0]));
-                            bp.setDiastolic(Integer.parseInt(bpValues[1]));
-                            bp.setDate(date.toString());
-                            bp.setTimestamp(System.currentTimeMillis());
-                            bpDao.insert(bp);
-                            isSaved = true;
+                                BloodPressureData bp = new BloodPressureData();
+                                bp.setFirebase_user_id(Constants.FIREBASE_UID);
+                                bp.setSystolic(Integer.parseInt(bpValues[0]));
+                                bp.setDiastolic(Integer.parseInt(bpValues[1]));
+                                bp.setDate(date.toString());
+                                bp.setTimestamp(System.currentTimeMillis());
+                                bpDao.insert(bp);
+                                isSaved = true;
 
-                            if (lv != null && !lv.getBpLimit().equals("")) {
-                                int highSys = (Integer.parseInt(sysDia[0]) + UNITS_HIGH);
-                                int highDia = (Integer.parseInt(sysDia[1]) + UNITS_HIGH);
-                                if (bp.getSystolic() >= highSys ||
-                                        bp.getDiastolic() >= highDia) {
-                                    checkBPAlert(bp.getSystolic(), bp.getDiastolic(), Constants.RANGE_HIGH);
-                                }
+                                if (lv != null && !lv.getBpLimit().equals("")) {
+                                    int highSys = (Integer.parseInt(sysDia[0]) + UNITS_HIGH);
+                                    int highDia = (Integer.parseInt(sysDia[1]) + UNITS_HIGH);
+                                    if (bp.getSystolic() >= highSys ||
+                                            bp.getDiastolic() >= highDia) {
+                                        checkBPAlert(bp.getSystolic(), bp.getDiastolic(), Constants.RANGE_HIGH);
+                                    }
 
-                                int lowSys = (Integer.parseInt(sysDia[0]) - UNITS_LOW);
-                                int lowDia = (Integer.parseInt(sysDia[1]) - UNITS_LOW);
-                                //guard for negative result inputs
-                                if (lowSys > UNITS_LOW && lowDia > UNITS_LOW) {
-                                    if (bp.getSystolic() <= lowSys ||
-                                            bp.getDiastolic() <= lowDia) {
-                                        checkBPAlert(bp.getSystolic(), bp.getDiastolic(), Constants.RANGE_LOW);
+                                    int lowSys = (Integer.parseInt(sysDia[0]) - UNITS_LOW);
+                                    int lowDia = (Integer.parseInt(sysDia[1]) - UNITS_LOW);
+                                    //guard for negative result inputs
+                                    if (lowSys > UNITS_LOW && lowDia > UNITS_LOW) {
+                                        if (bp.getSystolic() <= lowSys ||
+                                                bp.getDiastolic() <= lowDia) {
+                                            checkBPAlert(bp.getSystolic(), bp.getDiastolic(), Constants.RANGE_LOW);
+                                        }
                                     }
                                 }
-                            }
 
-                            Log.e(TAG, "!!!!!!!!!!!! SAVED!");
+                                Log.e(TAG, "!!!!!!!!!!!! SAVED!");
+                            }
                         }
                     }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -243,7 +246,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                     e.printStackTrace();
                 }
                 // TODO: Mar 24, 0024 callback here...
-                Log.d(TAG, "handleMessage: " + readMessage);
+                Log.d(TAG, "handleMessage: " + readMessage + "-----");
                 this.listener.onMessageReceived(readMessage);
             }
 
