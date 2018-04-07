@@ -80,17 +80,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp">
 
             <com.github.lzyzsd.circleprogress.ArcProgress
                 android:id="@+id/arc_progress"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 app:arc_stroke_width="15dp"
+                app:arc_suffix_text_size="30sp"
                 app:arc_text_color="@color/white"
                 app:arc_text_size="70sp"
-                app:arc_suffix_text_size="30sp"
                 custom:arc_bottom_text="HEART RATE"
                 custom:arc_progress="55" />
 
@@ -99,27 +99,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
-                app:indicatorName="LineScaleIndicator"/>
+                app:indicatorName="LineScaleIndicator" />
 
             <TextView
                 android:id="@+id/bpFinal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:background="@color/main_app_bg"
-                android:textSize="75sp"/>
+                android:textColor="@color/white"
+                android:textSize="47sp" />
 
             <TextView
                 android:id="@+id/bpLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_gravity="center|bottom"
                 android:text="Normal"
-                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:visibility="gone" />
 
         </FrameLayout>
 

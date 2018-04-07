@@ -64,7 +64,8 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
 
     private Boolean isSaved = false;
     private String[] sysDia;
-    private int progress = 0;
+    public float percentage = 0f;
+    public float progress = 0f;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,7 +99,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         loading = (AVLoadingIndicatorView) fragmentView.findViewById(R.id.loading);
         bpFinal = (TextView) fragmentView.findViewById(R.id.bpFinal);
         bpLabel = (TextView) fragmentView.findViewById(R.id.bpLabel);
-        arcProgress.setMax(46);
+        arcProgress.setMax(100);
 
         ImageView back = (ImageView) fragmentView.findViewById(R.id.img_arrowback);
         back.setOnClickListener(new View.OnClickListener() {
@@ -141,19 +142,37 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
             diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_error));
             dateTaken.setVisibility(View.GONE);
             arcProgress.setProgress(0);
+            progress = 0f;
             loading.setVisibility(View.GONE);
+            bpLabel.setVisibility(View.GONE);
+            bpFinal.setVisibility(View.GONE);
         } else {
-            arcProgress.setProgress(progress++);
             try {
                 String[] bpValues = parseMessage(string).split(",");
                 if (Integer.parseInt(bpValues[0]) == 0 || Integer.parseInt(bpValues[1]) == 0) {
+                    float tempProgress = progress;
+                    if ((tempProgress + 1) > progress) {
+                        //this means, user is now re-reading BP from device OR reading of device was interrupted;
+                        progress = 0f;
+                    }
+                    if (Integer.parseInt(bpValues[0]) == 0 && Integer.parseInt(bpValues[1]) == 0) {
+                        //premature stop
+                        progress = 0f;
+                        percentage = 0f;
+                    } else {
+                        progress = (percentage++ / 46f) * 100f;
+                    }
+                    arcProgress.setProgress((int) progress);
                     systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
                     diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
                     dateTaken.setText("");
                     isSaved = false;
                     loading.setVisibility(View.VISIBLE);
+                    bpLabel.setVisibility(View.GONE);
+                    bpFinal.setVisibility(View.GONE);
                 } else {
                     if (systolicBPValue != null || diastolicBPValue != null || dateTaken != null) {
+                        arcProgress.setProgress(arcProgress.getMax());
                         systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_systolic) + " " + bpValues[0]);
                         diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_diastolic) + " " + bpValues[1]);
                         setFormattedDate(dateTaken, System.currentTimeMillis());
@@ -171,11 +190,12 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                             bp.setTimestamp(System.currentTimeMillis());
                             bpDao.insert(bp);
                             isSaved = true;
-
+                            bpFinal.setVisibility(View.VISIBLE);
                             bpFinal.setText((bpValues[0] + "/" + bpValues[1]));
                             loading.setVisibility(View.GONE);
 
                             if (lv != null && !lv.getBpLimit().equals("")) {
+                                bpLabel.setVisibility(View.VISIBLE);
                                 int highSys = (Integer.parseInt(sysDia[0]) + UNITS_HIGH);
                                 int highDia = (Integer.parseInt(sysDia[1]) + UNITS_HIGH);
                                 int lowSys = (Integer.parseInt(sysDia[0]) - UNITS_LOW);
