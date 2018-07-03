@@ -18,6 +18,9 @@ public class Constants {
     public static final int TYPE_USER_DOCTOR = 1;
     public static final int TYPE_USER_PATIENT = 0;
 
+    public static final String SHARED_PREFS_TABLE = "heartrytcare-shpref";
+    public static final String SHARED_PREFS_FIELD_USER_INFO_JSON = "user_json";
+
     ///////////////////////////////////////////////////////////////////////////
     // BLUETOOTH FIELDS
     ///////////////////////////////////////////////////////////////////////////

@@ -296,6 +296,7 @@ public class HeartRateMonitor extends FragmentActivity {
     };
 
     @Subscribe(threadMode = ThreadMode.MAIN)
+    @SuppressWarnings("unused")
     public void checkBPAlert(MessageEvent event) {
         CriticalRateFragment criticalRateFragment = CriticalRateFragment.newInstance(
                 CriticalRateFragment.CASE_TYPE_HR,

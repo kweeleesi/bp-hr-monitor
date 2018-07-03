@@ -1,8 +1,12 @@
 package com.example.hp.heartrytcare.activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -36,6 +40,7 @@ import com.example.hp.heartrytcare.fragment.StatFragment;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.example.hp.heartrytcare.helper.FileSharingHelper;
 import com.example.hp.heartrytcare.service.FirebaseInstanceImpl;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -108,6 +113,7 @@ public class MainMenuActivity extends AppCompatActivity
         super.onResume();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("user");
+        myRef.keepSynced(true);
         getUserDetailsFromFirebase();
 
         /*FileSharingHelper fileSharingHelper = new FileSharingHelper(this);
@@ -240,42 +246,63 @@ public class MainMenuActivity extends AppCompatActivity
     }
 
     private void getUserDetailsFromFirebase() {
+        Log.d(TAG, "getUserDetailsFromFirebase");
         // Read from the database
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                UserFirebase user = null;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    user = snapshot.getValue(UserFirebase.class);
-                    if (user != null) {
-                        if (Constants.FIREBASE_UID.equals(user.firebase_user_id)) {
-                            Constants.FIREBASE_USER_DATA = user;
-                            myRef.removeEventListener(this);
-                            setUserInformation(user);
-                            updateUserFCMToken(snapshot.getKey(), user);
-                        }
-                    }
-                }
-                if (user == null) {
-                    Toast.makeText(MainMenuActivity.this, "User detail not found.", Toast.LENGTH_LONG).show();
+        if (isNetworkAvailable()) {
+            Log.d(TAG, "getUserDetailsFromFirebase: network available!");
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    Log.d(TAG, "onDataChange - online");
+                    retrieveUserDataSnapshot(dataSnapshot);
+                    myRef.removeEventListener(this);
                 }
 
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
+        } else {
+            Log.d(TAG, "getUserDetailsFromFirebase: offline!");
+            if (Constants.FIREBASE_USER_DATA != null) {
+                setUserInformation(Constants.FIREBASE_USER_DATA);
             }
+        }
+    }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+    private void retrieveUserDataSnapshot(DataSnapshot dataSnapshot) {
+        UserFirebase user = null;
+        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            user = snapshot.getValue(UserFirebase.class);
+            if (user != null) {
+                if (Constants.FIREBASE_UID.equals(user.firebase_user_id)) {
+                    Constants.FIREBASE_USER_DATA = user;
+                    Log.d(TAG, "onDataChange: " + user.first_name + ", " + user.last_name);
+                    setUserInformation(user);
+                    updateUserFCMToken(snapshot.getKey(), user);
+                }
             }
-        });
+        }
+        if (user == null) {
+            Toast.makeText(MainMenuActivity.this, "User detail not found.", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void updateUserFCMToken(String key, UserFirebase user) {
         myRef = FirebaseDatabase.getInstance().getReference("user").child(key);
         user._FCMtoken = FirebaseInstanceId.getInstance().getToken();
         myRef.setValue(user);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }

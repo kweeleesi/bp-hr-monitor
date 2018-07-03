@@ -111,7 +111,6 @@ public class PatientFragment extends Fragment implements
 
         patientList = (ListView) view.findViewById(R.id.patientList);
         patientList.setOnItemClickListener(this);
-
         database = FirebaseDatabase.getInstance();
         relationModelList = new ArrayList<>();
         fullPatientList = new ArrayList<>();

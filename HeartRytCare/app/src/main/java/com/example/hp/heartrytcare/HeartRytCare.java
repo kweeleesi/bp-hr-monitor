@@ -9,6 +9,7 @@ import com.example.hp.heartrytcare.db.DaoMaster;
 import com.example.hp.heartrytcare.db.DaoSession;
 import com.example.hp.heartrytcare.helper.BluetoothBPHelper;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HeartRytCare extends Application {
 
@@ -21,7 +22,6 @@ public class HeartRytCare extends Application {
         super.onCreate();
         firebaseAuth = FirebaseAuth.getInstance();
         bluetoothBPHelper = BluetoothBPHelper.getInstance();
-
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.example.hp.heartrytcare.SMS_RECEIVER");
 

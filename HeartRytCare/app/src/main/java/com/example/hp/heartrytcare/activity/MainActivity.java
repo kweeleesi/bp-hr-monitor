@@ -2,7 +2,9 @@ package com.example.hp.heartrytcare.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -18,9 +20,11 @@ import android.widget.Toast;
 
 import com.example.hp.heartrytcare.HeartRytCare;
 import com.example.hp.heartrytcare.R;
+import com.example.hp.heartrytcare.db.UserFirebase;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.gson.Gson;
 
 import java.util.Arrays;
 
@@ -103,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void startAuthViaFirebase() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        String userInfoJson = getSharedPreferences(Constants.SHARED_PREFS_TABLE, Context.MODE_PRIVATE).getString(Constants.SHARED_PREFS_FIELD_USER_INFO_JSON, "");
+        if (!userInfoJson.isEmpty()) {
+            Constants.FIREBASE_USER_DATA = new Gson().fromJson(userInfoJson, UserFirebase.class);
+        } else {
+            currentUser = null;
+        }
         if (currentUser == null) {
             new Handler().postDelayed(new Runnable() {
                 @Override
