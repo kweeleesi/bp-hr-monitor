@@ -3,6 +3,7 @@ package com.example.hp.heartrytcare.fragment;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -88,24 +89,44 @@ public class BluetoothConnectDialogFragment extends DialogFragment implements Ad
                 try {
                     mBTSocket.connect();
                 } catch (IOException e) {
-                    try {
-                        fail = true;
-                        mBTSocket.close();
-                        Toast.makeText(getActivity(), "Failed connecting to " + name, Toast.LENGTH_SHORT).show();
-                    } catch (IOException e2) {
-                        //insert code to deal with this
-                        Toast.makeText(getActivity(), "Socket creation failed", Toast.LENGTH_SHORT).show();
-                    }
+                    e.printStackTrace();
+                    fail = true;
+                    closeBTConnection();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Failed connecting to " + name + ", please retry", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 if(!fail) {
                     mConnectedThread = new ConnectedThread(mBTSocket, BloodPressureFragment.incomingMessageHandler);
                     mConnectedThread.start();
-
                     BloodPressureFragment.incomingMessageHandler.obtainMessage(Constants.CONNECTING_STATUS, 1, -1, name)
                             .sendToTarget();
                     dismissAllowingStateLoss();
                 }
             }
+
+            private void closeBTConnection() {
+                if (mConnectedThread != null) {
+                    if (mConnectedThread.getInputStream() != null) {
+                        try {mConnectedThread.getInputStream().close();} catch (Exception e) {e.printStackTrace();}
+                        mConnectedThread.resetInputStream();
+                    }
+
+                    if (mConnectedThread.getOutputStream() != null) {
+                        try {mConnectedThread.getOutputStream().close();} catch (Exception e) {e.printStackTrace();}
+                        mConnectedThread.resetOutputStream();
+                    }
+                }
+
+                if (mBTSocket != null) {
+                    try {mBTSocket.close();} catch (Exception e) {}
+                    mBTSocket = null;
+                }
+            }
         }.start();
     }
+
 }

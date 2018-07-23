@@ -26,12 +26,14 @@ import com.example.hp.heartrytcare.db.LimitValues;
 import com.example.hp.heartrytcare.db.LimitValuesDao;
 import com.example.hp.heartrytcare.helper.BTMessageReceiver;
 import com.example.hp.heartrytcare.helper.BluetoothBPHelper;
+import com.example.hp.heartrytcare.helper.ConnectedThread;
 import com.example.hp.heartrytcare.helper.Constants;
 import com.github.lzyzsd.circleprogress.ArcProgress;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -57,10 +59,12 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     private TextView systolicBPValue;
     private TextView diastolicBPValue;
     private TextView dateTaken;
+    private TextView btIsConnectedLabel;
     private ArcProgress arcProgress;
     private AVLoadingIndicatorView loading;
     private TextView bpFinal;
     private TextView bpLabel;
+    private Button bpconnect;
 
     private Boolean isSaved = false;
     private String[] sysDia;
@@ -70,7 +74,9 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        incomingMessageHandler = new IncomingMessageHandler(this);
+        if (!ConnectedThread.isConnectionAlive) {
+            incomingMessageHandler = new IncomingMessageHandler(this);
+        }
         btHelper = BluetoothBPHelper.getInstance();
 
         DaoSession daoSession = ((HeartRytCare) getActivity().getApplicationContext()).getDaoSession();
@@ -94,6 +100,8 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         systolicBPValue = (TextView) fragmentView.findViewById(R.id.systolicValue);
         diastolicBPValue = (TextView) fragmentView.findViewById(R.id.diastolicValue);
         dateTaken = (TextView) fragmentView.findViewById(R.id.dateTaken);
+        btIsConnectedLabel = (TextView) fragmentView.findViewById(R.id.btIsConnectedLabel);
+        bpconnect = (Button) fragmentView.findViewById(R.id.btn_bpconnect);
 
         arcProgress = (ArcProgress) fragmentView.findViewById(R.id.arc_progress);
         loading = (AVLoadingIndicatorView) fragmentView.findViewById(R.id.loading);
@@ -105,14 +113,18 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ConnectedThread.shouldBailOut = true;
+                ConnectedThread.isConnectionAlive = false;
                 MeasureFragment measureFragment = new MeasureFragment();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, measureFragment, measureFragment.getTag()).commit();
             }
         });
-
-        Button bpconnect = (Button) fragmentView.findViewById(R.id.btn_bpconnect);
-        bpconnect.setOnClickListener(this);
+        bpconnect.setVisibility(View.VISIBLE);
+        setConnectButtonVisibility(ConnectedThread.isConnectionAlive);
+        /*if (ConnectedThread.isConnectionAlive){
+            incomingMessageHandler =
+        }*/
 
         return fragmentView;
     }
@@ -135,6 +147,12 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
+    public void onDestroy() {
+        ConnectedThread.shouldBailOut = true;
+        super.onDestroy();
+    }
+
+    @Override
     public void onMessageReceived(String string) {
         if (getActivity() != null) {
         String message = parseMessage(string);
@@ -148,11 +166,14 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
             bpLabel.setVisibility(View.GONE);
             bpFinal.setVisibility(View.GONE);
         } else {
+            Log.d(TAG, "onMessageReceived: ");
             try {
                     String[] arrayInputs = string.split("\\n");
                     String[] bpValues = parseMessage(arrayInputs[0]).split(",");
+                Log.d(TAG, "onMessageReceived() bpValues 1 = [" + Arrays.deepToString(bpValues) + "]");
                 if (Integer.parseInt(bpValues[0]) == 0 || Integer.parseInt(bpValues[1]) == 0) {
                     float tempProgress = progress;
+                    Log.d(TAG, "onMessageReceived() called with: progress = [" + progress + "]");
                     if ((tempProgress + 1) > progress) {
                         //this means, user is now re-reading BP from device OR reading of device was interrupted;
                         progress = 0f;
@@ -169,6 +190,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                     diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_reading));
                     dateTaken.setText("");
                     isSaved = false;
+                    Log.d(TAG, "onMessageReceived() bpValues 2 = [" + Arrays.deepToString(bpValues) + "]");
                     loading.setVisibility(View.VISIBLE);
                     bpLabel.setVisibility(View.GONE);
                     bpFinal.setVisibility(View.GONE);
@@ -182,7 +204,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
 
                         if (!isSaved) {
                             Date d = new Date();
-                            CharSequence date  = DateFormat.format("MM/dd", d.getTime());
+                            CharSequence date = DateFormat.format("MM/dd", d.getTime());
 
                             BloodPressureData bp = new BloodPressureData();
                             bp.setFirebase_user_id(Constants.FIREBASE_UID);
@@ -216,7 +238,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                                         bpLabel.setText("LOW");
                                         bpLabel.setTextColor(Color.BLUE);
                                     }
-                                    }
+                                }
                                 //within normal range
                                 else {
                                     bpLabel.setText("NORMAL");
@@ -226,6 +248,15 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
 
                             Log.e(TAG, "!!!!!!!!!!!! SAVED!");
                         }
+                    } else if (Integer.parseInt(bpValues[0]) != 0 && Integer.parseInt(bpValues[1]) != 0) {
+                        //this means that the BP fragment was opened again while the BT is still connected to the phone reading its stream of packets,
+                        //in-short, on stand-by pre-connected
+                        bpFinal.setVisibility(View.VISIBLE);
+                        loading.setVisibility(View.GONE);
+                        arcProgress.setProgress(arcProgress.getMax());
+                        systolicBPValue.setText(getActivity().getString(R.string.blood_pressure_systolic) + " " + bpValues[0]);
+                        diastolicBPValue.setText(getActivity().getString(R.string.blood_pressure_diastolic) + " " + bpValues[1]);
+                        progress = 100f;
                     }
                 }
             } catch (NumberFormatException e) {
@@ -233,6 +264,11 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
             }
         }
     }
+    }
+
+    @Override
+    public void onConnectedState(boolean isConnected) {
+        setConnectButtonVisibility(isConnected);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -274,6 +310,18 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
         criticalRateFragment.show(getFragmentManager(), "criticalState");
     }
 
+    private void setConnectButtonVisibility(boolean isVisible) {
+        if (!isVisible) {
+            bpconnect.setVisibility(View.VISIBLE);
+            btIsConnectedLabel.setVisibility(View.GONE);
+            bpconnect.setOnClickListener(this);
+        } else {
+            bpconnect.setVisibility(View.GONE);
+            btIsConnectedLabel.setVisibility(View.VISIBLE);
+        }
+        bpconnect.invalidate();
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // STATIC CLASS
     ///////////////////////////////////////////////////////////////////////////
@@ -302,6 +350,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                 // TODO: Mar 24, 0024 update connection status here...
                 if(msg.arg1 == 1) {
                     Log.d(TAG, "handleMessage: " + "Connected to Device: " + (String)(msg.obj));
+                    listener.onConnectedState(ConnectedThread.isConnectionAlive);
                 } else {
                     Log.d(TAG, "handleMessage: " + "Connection Failed");
                 }

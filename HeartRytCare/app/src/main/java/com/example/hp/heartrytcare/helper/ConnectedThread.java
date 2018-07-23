@@ -3,6 +3,7 @@ package com.example.hp.heartrytcare.helper;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,14 +12,18 @@ import java.io.OutputStream;
 public class ConnectedThread extends Thread {
     private final BluetoothSocket mmSocket;
     private Handler mHandler;
-    private final InputStream mmInStream;
-    private final OutputStream mmOutStream;
+    public InputStream mmInStream;
+    public OutputStream mmOutStream;
+    public static boolean shouldBailOut = false;
+    //dirty
+    public static boolean isConnectionAlive = false;
 
     public ConnectedThread(BluetoothSocket socket, Handler mHandler) {
         mmSocket = socket;
         this.mHandler = mHandler;
         InputStream tmpIn = null;
         OutputStream tmpOut = null;
+        shouldBailOut = false;
 
         // Get the input and output streams, using temp objects because
         // member streams are final
@@ -31,13 +36,34 @@ public class ConnectedThread extends Thread {
         mmOutStream = tmpOut;
     }
 
+    public InputStream getInputStream() {
+        return mmInStream;
+    }
+
+    public OutputStream getOutputStream() {
+        return mmOutStream;
+    }
+
+    public void resetInputStream() {
+        mmInStream = null;
+    }
+
+    public void resetOutputStream() {
+        mmOutStream = null;
+    }
+
     public void run() {
         byte[] buffer = new byte[1024];  // buffer store for the stream
         int bytes; // bytes returned from read()
         // Keep listening to the InputStream until an exception occurs
         while (true) {
+            if (shouldBailOut) {
+                Log.d("bail", "run: break out!");
+                break;
+            }
             try {
                 // Read from the InputStream
+                isConnectionAlive = true;
                 bytes = mmInStream.available();
                 if(bytes != 0) {
                     buffer = new byte[1024];
@@ -48,10 +74,10 @@ public class ConnectedThread extends Thread {
                             .sendToTarget(); // Send the obtained bytes to the UI activity
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 break;
             } catch (ArrayIndexOutOfBoundsException arrex) {
-                arrex.printStackTrace();
+//                arrex.printStackTrace();
             }
         }
     }
