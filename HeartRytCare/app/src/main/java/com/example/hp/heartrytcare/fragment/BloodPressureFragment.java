@@ -1,6 +1,7 @@
 package com.example.hp.heartrytcare.fragment;
 
 
+import android.bluetooth.BluetoothAdapter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -118,6 +119,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
                 MeasureFragment measureFragment = new MeasureFragment();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().replace(R.id.relativeLayout_for_fragment, measureFragment, measureFragment.getTag()).commit();
+                turnOffBluetooth();
             }
         });
         bpconnect.setVisibility(View.VISIBLE);
@@ -149,6 +151,7 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     @Override
     public void onDestroy() {
         ConnectedThread.shouldBailOut = true;
+        turnOffBluetooth();
         super.onDestroy();
     }
 
@@ -274,6 +277,14 @@ public class BloodPressureFragment extends Fragment implements View.OnClickListe
     ///////////////////////////////////////////////////////////////////////////
     // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////
+
+    private void turnOffBluetooth() {
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter.isEnabled()) {
+            mBluetoothAdapter.disable();
+        }
+    }
+
     private String parseMessage(String message) {
         String trimmedString = "";
         if (message.contains("error")) {

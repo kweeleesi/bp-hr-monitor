@@ -12,10 +12,6 @@
     <list default="true" id="2c755811-6f3f-41ec-8c20-e06cc5615a93" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BloodPressureFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BloodPressureFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BluetoothConnectDialogFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BluetoothConnectDialogFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/BTMessageReceiver.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/BTMessageReceiver.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/ConnectedThread.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/ConnectedThread.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,7 +37,7 @@
       <file leaf-file-name="HeartRateMonitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/HeartRateMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
+            <state relative-caret-position="3186">
               <caret line="218" column="27" lean-forward="false" selection-start-line="218" selection-start-column="27" selection-end-line="218" selection-end-column="27" />
               <folding />
             </state>
@@ -51,7 +47,7 @@
       <file leaf-file-name="ConnectedThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/ConnectedThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-648">
+            <state relative-caret-position="324">
               <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
               <folding>
                 <element signature="e#1154#1155#0" expanded="true" />
@@ -67,30 +63,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BloodPressureFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BloodPressureFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BloodPressureFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="116" column="58" lean-forward="false" selection-start-line="116" selection-start-column="58" selection-end-line="116" selection-end-column="58" />
+            <state relative-caret-position="227">
+              <caret line="121" column="35" lean-forward="false" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
               <folding>
                 <element signature="docComment;class#BloodPressureFragment#0" expanded="false" />
-                <element signature="e#4421#4925#0" expanded="true" />
-                <element signature="e#4924#4925#0" expanded="true" />
+                <element signature="method#onCreate#0;class#BloodPressureFragment#0" expanded="false" />
                 <element signature="method#onViewCreated#0;class#BloodPressureFragment#0" expanded="false" />
-                <element signature="method#onClick#0;class#BloodPressureFragment#0" expanded="false" />
-                <element signature="e#8557#8614#0" expanded="true" />
-                <element signature="e#8686#8744#0" expanded="true" />
-                <element signature="e#12294#12351#0" expanded="true" />
-                <element signature="e#12423#12481#0" expanded="true" />
-                <element signature="e#12775#12776#0" expanded="true" />
-                <element signature="e#12830#12831#0" expanded="true" />
+                <element signature="method#onMessageReceived#0;class#BloodPressureFragment#0" expanded="false" />
+                <element signature="e#11974#12100#0" expanded="false" />
                 <element signature="method#parseMessage#0;class#BloodPressureFragment#0" expanded="false" />
                 <element signature="method#setFormattedDate#0;class#BloodPressureFragment#0" expanded="false" />
                 <element signature="docComment;method#checkBPAlert#0;class#BloodPressureFragment#0" expanded="false" />
                 <element signature="method#checkBPAlert#0;class#BloodPressureFragment#0" expanded="false" />
-                <element signature="e#14724#14799#0" expanded="false" />
-                <element signature="e#15077#15078#0" expanded="true" />
-                <element signature="e#15125#15126#0" expanded="true" />
+                <element signature="method#setConnectButtonVisibility#0;class#BloodPressureFragment#0" expanded="false" />
+                <element signature="e#15056#15131#0" expanded="false" />
+                <element signature="class#IncomingMessageHandler#0;class#BloodPressureFragment#0" expanded="false" />
+                <element signature="method#handleMessage#0;class#IncomingMessageHandler#0;class#BloodPressureFragment#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -98,28 +89,39 @@
       </file>
       <file leaf-file-name="fragment_blood_pressure.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
+            <state relative-caret-position="756">
               <caret line="78" column="51" lean-forward="false" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="51" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="BluetoothConnectDialogFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BluetoothConnectDialogFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="674">
+              <caret line="62" column="83" lean-forward="true" selection-start-line="62" selection-start-column="83" selection-end-line="62" selection-end-column="83" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BluetoothConnectDialogFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BluetoothConnectDialogFragment.java">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="88" column="21" lean-forward="true" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3649#3928#0" expanded="true" />
-                <element signature="e#3927#3928#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="378">
+              <caret line="21" column="74" lean-forward="false" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="74" />
+              <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
           </provider>
         </entry>
       </file>
@@ -2539,8 +2541,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/BTMessageReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/ConnectedThread.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BloodPressureFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BluetoothConnectDialogFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BloodPressureFragment.java" />
       </list>
     </option>
   </component>
@@ -2783,7 +2785,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530582882285</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="WIP - Bluetooth correction and debugging">
+      <created>1532359779611</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1532359779611</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2797,7 +2806,7 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2807,12 +2816,11 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2820,6 +2828,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2858,7 +2867,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="enable offline mode - saving to sharedprefs user info upon signin for backup detail while offline." />
-    <option name="LAST_COMMIT_MESSAGE" value="enable offline mode - saving to sharedprefs user info upon signin for backup detail while offline." />
+    <MESSAGE value="WIP - Bluetooth correction and debugging" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP - Bluetooth correction and debugging" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3182,17 +3192,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="74" lean-forward="false" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/SignInFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1152">
@@ -3216,7 +3215,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/activity/HeartRateMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
+        <state relative-caret-position="3186">
           <caret line="218" column="27" lean-forward="false" selection-start-line="218" selection-start-column="27" selection-end-line="218" selection-end-column="27" />
           <folding />
         </state>
@@ -3226,24 +3225,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="5" column="47" lean-forward="false" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="78" column="51" lean-forward="false" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/helper/ConnectedThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648">
+        <state relative-caret-position="324">
           <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
           <folding>
             <element signature="e#1154#1155#0" expanded="true" />
@@ -3258,41 +3245,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BloodPressureFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="116" column="58" lean-forward="false" selection-start-line="116" selection-start-column="58" selection-end-line="116" selection-end-column="58" />
-          <folding>
-            <element signature="docComment;class#BloodPressureFragment#0" expanded="false" />
-            <element signature="e#4421#4925#0" expanded="true" />
-            <element signature="e#4924#4925#0" expanded="true" />
-            <element signature="method#onViewCreated#0;class#BloodPressureFragment#0" expanded="false" />
-            <element signature="method#onClick#0;class#BloodPressureFragment#0" expanded="false" />
-            <element signature="e#8557#8614#0" expanded="true" />
-            <element signature="e#8686#8744#0" expanded="true" />
-            <element signature="e#12294#12351#0" expanded="true" />
-            <element signature="e#12423#12481#0" expanded="true" />
-            <element signature="e#12775#12776#0" expanded="true" />
-            <element signature="e#12830#12831#0" expanded="true" />
-            <element signature="method#parseMessage#0;class#BloodPressureFragment#0" expanded="false" />
-            <element signature="method#setFormattedDate#0;class#BloodPressureFragment#0" expanded="false" />
-            <element signature="docComment;method#checkBPAlert#0;class#BloodPressureFragment#0" expanded="false" />
-            <element signature="method#checkBPAlert#0;class#BloodPressureFragment#0" expanded="false" />
-            <element signature="e#14724#14799#0" expanded="false" />
-            <element signature="e#15077#15078#0" expanded="true" />
-            <element signature="e#15125#15126#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="378">
+          <caret line="21" column="74" lean-forward="false" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_blood_pressure.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="78" column="51" lean-forward="false" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BluetoothConnectDialogFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="88" column="21" lean-forward="true" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
+        <state relative-caret-position="674">
+          <caret line="62" column="83" lean-forward="true" selection-start-line="62" selection-start-column="83" selection-end-line="62" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3649#3928#0" expanded="true" />
-            <element signature="e#3927#3928#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hp/heartrytcare/fragment/BloodPressureFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="121" column="35" lean-forward="false" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+          <folding>
+            <element signature="docComment;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="method#onCreate#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="method#onViewCreated#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="method#onMessageReceived#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="e#11974#12100#0" expanded="false" />
+            <element signature="method#parseMessage#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="method#setFormattedDate#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="docComment;method#checkBPAlert#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="method#checkBPAlert#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="method#setConnectButtonVisibility#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="e#15056#15131#0" expanded="false" />
+            <element signature="class#IncomingMessageHandler#0;class#BloodPressureFragment#0" expanded="false" />
+            <element signature="method#handleMessage#0;class#IncomingMessageHandler#0;class#BloodPressureFragment#0" expanded="false" />
           </folding>
         </state>
       </provider>
