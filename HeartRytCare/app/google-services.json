@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:888920020547:android:b0c9b44e5c0e89aa",
         "android_client_info": {
-          "package_name": "com.example.hp.heartrytcare"
+          "package_name": "com.um.hp.heartrytcare"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "888920020547-9087cik9g4avaflj8dr29jce0m3o0j9a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.hp.heartrytcare",
+            "package_name": "com.um.hp.heartrytcare",
             "certificate_hash": "3b7bc450d8d3c9f8e0b3f9eab4bc62d0fb6318a5"
           }
         },

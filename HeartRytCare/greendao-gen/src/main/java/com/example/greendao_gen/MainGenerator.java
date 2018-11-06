@@ -9,7 +9,7 @@ public class MainGenerator {
     private static final String PROJECT_DIR = System.getProperty("user.dir");
 
     public static void main(String[] args) {
-        Schema schema = new Schema(1, "com.example.hp.heartrytcare.db");
+        Schema schema = new Schema(1, "com.um.hp.heartrytcare.db");
         schema.enableKeepSectionsByDefault();
 
         addTables(schema);

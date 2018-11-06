@@ -1,4 +1,4 @@
-package com.example.hp.heartrytcare;
+package com.um.hp.heartrytcare;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.hp.heartrytcare.activity.HeartRateMonitor;
+import com.um.hp.heartrytcare.activity.HeartRateMonitor;
 
 
 /**

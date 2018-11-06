@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fffafa"
-    tools:context="com.example.hp.heartrytcare.activity.MainActivity">
+    tools:context="com.um.hp.heartrytcare.activity.MainActivity">
 
     <ImageView
         android:id="@+id/imageView2"

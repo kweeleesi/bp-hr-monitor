@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hp.heartrytcare.helper.HBView">
+    tools:context="com.um.hp.heartrytcare.helper.HBView">
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.hp.heartrytcare;
+package com.um.hp.heartrytcare;
 
 import org.junit.Test;
 
